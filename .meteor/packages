@@ -5,10 +5,13 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 mquandalle:jade
 stylus
 mizzao:bootstrap-3
 underscore
 iron:router
+useraccounts:bootstrap
+accounts-password
+ian:accounts-ui-bootstrap-3
+multiply:iron-router-progress

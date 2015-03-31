@@ -1,0 +1,24 @@
+template(name="layout")
+  nav(role="navigation").navbar.navbar-default
+    .container
+      .navbar-header
+        button(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse").navbar-toggle.collapsed
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a(href="/user").navbar-brand Пробибли
+      .collapse.navbar-collapse.navbar-ex1-collapse
+        p.navbar-text.navbar-right
+          strong 0
+          small мудрости
+        ul.nav.navbar-nav.navbar-right
+          li.dropdown
+            a.dropdown-toggle(href="#", data-toggle="dropdown",role="button", aria-expanded="false")
+              | #{user.username} 
+              span.caret
+            ul.dropdown-menu(role="menu")
+              li: a(href="#") Профиль
+              li: a(href="#").logout Выйти
+
+  +yield
