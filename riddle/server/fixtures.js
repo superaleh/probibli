@@ -156,5 +156,11 @@ riddlesSamson = [
 ];
 
 if (Riddles.find().count() === 0) {
+  _.each(riddlesSamson, function(value, key, list){
   
+    Riddles.insert({
+
+    });
+  
+  });
 }
