@@ -15,3 +15,7 @@ useraccounts:bootstrap
 accounts-password
 ian:accounts-ui-bootstrap-3
 multiply:iron-router-progress
+msavin:mongol
+http
+simple:reactive-method
+sacha:spin

@@ -2,8 +2,21 @@ template(name="user")
   .container
     .row
       .col-md-12
-        h1.text-center Эпизоды
+        h1.text-center Пользователь
+    .row
+      .col-md-12
+        h2.text-center Эпизоды
     .row
       each episodes
-        .col-md-4
-          h2= title
+        +episodeItem
+
+template(name="episodeItem")
+  .col-md-4
+    .thumbnail
+      .caption
+        h2= title
+        p {{riddlesCount}} загадок
+        p 0 пройдено
+        p
+          a(href="/episodes/{{_id}}").btn.btn-primary Пройти 
+            span.glyphicon.glyphicon-play

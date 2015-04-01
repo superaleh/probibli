@@ -2,4 +2,20 @@ template(name="episode")
   .container
     .row
       .col-md-12
-        h1.text-center Эпизод
+        h1.text-center
+          small Эпизод: 
+          | {{title}}
+    .row
+      each riddles
+        .col-md-4
+          .thumbnail.riddle-item
+            .caption
+              h3 {{ucFirst question}} <br>
+              h4.text-muted
+                span.glyphicon.glyphicon-book
+                | {{books}} {{chapters}}
+              a(href="/riddles/{{_id}}").btn.btn-primary Отгадать 
+                span.glyphicon.glyphicon-play
+              h5.pull-right.text-warning
+                span.text-warning.glyphicon.glyphicon-fire
+                | {{plurality intricacy "мудрост"}}

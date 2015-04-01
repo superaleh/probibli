@@ -28,7 +28,7 @@ riddlesSamson = [
     "FIELD4":"RST",
     "FIELD5":"названа ли Далида блудницей в Библии?",
     "FIELD6":"нет",
-    "FIELD7":"да, 100%, ",
+    "FIELD7":"да, 100%,",
     "FIELD8":"4",
     "FIELD9":1
   },
@@ -156,11 +156,26 @@ riddlesSamson = [
 ];
 
 if (Riddles.find().count() === 0) {
+
+  var episodeId = Episodes.insert({
+    title: "История Самсона"
+  })
+
   _.each(riddlesSamson, function(value, key, list){
   
     Riddles.insert({
-
+      episodeId: episodeId
+      , idBz: value.FIELD1
+      , books: value.FIELD2
+      , chapters: value.FIELD3
+      , translation: value.FIELD4
+      , question: value.FIELD5
+      , response: value.FIELD6
+      , falseResponse: value.FIELD7
+      , versesResponse: value.FIELD8
+      , intricacy: value.FIELD9
     });
   
   });
+
 }
