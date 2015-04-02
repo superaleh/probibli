@@ -6,10 +6,3 @@ Template.episode.helpers({
     return this._id;
   }
 });
-
-Template.episode.events({
-  'click .choose-riddle': function (e, template) {
-    var placeBible = $(e.target).data('placeBible');
-    Session.set('placeBible', placeBible);
-  }
-})

@@ -1,17 +1,17 @@
 Template.riddle.helpers({
   titleEpisode: function() {
-    episode = Episodes.findOne();
+    var episode = Episodes.findOne();
     return episode.title;
   }
   ,idEpisode: function() {
-    episode = Episodes.findOne();
+    var episode = Episodes.findOne();
     return episode._id;
   }
-  ,placesBible: function() {
-    riddle = Riddles.findOne();
-    books = riddle.books;
-    chapters = riddle.chapters;
-    placesBible = _.chain(chapters)
+  ,placesBible: function() { //формирование массива с главами, пока только сделал при одной книге (сделать когда несколько книг)
+    var riddle = Riddles.findOne();
+    var books = riddle.books;
+    var chapters = riddle.chapters;
+    var placesBible = _.chain(chapters)
       .words(',')
       .map(function(chapter, index){
         return {
@@ -25,28 +25,16 @@ Template.riddle.helpers({
   }
 });
 
-Template.riddle.onRendered(function () {
-  if(Session.get('placeBible')){
-    placeBible = Session.get('placeBible');
-  }else{
-    riddle = Riddles.findOne();
-    placeBible = riddle.books + riddle.chapters;
-  }
-  
-  HTTP.call("GET", "http://api.bibleonline.ru/bible.html", {params:{ q: placeBible }}, function(err, result){
-    this.$('#chapter0 .bible-text').hide().html(result.content).slideDown();
-    this.$('#chapter0 .progress').slideUp();
-  })
-});
-
 Template.riddle.events({
-  'click .bible-chapter-tab a': function(e, template) {
+
+  'click .bible-chapter-tab a': function(e, template) { //при клике по вкладке загружается данная глава
+  
     e.preventDefault();
 
     if( $(e.target).parent().hasClass('in active') ) return; //если вкладка активна то выходим
 
-    placeBible = $(e.target).text();
-    tabId = $(e.target).attr("href");
+    var placeBible = $(e.target).text();
+    var tabId = $(e.target).attr("href");
 
     if($(tabId + ' .bible-text').html()) return; //если текс во вкладку уже загружался то выходим
     
@@ -54,7 +42,31 @@ Template.riddle.events({
       this.$(tabId + ' .bible-text').hide().html(result.content).slideDown();
       this.$(tabId + ' .progress').slideUp();
     })
+
   }
+  ,'click .bible-text p.bible': function (e, template) {
+    e.preventDefault();
+    $(e.target).toggleClass("enabled");
+  }
+  ,'submit form.response-user': function (e, template) {
+    e.preventDefault();
+    console.log('проверка');
+  }
+});
+
+//загрузка текста первой главы
+Template.riddle.onRendered(function () {
+
+  var chapter = _.chain(this.data.chapters).strLeft(',').trim().value();
+  var placeBible = this.data.books + chapter;
+
+  var tabId = '#chapter0';
+
+  HTTP.call("GET", "http://api.bibleonline.ru/bible.html", {params:{ q: placeBible }}, function(err, result){
+    this.$(tabId + ' .bible-text').hide().html(result.content).slideDown();
+    this.$(tabId + ' .progress').slideUp();
+  })
+
 });
 
 Template.registerHelper('ucFirst', function(str) {
