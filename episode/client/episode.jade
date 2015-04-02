@@ -14,8 +14,8 @@ template(name="episode")
               h4.text-muted
                 span.glyphicon.glyphicon-book
                 | {{books}} {{chapters}}
-              a(href="/riddles/{{_id}}").btn.btn-primary Отгадать 
-                span.glyphicon.glyphicon-play
+              a(href="{{pathFor 'riddle' _episodeId=episodeId}}", data-place-bible="{{books}} {{chapters}}").btn.btn-primary.choose-riddle Отгадать 
+                span.glyphicon.glyphicon-chevron-right
               h5.pull-right.text-warning
                 span.text-warning.glyphicon.glyphicon-fire
                 | {{plurality intricacy "мудрост"}}

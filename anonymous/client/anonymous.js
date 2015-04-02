@@ -31,23 +31,23 @@
 //   }
 // ]);
 
-// AccountsTemplates.configure({
-//   homeRoutePath: '/user',
-//   redirectTimeout: 2000,
-//   texts: {
-//     button: {
-//       signIn: "Войти",
-//       signUp: "Создать"
-//     },
-//     title: {
-//       signIn: "Войти",
-//       signUp: "Создать Профиль"
-//     },
-//     signInLink_pre: "У вас уже есть профиль?",
-//     signInLink_link: "Войти",
-//     signUpLink_pre: "Нет профиля чтобы начать?",
-//     signUpLink_link: "Создать",
-//   }
-// });
+AccountsTemplates.configure({
+  homeRoutePath: '/user',
+  redirectTimeout: 2000,
+  texts: {
+    button: {
+      signIn: "Войти",
+      signUp: "Создать"
+    },
+    title: {
+      signIn: "Войти",
+      signUp: "Создать Профиль"
+    },
+    signInLink_pre: "У вас уже есть профиль?",
+    signInLink_link: "Войти",
+    signUpLink_pre: "Нет профиля чтобы начать?",
+    signUpLink_link: "Создать",
+  }
+});
 
-// T9n.setLanguage('ru');
+T9n.setLanguage('ru');

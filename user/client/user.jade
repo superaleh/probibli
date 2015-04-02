@@ -5,7 +5,7 @@ template(name="user")
         h1.text-center Пользователь
     .row
       .col-md-12
-        h2.text-center Эпизоды
+        h2.text-center Все Эпизоды
     .row
       each episodes
         +episodeItem
@@ -18,5 +18,5 @@ template(name="episodeItem")
         p {{riddlesCount}} загадок
         p 0 пройдено
         p
-          a(href="/episodes/{{_id}}").btn.btn-primary Пройти 
-            span.glyphicon.glyphicon-play
+          a(href="{{pathFor 'episode'}}").btn.btn-primary Пройти 
+            span.glyphicon.glyphicon-chevron-right
