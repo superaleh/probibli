@@ -14,15 +14,26 @@ template(name="riddle")
           span.text-warning.glyphicon.glyphicon-fire
           span.text-warning {{plurality intricacy "мудрост"}}
         hr
-        .well.response-user
+        .well
           form.response-user
-            if responseOptions
-              h3 Есть
-            else
-              .form-group
-                label.control-label(for='response-user') Впиши правильный ответ
-                input.form-control.input-lg(type='text', name="response-user", id="response-user", value="", placeholder="Ответ")
-            button(type="submit").btn.btn-lg.btn-primary Проверить
+            .row
+              .col-md-12
+                p
+                  if responseOptions
+                    label.control-label(for='response-user') Выбери правильный ответ
+                    .btn-group.btn-group-vertical.center-block(data-toggle='buttons')
+                      each responseOptions
+                        label.btn.btn-default.btn-lg
+                          input(type='radio', name='response-user', value="{{this}}")
+                          | {{this}}
+
+                  else
+                    .form-group
+                      label.control-label(for='response-user') Впиши правильный ответ
+                      input.form-control.input-lg(type='text', name="response-user", id="response-user", value="", placeholder="Ответ")
+            .row
+              .col-md-12
+                p: button(type="submit").btn.btn-lg.btn-primary Проверить
             
       .col-md-6
         h2

@@ -24,10 +24,7 @@ Template.riddle.helpers({
     return placesBible;
   }
   ,responseOptions: function () {
-    return Meteor.call('responseOptions', this._id, function ( error, result ) {
-      console.log(result);
-      return result;
-    })
+    return ReactiveMethod.call('responseOptions', this._id);
   }
 });
 
