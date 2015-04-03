@@ -7,7 +7,7 @@ Template.riddle.helpers({
     var episode = Episodes.findOne();
     return episode._id;
   }
-  ,placesBible: function() { //формирование массива с главами, пока только сделал при одной книге (сделать когда несколько книг)
+  ,placesBibleText: function() { //формирование массива с главами, пока только сделал при одной книге (сделать когда несколько книг)
     var riddle = Riddles.findOne();
     var books = riddle.books;
     var chapters = riddle.chapters;
@@ -44,13 +44,41 @@ Template.riddle.events({
     })
 
   }
-  ,'click .bible-text p.bible': function (e, template) {
+  ,'click .bible-text p.bible': function (e) {
     e.preventDefault();
     $(e.target).toggleClass("enabled");
   }
   ,'submit form.response-user': function (e, template) {
     e.preventDefault();
-    console.log('проверка');
+
+    var idRiddle = this._id;
+    var response = $(e.target).find('[name=response-user]').val();
+    var verses = template.$('.bible.enabled');
+
+    response = _.chain(response).clean().value().toLowerCase() //удаляю пробелы из начала и конца, преобразовывю в нижний регистр
+
+    verses = _.chain(verses).map(function(value, key){
+    
+      value = $(value).attr('id'); //получаю bible-7-16-5
+      value = value.replace(/bible-/gi, ''); //удаляю bible-
+      value = _.strRight(value, '-'); //удаляю 7-
+      value = value.replace(/-/gi, ''); //удаляю -
+      return value;
+    
+    }).value().join('');
+
+    userResponse = response + verses;
+
+    console.log(userResponse);
+
+    Meteor.call('checkAnswer'
+      ,userResponse
+      ,idRiddle
+      ,function (error,result) {
+        console.log(result);
+      }
+    )
+    
   }
 });
 

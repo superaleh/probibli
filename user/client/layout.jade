@@ -1,5 +1,5 @@
 template(name="layout")
-  nav(role="navigation").navbar.navbar-default
+  nav(role="navigation").navbar.navbar-default.navbar-fixed-top
     .container
       .navbar-header
         button(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse").navbar-toggle.collapsed
@@ -9,9 +9,10 @@ template(name="layout")
           span.icon-bar
         a(href="/user").navbar-brand Пробибли
       .collapse.navbar-collapse.navbar-ex1-collapse
-        p.navbar-text.navbar-right
+        p.navbar-text.navbar-right.wisdom
           span.text-warning.glyphicon.glyphicon-fire
           strong.text-warning {{plurality 0 "мудрост"}}
+            span.wisdom-addition +1
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle(href="#", data-toggle="dropdown",role="button", aria-expanded="false")

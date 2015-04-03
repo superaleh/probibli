@@ -7,7 +7,6 @@
 meteor-platform
 insecure
 mquandalle:jade
-stylus
 mizzao:bootstrap-3
 underscore
 iron:router
@@ -19,3 +18,4 @@ msavin:mongol
 http
 msavin:jetsetter
 wizonesolutions:underscore-string
+stylus
