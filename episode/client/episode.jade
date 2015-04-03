@@ -7,15 +7,19 @@ template(name="episode")
           | {{title}}
     .row
       each riddles
-        .col-md-4
-          .thumbnail.riddle-item
-            .caption
-              h3 {{ucFirst question}} <br>
-              h4.text-muted
-                span.glyphicon.glyphicon-book
-                | {{books}} {{chapters}}
-              a(href="{{pathFor 'riddle' _episodeId=episodeId}}", data-place-bible="{{books}} {{chapters}}").btn.btn-primary.choose-riddle Отгадать 
-                span.glyphicon.glyphicon-chevron-right
-              h5.pull-right.text-warning
-                span.text-warning.glyphicon.glyphicon-fire
-                | {{plurality intricacy "мудрост"}}
+        +riddleItem
+
+template(name="riddleItem")
+  .col-md-4
+    .thumbnail.riddle-item
+      .caption.clearfix
+        h3 {{ucFirst question}} <br>
+        h4.text-muted
+          span.glyphicon.glyphicon-book
+          | {{books}} {{chapters}}
+        if availability
+          a(href="{{pathFor 'riddle' _episodeId=episodeId}}").btn.btn-primary.choose-riddle Отгадать 
+            span.glyphicon.glyphicon-chevron-right
+        h5.pull-right.text-warning
+          span.text-warning.glyphicon.glyphicon-fire
+          | {{plurality intricacy "мудрост"}}

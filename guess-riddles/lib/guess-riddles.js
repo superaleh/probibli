@@ -1,0 +1,1 @@
+GuessRiddles = new Mongo.Collection('guessRiddles');

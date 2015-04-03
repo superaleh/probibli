@@ -12,6 +12,9 @@ Template.layout.helpers({
   }
   ,wisdomAddition: function () {
     if(Session.get('wisdomAddition'))
+      Meteor.setTimeout(function () {
+        Session.set('wisdomAddition');
+      }, 1000);
       return Session.get('wisdomAddition');
     return false;
   }
@@ -23,7 +26,3 @@ Template.layout.events({
     Meteor.logout();
   }
 });
-
-Template.layout.onRendered(function () {
-  Session.set('wisdomAddition', '');
-})
