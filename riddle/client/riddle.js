@@ -69,13 +69,11 @@ Template.riddle.events({
 
     userResponse = response + verses;
 
-    console.log(userResponse);
-
     Meteor.call('checkAnswer'
       ,userResponse
       ,idRiddle
       ,function (error,result) {
-        console.log(result);
+        if(result) Session.set('wisdomAddition', '+' + result);
       }
     )
     
@@ -97,19 +95,17 @@ Template.riddle.onRendered(function () {
 
 });
 
+//Первая буква в предложении большая
 Template.registerHelper('ucFirst', function(str) {
 
   if(!str) return str;
 
-  newStr = str.charAt(0).toUpperCase();
-
-  for(i=1; i<str.length; i++) {
-    newStr += str.charAt(i);
-  };
+  newStr = _.capitalize(str);
 
   return newStr;
 });
 
+//Падеж в числительных
 Template.registerHelper('plurality', function(n, thing) {
 
   if (n === 1) {

@@ -19,10 +19,12 @@ Meteor.methods({
     var verses = curentRiddle.versesResponse.replace(/ /gi, '').replace(/:/gi, '').replace(/;/gi, '');
 
     var correctResponse = response + verses;
-
-    console.log(correctResponse);
     
-    if(correctResponse === userResponse) return true;
+    if(correctResponse === userResponse) {
+      var riddleWisdom = curentRiddle.intricacy;
+      Meteor.users.update({_id:Meteor.userId()}, {$inc: {wisdom: riddleWisdom}});
+      return riddleWisdom;
+    }
     
     return false;
 
