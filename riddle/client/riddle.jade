@@ -2,12 +2,7 @@ template(name="riddle")
   .container
     .row
       .col-md-12
-        h1.text-center
-          small Эпизод: 
-          | {{titleEpisode}}
-          a(href="{{pathFor 'episode' _id=idEpisode}}").btn.btn-sm.btn-default.choose-riddle
-            span.glyphicon.glyphicon-chevron-left
-            | Обзор Эпизода 
+        h1.text-center: a(href="{{pathFor 'episode' _id=idEpisode}}") {{titleEpisode}}
     .row
       .col-md-6
         h2
@@ -21,9 +16,12 @@ template(name="riddle")
         hr
         .well.response-user
           form.response-user
-            .form-group
-              label.control-label(for='response-user') Впиши правильный ответ
-              input.form-control.input-lg(type='text', name="response-user", id="response-user", value="", placeholder="Ответ")
+            if responseOptions
+              h3 Есть
+            else
+              .form-group
+                label.control-label(for='response-user') Впиши правильный ответ
+                input.form-control.input-lg(type='text', name="response-user", id="response-user", value="", placeholder="Ответ")
             button(type="submit").btn.btn-lg.btn-primary Проверить
             
       .col-md-6

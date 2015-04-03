@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-insecure
 mquandalle:jade
 mizzao:bootstrap-3
 underscore
@@ -18,3 +17,4 @@ http
 msavin:jetsetter
 wizonesolutions:underscore-string
 stylus
+mizzao:bootboxjs

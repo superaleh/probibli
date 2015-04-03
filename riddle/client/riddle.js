@@ -23,6 +23,12 @@ Template.riddle.helpers({
       .value();
     return placesBible;
   }
+  ,responseOptions: function () {
+    return Meteor.call('responseOptions', this._id, function ( error, result ) {
+      console.log(result);
+      return result;
+    })
+  }
 });
 
 Template.riddle.events({
@@ -72,8 +78,50 @@ Template.riddle.events({
     Meteor.call('checkAnswer'
       ,userResponse
       ,idRiddle
-      ,function (error,result) {
-        if(result) Session.set('wisdomAddition', '+' + result);
+      ,function (error, result) {
+
+        var message = 'Прочтите еще раз!'
+            ,title = 'Не правильно!';
+
+        var buttons = {
+                cancel: {
+                  label: "Вернуться к загадке",
+                  className: "btn-default"
+                }
+                ,overview: {
+                  label: "Обзор эпизода",
+                  className: "btn-info",
+                  callback: function() {
+                    Router.go('episode', { _id: template.data.episodeId});
+                  }
+                }
+              }
+        
+        if( result !== false ) {
+
+          message = 'Правильно! Ты заработал: <div class="wisdom"><span class="wisdom-addition">+' + result.wisdom + '</span> ' + result.wisdom + ' мудрости(ть)</div>';
+          title = 'Поздравляем!';
+          _.extend(buttons, {
+            next: {
+                  label: "Следующая загадка",
+                  className: "btn-success",
+                  callback: function() {
+                    Router.go('riddle', { _episodeId: template.data.episodeId, _id: result.next });
+                  }
+                }
+          });
+
+          Session.set('wisdomAddition', '+' + result.wisdom);
+
+        }
+
+        bootbox.dialog({
+          message: message
+          ,title: title
+          ,closeButton: false
+          ,buttons: buttons
+        });
+
       }
     )
     

@@ -25,7 +25,6 @@ htmljs@1.0.4
 http@1.1.0
 ian:accounts-ui-bootstrap-3@1.2.38
 id-map@1.0.3
-insecure@1.0.3
 iron:controller@1.0.7
 iron:core@1.0.7
 iron:dynamic-template@1.0.7
@@ -47,6 +46,7 @@ meteor-platform@1.2.2
 meteortoys:toykit@0.2.2
 minifiers@1.1.5
 minimongo@1.0.8
+mizzao:bootboxjs@4.4.0
 mizzao:bootstrap-3@3.3.1_1
 mobile-status-bar@1.0.3
 mongo@1.1.0
