@@ -2,13 +2,15 @@ template(name="user")
   .container
     .row
       .col-md-12
-        h1.text-center Пользователь
+        h1.text-center Твоя доска
     .row
       .col-md-12
         h2.text-center Все Эпизоды
     .row
       each episodes
         +episodeItem
+
+    +usersBest
 
 template(name="episodeItem")
   .col-md-4
@@ -20,3 +22,19 @@ template(name="episodeItem")
         p
           a(href="{{pathFor 'episode'}}").btn.btn-primary Пройти 
             span.glyphicon.glyphicon-chevron-right
+
+template(name="usersBest") 
+  .row
+    .col-md-12
+      h1.text-center Лучшие Исследователи
+  .row
+    each users
+      .col-md-3
+        .thumbnail.users-best
+          .caption
+            h2 #{username}
+              br
+              small #{place} место
+            h4.text-warning
+              span.text-warning.glyphicon.glyphicon-fire
+              | {{plurality wisdom "мудрост"}}

@@ -77,18 +77,22 @@ Template.riddle.events({
       ,idRiddle
       ,function (error, result) {
 
-        var message = 'Прочтите еще раз!'
-            ,title = 'Не правильно!';
+        var message = '<h2>Прочти еще раз!</h2>'
+            ,title = '<h1>Не правильно!</h1>';
 
         var buttons = {
                 cancel: {
-                  label: "Вернуться к загадке",
-                  className: "btn-default"
+                  label: '<span class="glyphicon glyphicon-repeat"></span> Вернуться к загадке'
+                  ,className: "btn-default"
+                  ,callback: function() {
+                    if(result !== false) Session.set('wisdomAddition', '+' + result.wisdom);
+                  }
                 }
                 ,overview: {
-                  label: "Обзор эпизода",
-                  className: "btn-info",
-                  callback: function() {
+                  label: '<span class="glyphicon glyphicon-th-large"></span> Обзор эпизода'
+                  ,className: "btn-info"
+                  ,callback: function() {
+                    if(result !== false) Session.set('wisdomAddition', '+' + result.wisdom);
                     Router.go('episode', { _id: template.data.episodeId});
                   }
                 }
@@ -96,19 +100,20 @@ Template.riddle.events({
         
         if( result !== false ) {
 
-          message = 'Правильно! Ты заработал: <div class="wisdom"><span class="wisdom-addition">+' + result.wisdom + '</span> ' + result.wisdom + ' мудрости(ть)</div>';
-          title = 'Поздравляем!';
+          message = '<h2>Правильно! Ты заработал: +' + result.wisdom + ' мудрости</h2>';
+          title = '<h1>Правильно! Поздравляем!</h1>';
           _.extend(buttons, {
             next: {
-                  label: "Следующая загадка",
-                  className: "btn-success",
-                  callback: function() {
+                  label: '<span class="glyphicon glyphicon-chevron-right"></span> Следующая загадка'
+                  ,className: "btn-success"
+                  ,callback: function() {
+                    Session.set('wisdomAddition', '+' + result.wisdom);
                     Router.go('riddle', { _episodeId: template.data.episodeId, _id: result.next });
                   }
                 }
           });
 
-          Session.set('wisdomAddition', '+' + result.wisdom);
+          // Session.set('wisdomAddition', '+' + result.wisdom);
 
         }
 

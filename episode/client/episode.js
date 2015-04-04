@@ -14,7 +14,8 @@ Template.episode.helpers({
 
     if(!guessRiddlesUser) { //если нет не одной отгаданной загадки то доступна только первая загадка
 
-      riddles[0].availability = true;
+      riddles[0].availability = true; //доступная загадка
+      riddles[0].next = true; //следующая загадка
       return riddles;
 
     }else{ //иначе если есть хоть одна отгаданная загадка, то делаю ее доступной и следующую после нее
@@ -22,22 +23,21 @@ Template.episode.helpers({
       riddles = _.map(riddles, function(riddle, key){
         
         //загадка доступна если она отгадана
-        if(_.indexOf(guessRiddlesUser, riddle._id) === -1)
-          riddle.availability = false;
+        if(_.indexOf(guessRiddlesUser, riddle._id) !== -1)
+          riddle.availability = true; //доступная загадка
         else
-          riddle.availability = true;
+          riddle.availability = false; //НЕдоступная загадка
 
         return riddle;
       
       });
 
-      riddles[ guessRiddlesUser.length ].availability = true;
+      riddles[ guessRiddlesUser.length ].availability = true; //доступная загадка
+      riddles[ guessRiddlesUser.length ].next = true; //следующая загадка
 
       return riddles;
 
     }
-
-    // availability
 
   }
   ,idEpisode: function() {

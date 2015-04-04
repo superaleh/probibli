@@ -11,12 +11,19 @@ Template.layout.helpers({
     return Meteor.user().wisdom;
   }
   ,wisdomAddition: function () {
-    if(Session.get('wisdomAddition'))
+
+    if(Session.get('wisdomAddition')){
+
       Meteor.setTimeout(function () {
+
         Session.set('wisdomAddition');
-      }, 1000);
+
+      }, 1300);    
+
       return Session.get('wisdomAddition');
-    return false;
+
+    }
+
   }
 });
 
