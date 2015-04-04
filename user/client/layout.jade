@@ -7,15 +7,17 @@ template(name="layout")
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a(href="/user").navbar-brand Пробибли
+        a(href="{{pathFor 'user'}}").navbar-brand
+          img(src="logo-small1.png", alt="").img-responsive
+          span.sr-only ПРОБИБЛИ
       .collapse.navbar-collapse.navbar-ex1-collapse
         if currentUser
-          p.navbar-text.wisdom
+          ul.nav.navbar-nav.navbar-right
+            +loginButtons
+          p.navbar-text.navbar-right.wisdom
             span.text-warning.glyphicon.glyphicon-fire
             strong.text-warning {{plurality wisdom "мудрост"}}
               if wisdomAddition
                 span.wisdom-addition {{wisdomAddition}}
-          ul.nav.navbar-nav.navbar-right
-            +loginButtons
 
   +yield
