@@ -157,8 +157,12 @@ riddlesSamson = [
 
 if (Riddles.find().count() === 0) {
 
+  var now = new Date().getTime();
+
   var episodeId = Episodes.insert({
     title: "История Самсона"
+    ,creating: now
+    ,update: now
   })
 
   _.each(riddlesSamson, function(value, key, list){

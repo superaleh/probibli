@@ -19,3 +19,5 @@ wizonesolutions:underscore-string
 stylus
 mizzao:bootboxjs
 simple:reactive-method
+momentjs:moment
+mrt:modernizr-meteor

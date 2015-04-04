@@ -1,13 +1,16 @@
 template(name="anonymous")
-  .container
+  .container.anonymous
     .row
-      .col-md-12
-        h1.text-center Зарегистрируйтесь или Войдите
+      .col-xs-12.col-md-12
+        h1.page-header.text-center Давай ПРОБИБЛИ!
+        img(src="logo2.png", alt="").center-block
     .row
-      .col-md-4.col-md-push-4
+      .col-xs-12.col-md-12
+        h2.text-center Зарегистрируйтесь или Войдите
+    .row
+      .col-xs-12.col-md-4.col-md-push-4
         .well
           .nav.nav-pills.nav-justified
             +loginButtons
-        img(src="logo.png", alt="").center-block
     
     +usersBest

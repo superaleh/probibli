@@ -77,7 +77,14 @@ Template.riddle.events({
       ,idRiddle
       ,function (error, result) {
 
-        var message = '<h2>Прочти еще раз!</h2>'
+        //потраченное время на загадку от захода до нажатие кнопки отгадать
+        var now = new Date().getTime();
+        var startTime = Session.get('startTime');
+        var timeDiff = moment.duration(now - startTime);
+
+        var timeMessege = '<span class="glyphicon glyphicon-time"></span> Время исследования: ' + timeDiff.minutes() + ' м ' + timeDiff.seconds() + ' с';
+
+        var message = '<h2>Прочти еще раз!</h2><h3>' + timeMessege +'</h3>'
             ,title = '<h1>Не правильно!</h1>';
 
         var buttons = {
@@ -100,7 +107,7 @@ Template.riddle.events({
         
         if( result !== false ) {
 
-          message = '<h2>Правильно! Ты заработал: +' + result.wisdom + ' мудрости</h2>';
+          message = '<h2>Правильно! Ты заработал: +' + result.wisdom + ' мудрости</h2><h3>' + timeMessege +'</h3>';
           title = '<h1>Правильно! Поздравляем!</h1>';
           _.extend(buttons, {
             next: {
@@ -112,8 +119,6 @@ Template.riddle.events({
                   }
                 }
           });
-
-          // Session.set('wisdomAddition', '+' + result.wisdom);
 
         }
 
@@ -130,16 +135,31 @@ Template.riddle.events({
   }
 });
 
-//загрузка текста первой главы
+
 Template.riddle.onRendered(function () {
 
+  //установка время начала отгадывания
+  var now = new Date().getTime();
+  Session.set('startTime', now);
+
+  //загрузка текста первой главы
   var chapter = _.chain(this.data.chapters).strLeft(',').trim().value();
   var placeBible = this.data.books + chapter;
 
   var tabId = '#chapter0';
 
   HTTP.call("GET", "http://api.bibleonline.ru/bible.html", {params:{ q: placeBible }}, function(err, result){
-    this.$(tabId + ' .bible-text').hide().html(result.content).slideDown();
+
+    if(err){
+
+      this.$(tabId + ' .bible-text').hide().html('<h3>Извините! Сервис текста из Библии не доступен.</h3><h4 class="text-warning">Ошибка: ' + err.message + '</h4>').slideDown();
+
+    }else{
+
+      this.$(tabId + ' .bible-text').hide().html(result.content).slideDown();
+      
+    }
+
     this.$(tabId + ' .progress').slideUp();
   })
 

@@ -1,10 +1,18 @@
 template(name="riddle")
   .container
     .row
-      .col-md-12
-        h1.text-center: a(href="{{pathFor 'episode' _id=idEpisode}}") {{titleEpisode}}
+      .col-xs-12.col-md-12
+        h1.text-center.page-header
+          small: span.glyphicon.glyphicon-search
+          a(href="{{pathFor 'user'}}") Исследовательская
+          | /
+          small: span.glyphicon.glyphicon-th-large
+          a(href="{{pathFor 'episode' _id=idEpisode}}") {{titleEpisode}}
+          | /
+          small: span.glyphicon.glyphicon-question-sign
+          | Загадка 
     .row
-      .col-md-6
+      .col-xs-12.col-md-6
         h2
           span.glyphicon.glyphicon-question-sign
           | {{ucFirst question}}
@@ -17,7 +25,7 @@ template(name="riddle")
         .well
           form.response-user
             .row
-              .col-md-12
+              .col-xs-12.col-md-12
                 p
                   if responseOptions
                     label.control-label(for='response-user') Выбери правильный ответ
@@ -29,13 +37,13 @@ template(name="riddle")
 
                   else
                     .form-group
-                      label.control-label(for='response-user') Впиши правильный ответ
+                      label.control-label(for='response-user') Впиши правильный ответ (регистр не важен)
                       input.form-control.input-lg(type='text', name="response-user", id="response-user", value="", placeholder="Ответ")
             .row
-              .col-md-12
+              .col-xs-12.col-md-12
                 p: button(type="submit").btn.btn-lg.btn-primary Проверить
             
-      .col-md-6
+      .col-xs-12.col-md-6
         h2
           span.glyphicon.glyphicon-info-sign
           | Область поиска
