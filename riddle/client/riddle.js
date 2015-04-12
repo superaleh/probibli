@@ -82,7 +82,7 @@ Template.riddle.events({
         var startTime = Session.get('startTime');
         var timeDiff = moment.duration(now - startTime);
 
-        var timeMessege = '<span class="glyphicon glyphicon-time"></span> Время исследования: ' + timeDiff.minutes() + ' м ' + timeDiff.seconds() + ' с';
+        var timeMessege = '<span class="glyphicon glyphicon-time"></span> Время исследования: ' + timeDiff.minutes() + 'м:' + timeDiff.seconds() + 'с';
 
         var message = '<h2>Прочти еще раз!</h2><h3>' + timeMessege +'</h3>'
             ,title = '<h1>Не правильно!</h1>';

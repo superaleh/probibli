@@ -1,7 +1,7 @@
 Template.episode.helpers({
   riddles: function() {
 
-    var riddles = Riddles.find({}, {sort: {idBz: 1}}).fetch();
+    var riddles = Riddles.find({}, {sort: {intricacy: 1, idBz: 1}}).fetch();
 
     var guessRiddlesUser = GuessRiddles.findOne(
       {
@@ -18,7 +18,7 @@ Template.episode.helpers({
       riddles[0].next = true; //следующая загадка
       return riddles;
 
-    }else{ //иначе если есть хоть одна отгаданная загадка, то делаю ее доступной и следующую после нее
+    } else { //иначе если есть хоть одна отгаданная загадка, то делаю ее доступной и следующую после нее
       
       riddles = _.map(riddles, function(riddle, key){
         

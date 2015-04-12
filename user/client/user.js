@@ -2,13 +2,14 @@ Template.user.helpers({
 
   episodes: function() {
 
-    return Episodes.find();
+    return Episodes.find({}, {sort: {creating: 1}});
 
   }
 
 });
 
 Template.episodeItem.helpers({
+
   count: function() {
 
     var riddles = Riddles.find({episodeId: this._id}).count();
@@ -16,8 +17,7 @@ Template.episodeItem.helpers({
 
     if(guess){
       guess = guess.guessRiddles.length;
-    }
-    else {
+    } else {
       return {
        riddles: riddles
        ,guess: 0
@@ -26,6 +26,7 @@ Template.episodeItem.helpers({
     }
 
     var percent = ( ( guess / riddles ) * 100 ).toFixed(0)
+    
     return {
      riddles: riddles
      ,guess: guess
@@ -33,29 +34,35 @@ Template.episodeItem.helpers({
     }
 
   }
+
   ,newEpisode: function() {
 
     var now = new Date().getTime();
     var creatingDate = Episodes.findOne({_id: this._id}).creating;
+
     //если прошло меньше 30 дней от создания эпизода, то он новый
     if( moment(now).diff(creatingDate, 'days') < 30 ) return true;
     return false;
+
   }
+
 });
 
 Template.usersBest.helpers({
-  users: function() {
 
-    var users = Meteor.users.find().fetch();
+  usersBest: function() {
 
-    users = _.map(users, function(value, key){
+    var usersBest = Meteor.users.find( {}, {sort: {wisdom: -1}, limit: 4 } ).fetch();
+
+    usersBest = _.map(usersBest, function(value, key){
     
-      value.place = ++key;
+      value.place = key + 1;
 
       return value;
     
     });
 
-    return users;
+    return usersBest;
   }
+  
 });
