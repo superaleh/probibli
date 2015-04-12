@@ -51,6 +51,10 @@ Template.riddle.events({
     e.preventDefault();
     $(e.target).toggleClass("enabled");
   }
+  ,'tap .bible-text p.bible': function(e){
+    e.preventDefault();
+    $(e.target).toggleClass("enabled");
+  }
   ,'submit form.response-user': function (e, template) {
     e.preventDefault();
 

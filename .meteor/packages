@@ -22,3 +22,4 @@ simple:reactive-method
 momentjs:moment
 mrt:modernizr-meteor
 sacha:spin
+jimbog:tap
