@@ -1,0 +1,35 @@
+template(name="episodesAll")
+  h2.ui.horizontal.header.divider
+    i.block.layout.icon
+    | Все Эпизоды
+
+  .ui.three.column.grid.stackable
+    each episodes
+      .column
+        .ui.piled.segment
+          h3 {{title}}
+            if newEpisode
+              .ui.teal.label новый
+          .ui.divider
+          .ui.one.column.grid
+            .column
+              .ui.two.column.grid
+                .center.aligned.column
+                  .ui.mini.statistic
+                    .value {{count.guess}}
+                    .label ОТГАДАНО              
+                .ui.vertical.divider из
+                .center.aligned.column
+                  .ui.mini.statistic
+                    .value {{count.riddles}}
+                    .label ЗАГАДОК
+          .ui.divider
+          .ui.green.progress(data-value="{{count.guess}}" data-total="{{count.riddles}}")
+            .bar
+              .progress
+            .label Прогресс прохождения <b>{{count.percent}}%</b>
+          .ui.one.column.grid
+            .right.aligned.column
+              a(href="{{pathFor 'episode'}}").ui.right.labeled.icon.center.aligned.primary.large.button
+                i.right.rocket.icon
+                | Вперед

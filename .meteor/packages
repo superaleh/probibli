@@ -6,20 +6,20 @@
 
 meteor-platform
 mquandalle:jade
-mizzao:bootstrap-3
 underscore
 iron:router
 accounts-password
-ian:accounts-ui-bootstrap-3
 multiply:iron-router-progress
 msavin:mongol
 http
 msavin:jetsetter
 wizonesolutions:underscore-string
 stylus
-mizzao:bootboxjs
 simple:reactive-method
 momentjs:moment
 mrt:modernizr-meteor
 sacha:spin
-jimbog:tap
+fastclick
+coffeescript
+useraccounts:semantic-ui
+semantic:ui-css

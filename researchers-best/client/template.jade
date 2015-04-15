@@ -1,0 +1,14 @@
+template(name="researchersBest")
+  h2.ui.horizontal.header.divider
+    i.thumbs.up.icon
+    | Лучшие Исследователи
+
+  .ui.four.column.grid.stackable
+    each researchersBest
+      .column
+        .ui.card
+          .content
+            .header {{username}}
+          .extra.content
+            i.orange.fire.icon
+            | {{plurality wisdom "мудрост"}}

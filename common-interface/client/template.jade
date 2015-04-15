@@ -1,0 +1,46 @@
+template(name="commonInterface")
+  .ui.one.column.page.grid
+    .column
+      .ui.large.menu
+        a(href="{{pathFor 'research'}}").header.item
+          img(src="logo-small.png", alt="ПРОБИБЛИ", height="16")
+        if currentUser
+          .right.menu
+            .item
+              i.orange.fire.icon
+              | {{plurality wisdom "мудрост"}}
+              if wisdomAddition
+                span.wisdom-addition {{wisdomAddition}}
+            .item
+              i.user.icon
+              | {{researcher.username}}
+            .item
+              .ui.button.researcher-exit Выйти
+
+      .ui.fluid.large.steps
+        if _id
+          a(href="{{pathFor 'research'}}").step
+            i.diamond.icon
+            .content
+              .title Исследовательская
+          if episodeId
+            a(href="{{pathFor 'episode' _id=episodeId}}").step
+              i.block.layout.icon
+              .content
+                .title Эпизод
+            .active.step
+              i.help.icon
+              .content
+                .title Загадка
+          else
+            .active.step
+              i.block.layout.icon
+              .content
+                .title Эпизод
+        else
+          .active.step
+            i.diamond.icon
+            .content
+              .title Исследовательская
+
+      +yield

@@ -1,0 +1,66 @@
+template(name="riddlesAll")
+  h2.ui.horizontal.header.divider
+    i.block.layout.icon
+    | {{title}}
+  .ui.four.column.grid.stackable
+    each riddles
+      .column
+        .ui.card
+          .content
+            .header {{ucFirst question}}
+            .description
+              | {{ucFirst question}}
+              | {{books}} {{chapters}}
+          a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.bottom.attached.button
+            i.add.icon
+            | Отгадать
+        .ui.segment
+          if availability
+            if next
+              .panel.panel-primary.riddle-item
+                .panel-heading
+                  h2.panel-title Открыта
+                    span.glyphicon.glyphicon-chevron-right
+                    +position
+                .panel-body
+                  +riddleDetails
+                  a(href="{{pathFor 'riddle' _episodeId=episodeId}}").btn.btn-primary Отгадать 
+                    span.glyphicon.glyphicon-chevron-right
+                  h5.pull-right.text-warning
+                    span.text-warning.glyphicon.glyphicon-fire
+                    | {{plurality intricacy "мудрост"}}
+            else
+              .panel.panel-success.riddle-item
+                .panel-heading
+                  h2.panel-title Отгадана
+                    span.glyphicon.glyphicon-ok
+                    +position
+                .panel-body
+                  +riddleDetails
+                  a(href="{{pathFor 'riddle' _episodeId=episodeId}}").btn.btn-success Отгадать снова
+                    span.glyphicon.glyphicon-repeat
+          else
+            .panel.panel-default.riddle-item
+              .panel-heading
+                h2.panel-title Закрыта
+                  span.glyphicon.glyphicon-lock
+                  +position
+              .panel-body
+                +riddleDetails
+                a(href="#").btn.btn-default.disabled Отгадать 
+                  span.glyphicon.glyphicon-lock
+                h5.pull-right.text-warning
+                  span.text-warning.glyphicon.glyphicon-fire
+                  | {{plurality intricacy "мудрост"}}
+
+template(name="riddleDetails")
+  h3
+    small: span.glyphicon.glyphicon-question-sign
+    | {{ucFirst question}}
+    br
+  h4.text-muted
+    span.glyphicon.glyphicon-book
+    | {{books}} {{chapters}}
+
+template(name="position")
+  span.badge.pull-right {{position}}

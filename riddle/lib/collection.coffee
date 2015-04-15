@@ -1,0 +1,1 @@
+@Riddles = new Mongo.Collection 'riddles'
