@@ -1,11 +1,13 @@
+Template.searchArea.onCreated(function() {
+  Session.set('enableVerses', '[]');
+})
+
 Template.riddleAnswer.onDestroyed(function() {
   Session.set('enableVerses', '[]');
 })
 
 Template.searchArea.onRendered(function() {
   var chapter, now, placeBible, tab;
-
-  Session.set('enableVerses', '[]');
 
   Meteor.setTimeout((function() {
     this.$('.bible-chapter-tab').tab();

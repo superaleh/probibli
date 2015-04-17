@@ -56,8 +56,11 @@ Template.riddleAnswer.onRendered(function() {
       }
     };
     formString.form(validationRulesString, {
-      inline: true
-      ,on: 'blur'
+      on: 'blur'
+      ,onSuccess: function (element, total) {
+        console.log($(element).find('.message'));
+        return true;
+      }
     });
 
     validationRulesNumber = {
@@ -72,8 +75,7 @@ Template.riddleAnswer.onRendered(function() {
       }
     };
     formNumber.form(validationRulesNumber, {
-      inline: true
-      ,on: 'blur'
+      on: 'blur'
     });
 
     validationRulesOptions = {
@@ -87,7 +89,9 @@ Template.riddleAnswer.onRendered(function() {
         ]
       }
     };
-    formOptions.form(validationRulesOptions);
+    formOptions.form(validationRulesOptions, {
+      on: 'blur'
+    });
 
   }, 200);
 

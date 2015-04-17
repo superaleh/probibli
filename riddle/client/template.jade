@@ -4,12 +4,11 @@ template(name="riddle")
       h2.ui.header
         i.question.icon
         .content {{ucFirst question}}
-
-      h3
-        i.book.icon
-        | {{books}} {{chapters}}
-        i.orange.fire.icon
-        | {{plurality intricacy "мудрост"}}
+          .sub.header
+            i.book.icon
+            | {{books}} {{chapters}}
+            i.orange.fire.icon
+            | {{plurality intricacy "мудрост"}}
 
       +riddleAnswer
           

@@ -4,7 +4,6 @@ template(name="searchArea")
       i.search.icon
       .content
         | Область поиска
-        .sub.header Выбери стихи
 
     .ui.segments
       .ui.secondary.segment
@@ -13,6 +12,21 @@ template(name="searchArea")
             .ui.large.buttons
               each placesBibleText
                 a.ui.blue.basic.button.bible-chapter-tab(data-tab='chapter{{id}}', class="{{active}}") {{place}}
+      .ui.secondary.segment
+        .ui.two.column.grid
+          .column
+            h3 Выбери стихи
+          .column
+            .ui.two.column.grid.stackable
+              .center.aligned.column
+                .ui.mini.horizontal.statistic
+                  .value {{selectedVersesCount}}
+                  .label выбрано
+              .ui.vertical.divider из
+              .center.aligned.column
+                .ui.mini.horizontal.statistic
+                  .value {{versesCount}}
+                  .label всего
       each placesBibleText
         .ui.tab.segment.bible-text(data-tab='chapter{{id}}', class="{{active}}")
           

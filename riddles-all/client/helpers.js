@@ -8,7 +8,8 @@ Template.riddlesAll.helpers({
     }).fetch();
 
     var guessRiddlesResearcher = Meteor.user().guessRiddles;
-    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: this._id });
+    var episodeId = this._id;
+    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: episodeId });
 
     /*
     #если нет не одной отгаданной загадки то доступна только первая загадка
@@ -36,7 +37,7 @@ Template.riddlesAll.helpers({
           /*
           #следующая загадка
            */
-          if (riddle._id === guessRiddleResearcherLastId)
+          if (riddle._id === guessRiddleResearcherLastId)            
             riddles[riddle.position].next = true;
 
         }

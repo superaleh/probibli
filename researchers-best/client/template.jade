@@ -8,7 +8,9 @@ template(name="researchersBest")
       .column
         .ui.card
           .content
-            .header {{username}}
+            .header
+              i.trophy.icon
+              | {{username}}
           .extra.content
             i.orange.fire.icon
             | {{plurality wisdom "мудрост"}}
