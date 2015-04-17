@@ -1,13 +1,26 @@
 Meteor.methods({
-  responseType: function(riddleId) {
+  nextRiddleId: function(position, episodeId) {
+    
+    check(episodeId, String);
+    check(position, Number);
 
-    var curentRiddle, responseType;
+    var nextRiddle = Riddles.findOne({
+      episodeId : episodeId
+      ,position : position + 1
+    });
 
-    curentRiddle = Riddles.findOne({
+    return nextRiddle._id;
+
+  }
+  ,responseType: function(riddleId) {
+
+    check(riddleId, String);
+
+    var curentRiddle = Riddles.findOne({
       _id: riddleId
     });
 
-    responseType = {
+    var responseType = {
       number: false
       ,string: false
       ,options: false
@@ -33,47 +46,45 @@ Meteor.methods({
     return responseType;
   }
   ,checkAnswer: function(userResponse, riddleId) {
-    var correctResponse, curentRiddle, guessRiddlesUser, indexRiddle, nextRiddle, response, riddleWisdom, verses;
 
     check(userResponse, String);
     check(riddleId, String);
 
-    curentRiddle = Riddles.findOne({
+    var curentRiddle = Riddles.findOne({
       _id: riddleId
     });
 
-    response = _.chain(curentRiddle.response).clean().value().toLowerCase();
-    verses = curentRiddle.versesResponse
+    var response = _.chain(curentRiddle.response).clean().value().toLowerCase();
+    var verses = curentRiddle.versesResponse
       .replace(RegExp(' ', 'gi'), '')
       .replace(/:/gi, '')
       .replace(/;/gi, '')
       .replace(/,/gi, '')
     ;
-    correctResponse = response + verses;
+    var correctResponse = response + verses;
 
     if (correctResponse === userResponse) {
 
-      guessRiddlesUser = Meteor.user().guessRiddles;
+      var guessRiddlesResearcher = Meteor.user().guessRiddles;
+      var currentGuessRiddlesResearcher = _.where(guessRiddlesResearcher, { riddleId: curentRiddle._id });
 
-      riddleWisdom = 0;
+      var riddleWisdom = 0;
 
-      if (_.indexOf(guessRiddlesUser, riddleId) === -1) {
+
+      if (currentGuessRiddlesResearcher.length === 0) {
 
         riddleWisdom = curentRiddle.intricacy;
 
-        Meteor.users.update(
+        var temp = Meteor.users.update(
            { _id: Meteor.userId }
-           ,{ $addToSet: { guessRiddles:  riddleId } }
-        );
-
-        Meteor.users.update(
-           { _id: Meteor.userId }
-           ,{ $inc: { wisdom:  riddleWisdom } }
+           ,{ $push: { guessRiddles: {episodeId: curentRiddle.episodeId, riddleId: curentRiddle._id} }
+              ,$inc: { wisdom:  riddleWisdom }
+            }
         );
 
       };
 
-      return true;
+      return riddleWisdom;
     }
     
     return false;

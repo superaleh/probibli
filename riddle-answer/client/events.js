@@ -10,17 +10,17 @@ Template.riddleAnswer.events({
     formOptions.find('input[name=response-user]').val(response);
   }
   ,'submit form.ui.form': function(e, template) {
-    var idRiddle, response, userResponse, verses;
     e.preventDefault();
-    idRiddle = this._id;
+    var idRiddle = this._id;
+    var timeCircle = $(e.target).parents().find('.time-circle').TimeCircles();
 
-    response = $(e.target).find('input[name=response-user]').val();
+    var response = $(e.target).find('input[name=response-user]').val();
 
     response = _.chain(response).clean().value().toLowerCase();
 
-    verses = EJSON.parse( Session.get('enableVerses') ).join('');
+    var verses = EJSON.parse( Session.get('enableVerses') ).join('');
 
-    userResponse = response + verses;
+    var userResponse = response + verses;
 
     Meteor.call('checkAnswer', userResponse, idRiddle, function(error, result) {
 
@@ -31,6 +31,14 @@ Template.riddleAnswer.events({
           context : '.riddle-answer'
           ,closable : false
           ,transition : 'vertical flip'
+          ,onShow : function(){
+            //останавливаем счетчик
+            timeCircle.stop();
+          }
+          ,onHidden : function(){
+            //запускаем счетчик
+            timeCircle.start(); 
+          }
         })
         .modal('toggle')
       ;

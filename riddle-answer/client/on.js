@@ -1,5 +1,41 @@
+Template.riddleAnswer.onDestroyed(function() {
+  Session.set('checkAnswer', false);
+})
+
 Template.riddleAnswer.onRendered(function() {
+  Session.set('checkAnswer', false);
+  
   Meteor.setTimeout(function() {
+
+
+    this.$(".time-circle").TimeCircles({
+        "animation": "ticks",
+        "bg_width": 0.12,
+        "fg_width": 0.04,
+        "circle_bg_color": "#fff",
+        "time": {
+            "Days": {
+                "text": "ДНИ",
+                "color": "#FFCC66",
+                "show": false
+            },
+            "Hours": {
+                "text": "ЧАСЫ",
+                "color": "#99CCFF",
+                "show": false
+            },
+            "Minutes": {
+                "text": "МИНУТЫ",
+                "color": "#f2c61f",
+                "show": true
+            },
+            "Seconds": {
+                "text": "СЕКУНДЫ",
+                "color": "#d9499a",
+                "show": true
+            }
+        }
+    });
 
     var validationRulesNumber, validationRulesOptions, validationRulesString;
     var formString = this.$('.ui.form.string')

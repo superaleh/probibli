@@ -4,7 +4,7 @@ template(name="riddleAnswer")
     if responseType.string
       form.ui.form.string
         .field
-          label Введи текст. Цифры словами
+          label Введи текст. Если в ответе есть числа, то набирай их словами
           input(type='text', name='response-user')
         +buttonSubmit
 
@@ -25,46 +25,79 @@ template(name="riddleAnswer")
               .ui.toggle.button {{this}}
         .ui.error.message
         +buttonSubmit
-    
+
+      
     .ui.basic.modal
-      if checkAnswer
-        .header Правильно! Поздравляем!
-        .content
-          .image
+      .header
+        h1.ui.inverted.header
+          if checkAnswer
+            | Правильно! Поздравляем!
+          else if equal checkAnswer 0
+            | Правильно!
+          else
+            | Не правильно!
+      .content
+        .image
+          if checkAnswer
             i.inverted.green.check.icon
-          .description
-            h3 Ты заработал: +2 мудрости.
-      else
-        .header Не правильно!
-        .content
-          .image
+          else if equal checkAnswer 0
+            i.inverted.green.check.icon
+          else
             i.inverted.red.close.icon
-          .description
-            h3 Прочти еще раз!
+        .description
+          .ui.two.column.stackable.grid
+            .column
+              if checkAnswer
+                h2.ui.inverted.header
+                  i.orange.fire.icon
+                  .content Ты заработал:<br>+{{plurality checkAnswer "мудрост"}}
+                    .sub.header
+                      i.play.icon
+                      | Открыта следующая загадка
+              else if equal checkAnswer 0
+                h2.ui.inverted.header
+                  i.repeat.icon
+                  .content Ты заработал:<br>{{plurality checkAnswer "мудрост"}}
+              else
+                h2.ui.inverted.header
+                  i.repeat.icon
+                  .content Прочти еще раз!
+            .column
+              h2.ui.inverted.header Время отгадывания:
+              .time-circle
       .actions
         .ui.one.column.grid
           .column.computer.only
             .3.fluid.ui.buttons.large
-              .ui.green.basic.inverted.button
+              a(href="{{pathFor 'episode' _id=episodeId}}").ui.green.basic.inverted.button
                 i.block.layout.icon
                 | Обзор эпизода
               .ui.basic.inverted.button
                 i.repeat.icon
                 | Вернуться к загадке
-              a(href="#").ui.blue.basic.inverted.button
-                i.play.icon
-                | Следующая загадка
+              if checkAnswer
+                a(href="{{pathFor 'riddle' _episodeId=episodeId _id=nextRiddleId}}").ui.blue.basic.inverted.cancel.button
+                  i.play.icon
+                  | Следующая загадка
+              else if equal checkAnswer 0
+                a(href="{{pathFor 'riddle' _episodeId=episodeId _id=nextRiddleId}}").ui.blue.basic.inverted.cancel.button
+                  i.play.icon
+                  | Следующая загадка
           .column.mobile.tablet.only
             .3.fluid.ui.inverted.buttons.big
-              .ui.green.basic.inverted.button
+              a(href="{{pathFor 'episode' _id=episodeId}}").ui.green.basic.inverted.button
                 i.block.layout.icon
               .ui.basic.inverted.button
                 i.repeat.icon
-              .ui.blue.basic.inverted.button
-                i.play.icon
+              if checkAnswer
+                a(href="{{pathFor 'riddle' _episodeId=episodeId _id=nextRiddleId}}").ui.blue.basic.inverted.button
+                  i.play.icon
+              else if equal checkAnswer 0
+                a(href="{{pathFor 'riddle' _episodeId=episodeId _id=nextRiddleId}}").ui.blue.basic.inverted.button
+                  i.play.icon
 
 template(name="buttonSubmit")
-  .ui.animated.fade.big.blue.submit.button
+  .ui.fluid.animated.fade.big.blue.submit.button
     .visible.content Отправить
     .hidden.content
       i.send.icon

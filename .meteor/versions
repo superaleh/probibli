@@ -19,6 +19,7 @@ email@1.0.6
 fastclick@1.0.3
 geojson-utils@1.0.3
 gwendall:session-json@0.1.7
+handlebars@1.0.3
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
@@ -66,6 +67,7 @@ service-configuration@1.0.4
 session@1.1.0
 sha@1.0.3
 simple:reactive-method@1.0.1
+sml0820:meteor-timecircles@0.2.4
 softwarerero:accounts-t9n@1.0.9
 spacebars@1.0.6
 spacebars-compiler@1.0.6

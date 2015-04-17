@@ -5,4 +5,7 @@ Template.riddleAnswer.helpers({
   ,checkAnswer: function() {
     return Session.get('checkAnswer');
   }
+  ,nextRiddleId: function() {
+    return ReactiveMethod.call('nextRiddleId', this.position, this.episodeId);
+  }
 });

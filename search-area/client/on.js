@@ -1,8 +1,9 @@
+Template.riddleAnswer.onDestroyed(function() {
+  Session.set('enableVerses', '[]');
+})
+
 Template.searchArea.onRendered(function() {
   var chapter, now, placeBible, tab;
-
-  now = (new Date).getTime();
-  Session.set('startTime', now);
 
   Session.set('enableVerses', '[]');
 

@@ -5,6 +5,14 @@ template(name="riddlesAll")
   .ui.four.cards.stackable
     each riddles
       .card
+        unless availability
+          unless next
+            .ui.active.dimmer
+              .content
+                .center
+                  h3.ui.inverted.icon.header
+                    i.lock.icon
+                    | Закрыта
         .content
           .ui.corner.label.position
             h5 {{position}}
@@ -13,6 +21,14 @@ template(name="riddlesAll")
             i.book.icon
             | {{books}} {{chapters}}
         if availability
+          .extra.content
+            span.right.floated
+              i.check.icon
+              | Отгадана
+          a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.green.bottom.attached.button
+            i.repeat.icon
+            | Отгадать снова
+        else
           if next
             .extra.content
               span.left.floated
@@ -21,7 +37,7 @@ template(name="riddlesAll")
               span.right.floated
                 i.unlock.icon
                 | Открыта
-            a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.primary.bottom.attached.button
+            a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.blue.bottom.attached.button
               i.play.icon
               | Отгадать
           else
@@ -30,23 +46,8 @@ template(name="riddlesAll")
                 i.orange.fire.icon
                 | {{plurality intricacy "мудрост"}}
               span.right.floated
-                i.check.icon
-                | Отгадана
-            a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.primary.bottom.attached.button
-              i.repeat.icon
-              | Отгадать снова
-        else
-          .extra.content
-            span.left.floated
-              i.orange.fire.icon
-              | {{plurality intricacy "мудрост"}}
-            span.right.floated
-              i.lock.icon
-              | Закрыта
-          .ui.disabled.bottom.attached.button
-            i.lock.icon
-            | Отгадать
-          //- для тестирования
-          a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.primary.bottom.attached.button
-            i.repeat.icon
-            | Отгадать снова
+                i.lock.icon
+                | Закрыта
+            .ui.blue.bottom.attached.button
+              i.play.icon
+              | Отгадать
