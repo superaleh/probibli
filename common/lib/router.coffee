@@ -1,4 +1,5 @@
 Router.configure
+  loadingTemplate : 'loading'
   progressSpinner : false
 
 Router.onBeforeAction ->

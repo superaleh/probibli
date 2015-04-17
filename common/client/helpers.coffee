@@ -8,6 +8,6 @@ Template.registerHelper 'ucFirst', (str) ->
 #Окончание в числительных
 Template.registerHelper 'plurality', (n, thing) ->
   if n == 1
-    '1 ' + thing + 'ь'
+    n + ' ' + thing + 'ь'
   else
     n + ' ' + thing + 'и'

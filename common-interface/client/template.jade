@@ -1,46 +1,82 @@
 template(name="commonInterface")
   .ui.one.column.page.grid
     .column
-      .ui.large.menu
-        a(href="{{pathFor 'research'}}").header.item
-          img(src="logo-small.png", alt="ПРОБИБЛИ", height="16")
-        if currentUser
-          .right.menu
-            .item
-              i.orange.fire.icon
-              | {{plurality wisdom "мудрост"}}
-              if wisdomAddition
-                span.wisdom-addition {{wisdomAddition}}
-            .item
-              i.user.icon
-              | {{researcher.username}}
-            .item
-              .ui.button.researcher-exit Выйти
+      .ui.one.column.grid.vertically.padded
+        .column.tablet.computer.only
+          .ui.fluid.large.menu
+            a(href="{{pathFor 'research'}}").header.item
+              img(src="logo-small.png", alt="ПРОБИБЛИ", height="16")
+            .right.menu
+              .item
+                i.orange.fire.icon
+                | {{plurality wisdomNumber "мудрост"}}
+                if wisdomAddition
+                  span.wisdom-addition {{wisdomAddition}}
+              .item
+                i.user.icon
+                | {{researcher.username}}
+              .item
+                a.ui.button.icon.researcher-exit Выйти
+        .column.mobile.only
+          .ui.segments
+            .ui.segment.center.aligned.tertiary
+              a(href="{{pathFor 'research'}}").ui.fluid
+                img(src="logo-small.png", alt="ПРОБИБЛИ", height="16")
+            .ui.segment
+              h5.ui.header
+                i.orange.fire.icon
+                .content {{plurality wisdomNumber "мудрост"}}
+                  if wisdomAddition
+                    span.wisdom-addition {{wisdomAddition}}
+            .ui.segment
+              h5.ui.header
+                i.user.icon
+                .content {{researcher.username}}
+            .ui.segment
+              .ui.fluid.large.button.researcher-exit Выйти
 
-      .ui.fluid.large.steps
-        if _id
-          a(href="{{pathFor 'research'}}").step
-            i.diamond.icon
-            .content
-              .title Исследовательская
-          if episodeId
-            a(href="{{pathFor 'episode' _id=episodeId}}").step
-              i.block.layout.icon
+        .ui.fluid.large.steps
+          if _id
+            a(href="{{pathFor 'research'}}").step
+              i.diamond.icon
               .content
-                .title Эпизод
-            .active.step
-              i.help.icon
-              .content
-                .title Загадка
+                .title Исследовательская
+            if episodeId
+              a(href="{{pathFor 'episode' _id=episodeId}}").step
+                i.block.layout.icon
+                .content
+                  .title Эпизод
+                  .description {{episodeTitle}}
+              .active.step
+                i.help.icon
+                .content
+                  .title Загадка
+                    .ui.label {{position}}
+            else
+              .active.step
+                i.block.layout.icon
+                .content
+                  .title Эпизод
           else
             .active.step
-              i.block.layout.icon
+              i.diamond.icon
               .content
-                .title Эпизод
-        else
-          .active.step
-            i.diamond.icon
-            .content
-              .title Исследовательская
+                .title Исследовательская
 
       +yield
+
+  .ui.inverted.vertical.segment.footer
+    .ui.page.three.column.stackable.grid
+      .column
+        h5.ui.inverted.header
+          i.copyright.icon
+          .content ПРОБИБЛИ 2015
+            .sub.header версия для тестирования
+      .column
+        h5.ui.inverted.header
+          i.mobile.icon
+          .content Адаптировано под мобильные устройства
+      .column
+        h5.ui.inverted.header
+          i.rocket.icon
+          .content Поддержка только современных браузеров

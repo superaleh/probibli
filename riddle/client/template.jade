@@ -1,33 +1,16 @@
 template(name="riddle")
-  .row
-    .col-xs-12.col-md-6
-      h2
-        span.glyphicon.glyphicon-question-sign
-        | {{ucFirst question}}
+  .ui.two.column.grid.stackable
+    .column
+      h2.ui.header
+        i.question.icon
+        .content {{ucFirst question}}
+
       h3
-        span.text-muted.glyphicon.glyphicon-book
-        span.text-muted.bible-place {{books}} {{chapters}}
-        span.text-warning.glyphicon.glyphicon-fire
-        span.text-warning {{plurality intricacy "мудрост"}}
-      hr
-      .well
-        form.response-user
-          .row
-            .col-xs-12.col-md-12
-              p
-                if responseOptions
-                  label.control-label(for='response-user') Выбери правильный ответ
-                  .btn-group.btn-group-vertical.center-block(data-toggle='buttons')
-                    each responseOptions
-                      label.btn.btn-default.btn-lg
-                        input(type='radio', name='response-user', value="{{this}}")
-                        | {{this}}
+        i.book.icon
+        | {{books}} {{chapters}}
+        i.orange.fire.icon
+        | {{plurality intricacy "мудрост"}}
 
-                else
-                  .form-group
-                    label.control-label(for='response-user') Впиши правильный ответ (регистр не важен)
-                    input.form-control.input-lg(type='text', name="response-user", id="response-user", value="", placeholder="Ответ")
-
-          +riddleAnswer
+      +riddleAnswer
           
     +searchArea

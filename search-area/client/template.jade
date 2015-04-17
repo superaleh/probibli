@@ -1,19 +1,18 @@
 template(name="searchArea")
-  .col-xs-12.col-md-6
-    h2
-      span.glyphicon.glyphicon-info-sign
-      | Область поиска
-      small выбери стихи
-    .panel.panel-default
-      .panel-heading
-        ul.nav.nav-pills.nav-justified.bible-chapter-tab
-          each placesBibleText
-            li(class="{{active}}")
-              a(href="#chapter{{id}}", data-toggle="tab") {{place}}
-      .panel-body
-        .tab-content.bible-text-tab
-          each placesBibleText
-            .tab-pane.fade(id="chapter{{id}}", class="{{active}}")
-              .progress.progress-striped.active
-                .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 100%;') Загрузка текста из Библии...
-              .bible-text
+  .column
+    h2.ui.header
+      i.search.icon
+      .content
+        | Область поиска
+        .sub.header Выбери стихи
+
+    .ui.segments
+      .ui.secondary.segment
+        .ui.one.center.aligned.column.grid
+          .column
+            .ui.large.buttons
+              each placesBibleText
+                a.ui.blue.basic.button.bible-chapter-tab(data-tab='chapter{{id}}', class="{{active}}") {{place}}
+      each placesBibleText
+        .ui.tab.segment.bible-text(data-tab='chapter{{id}}', class="{{active}}")
+          

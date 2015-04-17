@@ -18,7 +18,6 @@ stylus
 simple:reactive-method
 momentjs:moment
 mrt:modernizr-meteor
-sacha:spin
 fastclick
 coffeescript
 useraccounts:semantic-ui

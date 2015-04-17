@@ -4,8 +4,10 @@ Template.commonInterface.helpers
       return
     researcher = Meteor.user()
     researcher
-  wisdom: ->
-    Meteor.user().wisdom
+  wisdomNumber: ->
+    user = Meteor.user()
+    if user
+      user.wisdom
   wisdomAddition: ->
     if Session.get('wisdomAddition')
       Meteor.setTimeout (->
@@ -13,3 +15,7 @@ Template.commonInterface.helpers
         return
       ), 1300
       return Session.get('wisdomAddition')
+  episodeTitle: ->
+    episode = Episodes.findOne()
+    if episode
+      episode.title

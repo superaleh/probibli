@@ -8,7 +8,7 @@ Template.searchArea.helpers
       {
         id: index
         place: books + ' ' + _.trim(chapter)
-        active: if index then '' else 'in active'
+        active: if index then '' else 'active'
       }
     ).value()
     placesBible
