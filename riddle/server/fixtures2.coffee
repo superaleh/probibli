@@ -74,7 +74,7 @@ riddlesPasha = [
     'FIELD6': '12:43, 12:44, 12:45'
     'FIELD7': 3
     'FIELD8': 2
-    'FIELD9': 5
+    'FIELD9': 28
   }
   {
     'FIELD1': 'Исх.'
@@ -360,7 +360,7 @@ riddlesPasha = [
     'FIELD6': '21:11'
     'FIELD7': 1
     'FIELD8': 1
-    'FIELD9': 28
+    'FIELD9': 5
   }
 ]
 

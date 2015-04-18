@@ -29,8 +29,7 @@ Template.searchArea.events({
   }
   ,'click .bible-text p.bible': function(e) {
     var verseBible, indexVerse;
-    var enableVersesUser = Session.get('enableVerses') ? Session.get('enableVerses') : '[]';
-    enableVersesUser = EJSON.parse( enableVersesUser );
+    var enableVersesUser = Session.get('enableVerses') ? Session.get('enableVerses') : [];
     e.preventDefault();
     
     $(e.target).toggleClass('enabled');
@@ -43,13 +42,12 @@ Template.searchArea.events({
     indexVerse = _.indexOf(enableVersesUser, verseBible);
 
     if(indexVerse === -1)
-      enableVersesUser.push(verseBible);      
+      enableVersesUser.push(verseBible);
     else
       enableVersesUser = _.without(enableVersesUser, enableVersesUser[indexVerse]);
 
     enableVersesUser = _.sortBy(enableVersesUser, function(value){ return value; });
 
-    enableVersesUser = EJSON.stringify(enableVersesUser);
     Session.set('enableVerses', enableVersesUser);
   }
 });

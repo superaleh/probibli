@@ -6,14 +6,12 @@
 
 meteor-platform
 mquandalle:jade
-underscore
 iron:router
 accounts-password
 multiply:iron-router-progress
 msavin:mongol
 http
 msavin:jetsetter
-wizonesolutions:underscore-string
 stylus
 simple:reactive-method
 momentjs:moment
@@ -24,3 +22,5 @@ useraccounts:semantic-ui
 semantic:ui-css
 sml0820:meteor-timecircles
 rzymek:moment-locale-ru
+stevezhu:lodash
+wizonesolutions:underscore-string

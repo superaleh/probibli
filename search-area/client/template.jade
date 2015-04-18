@@ -13,20 +13,20 @@ template(name="searchArea")
               each placesBibleText
                 a.ui.blue.basic.button.bible-chapter-tab(data-tab='chapter{{id}}', class="{{active}}") {{place}}
       .ui.secondary.segment
-        .ui.two.column.grid
-          .column
-            h3 Выбери стихи
-          .column
-            .ui.two.column.grid.stackable
-              .center.aligned.column
-                .ui.mini.horizontal.statistic
-                  .value {{selectedVersesCount}}
-                  .label выбрано
-              .ui.vertical.divider из
-              .center.aligned.column
-                .ui.mini.horizontal.statistic
-                  .value {{versesCount}}
-                  .label всего
+        .ui.grid.stackable.divided
+          .seven.wide.column
+            h3 Выбери стихи:
+          .nine.wide.column
+            .ui.padded.grid
+              .two.column.row
+                .center.aligned.column.green
+                  .ui.mini.statistic.horizontal.inverted
+                    .value {{selectedVersesCount}}
+                    .label выбрано
+                .center.aligned.column.teal
+                  .ui.mini.statistic.horizontal.inverted
+                    .value {{versesCount}}
+                    .label всего
       each placesBibleText
         .ui.tab.segment.bible-text(data-tab='chapter{{id}}', class="{{active}}")
           

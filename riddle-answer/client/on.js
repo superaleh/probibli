@@ -1,9 +1,15 @@
 Template.riddleAnswer.onDestroyed(function() {
   Session.set('checkAnswer', false);
+  Session.set('countWordsResponse', 0);
 })
 
-Template.riddleAnswer.onRendered(function() {
+Template.riddleAnswer.onCreated(function() {
   Session.set('checkAnswer', false);
+  Session.set('countWordsResponse', 0);
+  Session.set('checkAnswer', false);
+})
+
+Template.riddleAnswer.onRendered(function() {  
   
   Meteor.setTimeout(function() {
 
@@ -43,6 +49,7 @@ Template.riddleAnswer.onRendered(function() {
         ,formOptions = this.$('.ui.form.options');
 
     this.$('.ui.radio.checkbox').checkbox();
+    this.$('.ui.accordion').accordion();
 
     validationRulesString = {
       string: {
@@ -57,10 +64,6 @@ Template.riddleAnswer.onRendered(function() {
     };
     formString.form(validationRulesString, {
       on: 'blur'
-      ,onSuccess: function (element, total) {
-        console.log($(element).find('.message'));
-        return true;
-      }
     });
 
     validationRulesNumber = {

@@ -8,4 +8,10 @@ Template.riddleAnswer.helpers({
   ,nextRiddleId: function() {
     return ReactiveMethod.call('nextRiddleId', this.position, this.episodeId);
   }
+  ,countWordsResponseUser: function() {
+    return Session.get('countWordsResponse');
+  }
+  ,countWordsResponseRiddle: function() {
+    return ReactiveMethod.call('countWordsResponseRiddle', this._id);
+  }
 });

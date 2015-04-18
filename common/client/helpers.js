@@ -6,7 +6,7 @@ Template.registerHelper('ucFirst', function(str) {
   if (!str) {
     return str;
   }
-  newStr = _.capitalize(str);
+  newStr = lodash.capitalize(str);
   return newStr;
 });
 

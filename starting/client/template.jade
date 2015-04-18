@@ -1,27 +1,10 @@
 template(name="starting")
-  .ui.one.column.page.grid.starting
-    .column
-      .ui.stackable.two.column.grid
-        .column
-          .ui.segment
-            img(src="logo2.png", alt="").ui.centered.image
-        .column
-          +atForm
-      
-      +researchersBest
-
-      .ui.inverted.vertical.segment.footer
-        .ui.page.three.column.stackable.grid
-          .column
-            h5.ui.inverted.header
-              i.copyright.icon
-              .content ПРОБИБЛИ 2015
-                .sub.header версия для тестирования
-          .column
-            h5.ui.inverted.header
-              i.mobile.icon
-              .content Адаптировано под мобильные устройства
-          .column
-            h5.ui.inverted.header
-              i.rocket.icon
-              .content Поддержка только современных браузеров
+  .column.starting
+    .ui.stackable.two.column.grid
+      .column
+        .ui.segment
+          img(src="logo2.png", alt="").ui.centered.image
+      .column
+        +atForm
+    
+    +researchersBest

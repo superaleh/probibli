@@ -7,6 +7,8 @@ Template.riddlesAll.helpers({
       }
     }).fetch();
 
+    if(!Meteor.user()) return riddles;
+    
     var guessRiddlesResearcher = Meteor.user().guessRiddles;
     var episodeId = this._id;
     guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: episodeId });

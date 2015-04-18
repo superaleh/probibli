@@ -1,65 +1,102 @@
 template(name="riddleAnswer")
   .ui.segment
-    h3.ui.header
-      i.lightning.icon.purple
-      .content Инструкция
-        .sub.header Ознакомся пожалуйста
+    .ui.accordion
+      .title.active
+        h5.ui.right.aligned.header
+          i.icon.dropdown
+          | Прочитал инструкцию
+      .content.active
+        h3.ui.header
+          i.lightning.icon.purple
+          .content Инструкция
+            .sub.header Ознакомся пожалуйста
 
-    .ui.ordered.list.large
-      .item
-        .content
-          | Прочти внимательно вопрос сверху
-          i.pointing.up.icon
-      .item
-        .content
-          | Чтобы тебе найти ответ, необходимо справа
-          i.pointing.right.icon
-          | прочесть текст из области поиска 
-      .item
-        .content
-          | Если ты нашел ответ то выбери
-          i.checkmark.icon
-          | стих или стихи где находится ответ
-      .item        
-        .content
-          | Далее впиши
-          i.write.icon
-          | ответ в поле, которое находится ниже
-          i.pointing.down.icon
-      .item
-        .content
-          | И в конце нажми
-          i.paw.icon
-          | по кнопке отправить, для проверки того, что ты сделал
+        .ui.ordered.list.large
+          .item
+            .content
+              | Прочти внимательно вопрос сверху
+              i.pointing.up.icon
+          .item
+            .content
+              | Чтобы тебе найти ответ, необходимо справа
+              i.pointing.right.icon
+              | прочесть текст из области поиска 
+          .item
+            .content
+              | Если ты нашел ответ то выбери
+              i.checkmark.icon
+              | стих или стихи где находится ответ
+          .item        
+            .content
+              | Далее впиши
+              i.write.icon
+              | или выбери
+              i.checkmark.icon
+              | ответ в блок, который находится ниже
+              i.pointing.down.icon
+          .item
+            .content
+              | И в конце нажми
+              i.paw.icon
+              | по кнопке отправить, для проверки того, что ты сделал
 
-  .ui.segment.riddle-answer
+  .ui.segments.riddle-answer
 
     if responseType.string
-      form.ui.form.string
-        h3 Введи текст. Если в ответе есть числа, то набирай их словами
-        .field
-          input(type='text', name='response-user', placeholder="Ответ вводить сюда")
-        +buttonSubmit
-        .ui.error.message
+      .ui.secondary.segment
+        .ui.grid.stackable.divided
+          .ten.wide.column
+            h3.ui.header
+              .content Введи текст
+                .sub.header Если в ответе есть числа, то набирай их словами
+          .six.wide.column
+            .ui.padded.grid
+              .two.column.row
+                .center.aligned.column.green
+                  .ui.mini.statistic.inverted
+                    .value {{countWordsResponseUser}}
+                    .label введено
+                .center.aligned.column.teal
+                  .ui.mini.statistic.inverted
+                    .value {{countWordsResponseRiddle}}
+                    .label всего
+      .ui.segment
+        form.ui.form.string
+          .field
+            .ui.left.icon.input.large
+              input(type='text', name='response-user', placeholder="Ответ вводить сюда")
+              i.write.icon
+              .ui.corner.label
+                i.asterisk.icon.red
+          .ui.error.message
+          +buttonSubmit
 
     if responseType.number
-      form.ui.form.number
+      .ui.secondary.segment
         h3 Введи число
-        .field
-          input(type='text', name='response-user')
-        +buttonSubmit
-        .ui.error.message
+      .ui.segment
+        form.ui.form.number
+          .field
+            .ui.left.icon.input.large
+              input(type='text', name='response-user', placeholder="Ответ вводить сюда")
+              i.write.icon
+              .ui.corner.label
+                i.asterisk.icon
+          .ui.error.message
+          +buttonSubmit
 
     if responseType.options
-      form.ui.form.options
+      .ui.secondary.segment
         h3 Выбери один вариант
-        input(type="hidden", name='response-user')
-        p
-          .ui.fluid.large.vertical.buttons
-            each responseType.options
-              .ui.toggle.button {{this}}
-        +buttonSubmit
-        .ui.error.message
+      .ui.segment
+        form.ui.form.options
+          input(type="hidden", name='response-user')
+          p
+            .ui.fluid.large.vertical.buttons
+              each responseType.options
+                .ui.toggle.button {{this}}
+          .ui.error.message
+          +buttonSubmit
 
       
     .ui.basic.modal
@@ -116,7 +153,7 @@ template(name="riddleAnswer")
                   span.text-popup Следующая загадка
 
 template(name="buttonSubmit")
-  .ui.fluid.animated.fade.big.blue.submit.button
+  .ui.fluid.animated.huge.blue.submit.button
     .visible.content Отправить
     .hidden.content
       i.send.icon

@@ -8,8 +8,11 @@ Template.episodesAll.helpers({
     });
   },
   count: function() {
+    if(!Meteor.user()) return 0;
+
     var riddles = this.numberRiddles;
     var guessRiddlesResearcher = Meteor.user().guessRiddles;
+    
     if (guessRiddlesResearcher.length > 0) {
       /*
       #фильтрую массив по id эпизода

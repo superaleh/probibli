@@ -10,7 +10,7 @@ Template.searchArea.helpers({
     placesBible = _.chain(chapters).words(',').map(function(chapter, index) {
       return {
         id: index,
-        place: books + ' ' + _.trim(chapter),
+        place: books + ' ' + lodash.trim(chapter),
         active: index ? '' : 'active'
       };
     }).value();
@@ -18,7 +18,6 @@ Template.searchArea.helpers({
   }
   ,selectedVersesCount: function() {
     var enableVersesUser = Session.get('enableVerses');
-    enableVersesUser = EJSON.parse( enableVersesUser );
     return enableVersesUser.length;
   }
 });

@@ -1,9 +1,9 @@
 Template.searchArea.onCreated(function() {
-  Session.set('enableVerses', '[]');
+  Session.set('enableVerses', []);
 })
 
 Template.riddleAnswer.onDestroyed(function() {
-  Session.set('enableVerses', '[]');
+  Session.set('enableVerses', []);
 })
 
 Template.searchArea.onRendered(function() {
