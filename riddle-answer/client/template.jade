@@ -1,44 +1,4 @@
 template(name="riddleAnswer")
-  .ui.segment
-    .ui.accordion
-      .title.active
-        h5.ui.right.aligned.header
-          i.icon.dropdown
-          | Прочитал инструкцию
-      .content.active
-        h3.ui.header
-          i.lightning.icon.purple
-          .content Инструкция
-            .sub.header Ознакомся пожалуйста
-
-        .ui.ordered.list.large
-          .item
-            .content
-              | Прочти внимательно вопрос сверху
-              i.pointing.up.icon
-          .item
-            .content
-              | Чтобы тебе найти ответ, необходимо справа
-              i.pointing.right.icon
-              | прочесть текст из области поиска 
-          .item
-            .content
-              | Если ты нашел ответ то выбери
-              i.checkmark.icon
-              | стих или стихи где находится ответ
-          .item        
-            .content
-              | Далее впиши
-              i.write.icon
-              | или выбери
-              i.checkmark.icon
-              | ответ в блок, который находится ниже
-              i.pointing.down.icon
-          .item
-            .content
-              | И в конце нажми
-              i.paw.icon
-              | по кнопке отправить, для проверки того, что ты сделал
 
   .ui.segments.riddle-answer
 
@@ -67,8 +27,7 @@ template(name="riddleAnswer")
               input(type='text', name='response-user', placeholder="Ответ вводить сюда")
               i.write.icon
               .ui.corner.label
-                i.asterisk.icon.red
-          .ui.error.message
+                i.asterisk.icon
           +buttonSubmit
 
     if responseType.number
@@ -82,7 +41,6 @@ template(name="riddleAnswer")
               i.write.icon
               .ui.corner.label
                 i.asterisk.icon
-          .ui.error.message
           +buttonSubmit
 
     if responseType.options
@@ -99,7 +57,7 @@ template(name="riddleAnswer")
           +buttonSubmit
 
       
-    .ui.basic.modal
+    .ui.basic.modal(data-next="{{nextRiddleId}}")
       .header
         h1.ui.inverted.header
           if notequal checkAnswer false
@@ -136,24 +94,27 @@ template(name="riddleAnswer")
       .actions
         .ui.one.column.grid
           .column
-            .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
-              a(href="{{pathFor 'episode' _id=episodeId}}").ui.green.basic.inverted.button
-                i.block.layout.icon
-                span.text-popup Обзор эпизода
-              .ui.basic.inverted.button
-                i.repeat.icon
-                span.text-popup Вернуться к загадке
-              if checkAnswer
-                a(href="{{pathFor 'riddle' _episodeId=episodeId _id=nextRiddleId}}").ui.blue.basic.inverted.cancel.button
-                  i.play.icon
-                  span.text-popup Следующая загадка
-              else if equal checkAnswer 0
-                a(href="{{pathFor 'riddle' _episodeId=episodeId _id=nextRiddleId}}").ui.blue.basic.inverted.cancel.button
-                  i.play.icon
-                  span.text-popup Следующая загадка
+            .ui.segment
+              .ui.active.dimmer
+                .ui.loader
+              .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
+                .ui.green.basic.inverted.button.correct-transition(data-settings="{{episodeId}}", data-router="episode")
+                  i.block.layout.icon
+                  span.text-popup Обзор эпизода
+                .ui.basic.inverted.cancel.button
+                  i.repeat.icon
+                  span.text-popup Вернуться к загадке
+                if checkAnswer
+                  .ui.blue.basic.inverted.button.correct-transition(data-settings="{{nextRiddleId}}", data-router="riddle")
+                    i.play.icon
+                    span.text-popup Следующая загадка
+                else if equal checkAnswer 0
+                  .ui.blue.basic.inverted.button.correct-transition(data-settings="{{nextRiddleId}}", data-router="riddle")
+                    i.play.icon
+                    span.text-popup Следующая загадка
 
 template(name="buttonSubmit")
-  .ui.fluid.animated.huge.blue.submit.button
+  .ui.fluid.animated.fade.huge.blue.submit.button
     .visible.content Отправить
     .hidden.content
       i.send.icon

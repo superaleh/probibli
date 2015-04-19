@@ -25,7 +25,7 @@ template(name="riddlesAll")
             span.right.floated
               i.check.icon
               | Отгадана
-          a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.green.bottom.attached.button
+          a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.repeat.icon
             | Отгадать снова
         else
@@ -37,7 +37,7 @@ template(name="riddlesAll")
               span.right.floated
                 i.unlock.icon
                 | Открыта
-            a(href="{{pathFor 'riddle' _episodeId=episodeId}}").ui.blue.bottom.attached.button
+            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.blue.bottom.attached.button
               i.play.icon
               | Отгадать
           else

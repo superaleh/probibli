@@ -48,7 +48,6 @@ Template.riddleAnswer.onRendered(function() {
         ,formNumber = this.$('.ui.form.number')
         ,formOptions = this.$('.ui.form.options');
 
-    this.$('.ui.radio.checkbox').checkbox();
     this.$('.ui.accordion').accordion();
 
     validationRulesString = {
@@ -64,6 +63,7 @@ Template.riddleAnswer.onRendered(function() {
     };
     formString.form(validationRulesString, {
       on: 'blur'
+      ,inline: true
     });
 
     validationRulesNumber = {
@@ -79,6 +79,7 @@ Template.riddleAnswer.onRendered(function() {
     };
     formNumber.form(validationRulesNumber, {
       on: 'blur'
+      ,inline: true
     });
 
     validationRulesOptions = {
@@ -92,9 +93,7 @@ Template.riddleAnswer.onRendered(function() {
         ]
       }
     };
-    formOptions.form(validationRulesOptions, {
-      on: 'blur'
-    });
+    formOptions.form(validationRulesOptions);
 
   }, 200);
 

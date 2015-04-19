@@ -4,6 +4,7 @@ Template.researchersBest.helpers({
     return researchersBest = Meteor.users.find({}, {
       sort: {
         wisdom: -1
+        ,createdAt: -1
       },
       limit: 4
     });

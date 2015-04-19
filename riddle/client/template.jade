@@ -1,7 +1,7 @@
 template(name="riddle")
   .ui.two.column.grid.stackable
     .column
-      h2.ui.header
+      h2.ui.header.teal.dividing
         i.question.icon
         .content {{ucFirst question}}
           .sub.header
@@ -9,6 +9,47 @@ template(name="riddle")
             | {{books}} {{chapters}}
             i.orange.fire.icon
             | {{plurality intricacy "мудрост"}}
+
+      .ui.segment
+        .ui.accordion
+          .title.active
+            h5.ui.right.aligned.header
+              i.icon.dropdown
+              | Прочитал инструкцию
+          .content.active
+            h3.ui.header
+              i.lightning.icon.purple
+              .content Инструкция
+                .sub.header Ознакомся пожалуйста
+
+            .ui.ordered.list.large
+              .item
+                .content
+                  | Прочти внимательно вопрос сверху
+                  i.pointing.up.icon
+              .item
+                .content
+                  | Чтобы тебе найти ответ, необходимо справа
+                  i.pointing.right.icon
+                  | прочесть текст из области поиска 
+              .item
+                .content
+                  | Если ты нашел ответ то выбери
+                  i.checkmark.icon
+                  | стих или стихи где находится ответ
+              .item        
+                .content
+                  | Далее впиши
+                  i.write.icon
+                  | или выбери
+                  i.checkmark.icon
+                  | ответ в блок, который находится ниже
+                  i.pointing.down.icon
+              .item
+                .content
+                  | И в конце нажми
+                  i.paw.icon
+                  | по кнопке отправить, для проверки того, что ты сделал
 
       +riddleAnswer
           
