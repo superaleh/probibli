@@ -10,7 +10,7 @@ template(name="commonInterface")
                   td
                     a(href="{{pathFor 'research'}}").logo
                       img(src="logo-small.png", alt="ПРОБИБЛИ")
-                      .ui.label.mini.floating.tag.orange 0.3.0
+                      .ui.label.mini.floating.tag.orange {{varsion}}
                   td.collapsing.center.aligned
                     h3
                       i.orange.fire.icon
@@ -63,7 +63,7 @@ template(name="commonInterface")
         h5.ui.inverted.header
           i.copyright.icon
           .content ПРОБИБЛИ 2015
-            .ui.orange.label.mini 0.3.0
+            .ui.orange.label.mini {{varsion}}
             .sub.header версия для внутреннего тестирования
       .column
         h5.ui.inverted.header

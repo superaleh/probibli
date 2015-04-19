@@ -13,12 +13,14 @@ Template.riddleAnswer.events({
 
       Meteor.setTimeout(function() {
         Router.go( routerName, { _episodeId: episodeId } );
+        // Router.next();
       }, delay);
 
     }else if(routerName === 'riddle'){
 
       Meteor.setTimeout(function() {
         Router.go( routerName, { _riddleId: settings, _episodeId: episodeId } );
+        // Router.next();
       }, delay);
 
     }
@@ -51,6 +53,10 @@ Template.riddleAnswer.events({
     var formButton = $(e.target).find('.submit.button');
     var actionsSegment = $(e.target).parents().find('.basic.modal .actions .segment .dimmer');
 
+    var pastorMode = false;    
+    if (Meteor.user().pastor && Session.get('pastorMode'))
+      pastorMode = true;
+
     //включаею на кнопке загрузку
     formButton.addClass('loading');
     actionsSegment.addClass('active');
@@ -61,7 +67,7 @@ Template.riddleAnswer.events({
 
     var userVerses = Session.get('enableVerses');
 
-    Meteor.call('checkAnswer', userResponse, userVerses, idRiddle, function(error, result) {
+    Meteor.call('checkAnswer', userResponse, userVerses, idRiddle, pastorMode, function(error, result) {
 
       if(error){
         console.error(error);
@@ -83,9 +89,10 @@ Template.riddleAnswer.events({
             ,onShow : function(){
               //останавливаем счетчик
               timeCircle.stop();
+
               Meteor.setTimeout(function() {
                 actionsSegment.removeClass('active');
-              }, 1000)
+              }, 1000);
             }
             ,onHidden : function(){
               //запускаем счетчик

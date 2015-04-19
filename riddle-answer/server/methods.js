@@ -57,11 +57,12 @@ Meteor.methods({
 
     return responseType;
   }
-  ,checkAnswer: function(userResponse, userVerses, riddleId) {
+  ,checkAnswer: function(userResponse, userVerses, riddleId, pastorMode) {
 
     check(userResponse, String);
     check(userVerses, Array);
     check(riddleId, String);
+    check(pastorMode, Boolean);
 
     var curentRiddle = Riddles.findOne({
       _id: riddleId
@@ -92,10 +93,13 @@ Meteor.methods({
 
     if ( correctResponse && correctVerses) {
 
+      var riddleWisdom = 0;
+
+      if (pastorMode)
+        return riddleWisdom;
+
       var guessRiddlesResearcher = Meteor.user().guessRiddles;
       var currentGuessRiddlesResearcher = _.where(guessRiddlesResearcher, { riddleId: curentRiddle._id });
-
-      var riddleWisdom = 0;
 
       if (currentGuessRiddlesResearcher.length === 0) {
 

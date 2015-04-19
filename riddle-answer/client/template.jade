@@ -95,7 +95,7 @@ template(name="riddleAnswer")
         .ui.one.column.grid
           .column
             .ui.segment
-              .ui.active.dimmer
+              .ui.dimmer
                 .ui.loader
               .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
                 .ui.green.basic.inverted.button.correct-transition(data-settings="{{episodeId}}", data-router="episode")

@@ -3,11 +3,27 @@ template(name="episodesAll")
     i.block.layout.icon
     | Все Эпизоды
 
-  .ui.three.column.grid.stackable
+  .ui.three.column.grid.stackable.middle.aligned.centered
+    if pastorMode
+      .column
+        .ui.segment
+          h1.ui.icon.header.center.aligned
+            i.add.icon
+            .content Добавить Эпизод
+              .sub.header Добавить новый эпизод
+          .ui.one.column.grid
+            .right.aligned.column
+              a(href="{{pathFor 'addEpisode'}}").ui.right.labeled.icon.center.aligned.orange.large.button
+                i.add.icon
+                | Добавить
     each episodes
       .column
-        .ui.piled.segment
-          h3 {{title}}
+        .ui.piled.segment.episode-item
+          h3
+            if pastorMode
+              a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.orange.button
+                i.write.icon
+            | {{title}}
             if newEpisode
               .ui.teal.label новый
           .ui.divider
@@ -30,6 +46,12 @@ template(name="episodesAll")
             .label Прогресс прохождения <b>{{count.percent}}%</b>
           .ui.one.column.grid
             .right.aligned.column
-              a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.labeled.icon.center.aligned.primary.large.button
-                i.right.rocket.icon
-                | Вперед
+              if pastorMode
+                a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.labeled.icon.center.aligned.blue.large.button
+                  i.chevron.right.icon
+                  | Открыть
+              else
+                a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.labeled.icon.center.aligned.blue.large.button
+                  i.rocket.icon
+                  | Вперед
+

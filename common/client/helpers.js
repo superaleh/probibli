@@ -1,4 +1,30 @@
 /*
+#версия приложения
+ */
+Template.registerHelper('varsion', function() {
+  return '0.3.0';
+});
+
+/*
+#режим пастора
+ */
+Template.registerHelper('pastorMode', function() {
+
+  if ( Meteor.user() ){    
+    var pastorMode = Session.get('pastorMode');
+    
+    if (Meteor.user().pastor && pastorMode)
+      return true;
+
+    return false;
+  };
+  
+  return false;
+
+});
+
+
+/*
 #Первая буква в предложении большая
  */
 Template.registerHelper('ucFirst', function(str) {

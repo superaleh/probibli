@@ -3,24 +3,44 @@ template(name="riddlesAll")
     i.block.layout.icon
     | {{title}}
   .ui.four.cards.stackable
+    if pastorMode
+      .card
+        .content
+          h3.ui.icon.header.center.aligned
+            i.add.icon
+            .content Добавить Загадку
+              .sub.header Добавить новую загадку
+        a(href="{{pathFor 'addRiddle' _episodeId=episodeId}}").ui.orange.bottom.attached.button
+          i.add.icon
+          | Добавить
+
     each riddles
       .card
         unless availability
           unless next
-            .ui.active.dimmer
-              .content
-                .center
-                  h3.ui.inverted.icon.header
-                    i.lock.icon
-                    | Закрыта
+            unless pastorMode
+              .ui.active.dimmer
+                .content
+                  .center
+                    h3.ui.inverted.icon.header
+                      i.lock.icon
+                      | Закрыта
         .content
           .ui.corner.label.position
             h5 {{position}}
-          .header {{ucFirst question}}
+          .header
+            if pastorMode
+              a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.mini.orange.button
+                i.write.icon
+            | {{ucFirst question}}
           .description
             i.book.icon
             | {{books}} {{chapters}}
-        if availability
+        if pastorMode
+          a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
+            i.chevron.right.icon
+            | Открыть
+        else if availability
           .extra.content
             span.right.floated
               i.check.icon
