@@ -57,7 +57,7 @@ template(name="riddleAnswer")
           +buttonSubmit
 
       
-    .ui.basic.modal(data-next="{{nextRiddleId}}")
+    .ui.basic.modal
       .header
         h1.ui.inverted.header
           if notequal checkAnswer false
@@ -94,27 +94,24 @@ template(name="riddleAnswer")
       .actions
         .ui.one.column.grid
           .column
-            .ui.segment
-              .ui.dimmer
-                .ui.loader
-              .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
-                .ui.green.basic.inverted.button.correct-transition(data-settings="{{episodeId}}", data-router="episode")
-                  i.block.layout.icon
-                  span.text-popup Обзор эпизода
-                .ui.basic.inverted.cancel.button
-                  i.repeat.icon
-                  span.text-popup Вернуться к загадке
-                if checkAnswer
-                  .ui.blue.basic.inverted.button.correct-transition(data-settings="{{nextRiddleId}}", data-router="riddle")
-                    i.play.icon
-                    span.text-popup Следующая загадка
-                else if equal checkAnswer 0
-                  .ui.blue.basic.inverted.button.correct-transition(data-settings="{{nextRiddleId}}", data-router="riddle")
-                    i.play.icon
-                    span.text-popup Следующая загадка
+            .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
+              .ui.green.basic.inverted.button.curren-episode-url
+                i.block.layout.icon
+                span.text-popup Обзор эпизода
+              .ui.basic.inverted.cancel.button
+                i.repeat.icon
+                span.text-popup Вернуться к загадке
+              if checkAnswer
+                .ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                  i.play.icon
+                  span.text-popup Следующая загадка
+              else if equal checkAnswer 0
+                .ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                  i.play.icon
+                  span.text-popup Следующая загадка
 
 template(name="buttonSubmit")
-  .ui.fluid.animated.fade.huge.blue.submit.button
+  button(type="submit").ui.fluid.animated.fade.huge.blue.submit.button
     .visible.content Отправить
     .hidden.content
       i.send.icon

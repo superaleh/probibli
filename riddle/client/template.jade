@@ -2,7 +2,11 @@ template(name="riddle")
   .ui.two.column.grid.stackable
     .column
       h2.ui.header.teal.dividing
-        i.question.icon
+        if pastorMode
+          //- a(href="{{pathFor 'updateRiddle' _episodeId=episodeId _riddleId=_id}}")
+          i.write.icon.orange
+        else
+          i.question.icon
         .content {{ucFirst question}}
           .sub.header
             i.book.icon

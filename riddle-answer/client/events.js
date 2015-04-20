@@ -1,32 +1,30 @@
 Template.riddleAnswer.events({
 
-  'click .actions .correct-transition': function(e) {
+  'click .actions .curren-episode-url': function(e) {
+
+    //переход не осуществлялся из-за того, что событие срабатовало на дочернем елементе а у него не было данных для редиректа
+    e.preventDefault();
+
+    var episodeId = this.episodeId;
+
+    Meteor.setTimeout(function() {
+      Router.go( 'episode', { _episodeId: episodeId } );
+    }, 700);
+
+  }
+  ,'click .actions .next-riddle-url': function(e) {
 
     e.preventDefault();
 
-    var routerName = $(e.target).data('router');
-    var settings = $(e.target).data('settings');
+    var nextRiddle = $(e.target).parents().find('.button.next-riddle-url').data('next');
     var episodeId = this.episodeId;
-    var delay = 700;
 
-    if(routerName === 'episode'){
-
-      Meteor.setTimeout(function() {
-        Router.go( routerName, { _episodeId: episodeId } );
-        // Router.next();
-      }, delay);
-
-    }else if(routerName === 'riddle'){
-
-      Meteor.setTimeout(function() {
-        Router.go( routerName, { _riddleId: settings, _episodeId: episodeId } );
-        // Router.next();
-      }, delay);
-
-    }
+    Meteor.setTimeout(function() {
+      Router.go( 'riddle', { _riddleId: nextRiddle, _episodeId: episodeId } );
+    }, 700);
 
   }
-  ,'keypress form.string input': function(e) {
+  ,'keypress form.string input, focus form.string input, blur form.string input': function(e) {
     var form = $(e.target).parents().find('form.string');
     var words = lodash.words( form.form('get value', 'response-user'), /[а-яА-Я]+/g );
     Session.set('countWordsResponse', words.length);
@@ -51,7 +49,6 @@ Template.riddleAnswer.events({
     var idRiddle = this._id;
     var timeCircle = $(e.target).parents().find('.time-circle').TimeCircles();
     var formButton = $(e.target).find('.submit.button');
-    var actionsSegment = $(e.target).parents().find('.basic.modal .actions .segment .dimmer');
 
     var pastorMode = false;    
     if (Meteor.user().pastor && Session.get('pastorMode'))
@@ -59,7 +56,6 @@ Template.riddleAnswer.events({
 
     //включаею на кнопке загрузку
     formButton.addClass('loading');
-    actionsSegment.addClass('active');
 
     var response = $(e.target).find('input[name=response-user]').val();
 
@@ -90,9 +86,6 @@ Template.riddleAnswer.events({
               //останавливаем счетчик
               timeCircle.stop();
 
-              Meteor.setTimeout(function() {
-                actionsSegment.removeClass('active');
-              }, 1000);
             }
             ,onHidden : function(){
               //запускаем счетчик

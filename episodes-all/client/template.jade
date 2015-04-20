@@ -13,7 +13,7 @@ template(name="episodesAll")
               .sub.header Добавить новый эпизод
           .ui.one.column.grid
             .right.aligned.column
-              a(href="{{pathFor 'addEpisode'}}").ui.right.labeled.icon.center.aligned.orange.large.button
+              a(href="{{pathFor 'newEpisode'}}").ui.right.labeled.icon.center.aligned.orange.large.button
                 i.add.icon
                 | Добавить
     each episodes
@@ -21,7 +21,7 @@ template(name="episodesAll")
         .ui.piled.segment.episode-item
           h3
             if pastorMode
-              a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.orange.button
+              a(href="{{pathFor 'updateEpisode' _episodeId=_id}}").ui.icon.orange.button
                 i.write.icon
             | {{title}}
             if newEpisode
