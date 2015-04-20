@@ -1,9 +1,28 @@
 Template.commonInterface.events({
-  'click .researcher-exit': function(e, template) {
+  'mouseenter .heart-block' : function(e, template) {
+
+    var shape = $(e.target).find('.heart-transition .shape');
+
+    shape.shape({duration: 300});
+    shape.shape('flip up');
+
+  }
+  ,'mouseleave .heart-block' : function(e, template) {
+
+    var shape = $(e.target).find('.heart-transition .shape');
+
+    shape.shape({duration: 600});
+    shape.shape('flip down');
+    
+  }
+  ,'click .researcher-exit' : function(e, template) {
+
     e.preventDefault();
     Meteor.logout();
+
   }
-  ,'click .checkbox.pastor': function(e, template) {
+  ,'change .checkbox.pastor' : function(e, template) {
+
     var pastorChecked = $(e.target).parent().checkbox('is checked');
     var userPastor = Meteor.user().pastor;
 

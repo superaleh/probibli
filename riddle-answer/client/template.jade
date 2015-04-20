@@ -102,11 +102,11 @@ template(name="riddleAnswer")
                 i.repeat.icon
                 span.text-popup Вернуться к загадке
               if checkAnswer
-                .ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
                   i.play.icon
                   span.text-popup Следующая загадка
               else if equal checkAnswer 0
-                .ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
                   i.play.icon
                   span.text-popup Следующая загадка
 

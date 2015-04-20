@@ -10,7 +10,7 @@ template(name="riddlesAll")
             i.add.icon
             .content Добавить Загадку
               .sub.header Добавить новую загадку
-        a(href="{{pathFor 'newRiddle' _episodeId=episodeId}}").ui.orange.bottom.attached.button
+        a(href="{{pathFor 'newRiddle' _episodeId=_id}}").ui.orange.bottom.attached.button
           i.add.icon
           | Добавить
 
@@ -30,13 +30,17 @@ template(name="riddlesAll")
             h5 {{position}}
           .header
             if pastorMode
-              a(href="{{pathFor 'updateEpisode' _episodeId=_id}}").ui.icon.mini.orange.button
+              a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.mini.orange.button
                 i.write.icon
             | {{ucFirst question}}
           .description
             i.book.icon
             | {{books}} {{chapters}}
         if pastorMode
+          .extra.content
+            span.left.floated
+              i.orange.fire.icon
+              | {{plurality intricacy "мудрост"}}
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.chevron.right.icon
             | Открыть

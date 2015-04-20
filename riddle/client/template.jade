@@ -1,21 +1,9 @@
 template(name="riddle")
   .ui.two.column.grid.stackable
     .column
-      h2.ui.header.teal.dividing
-        if pastorMode
-          //- a(href="{{pathFor 'updateRiddle' _episodeId=episodeId _riddleId=_id}}")
-          i.write.icon.orange
-        else
-          i.question.icon
-        .content {{ucFirst question}}
-          .sub.header
-            i.book.icon
-            | {{books}} {{chapters}}
-            i.orange.fire.icon
-            | {{plurality intricacy "мудрост"}}
 
       .ui.segment
-        .ui.accordion
+        .ui.accordion.instruction-read
           .title.active
             h5.ui.right.aligned.header
               i.icon.dropdown
@@ -54,6 +42,21 @@ template(name="riddle")
                   | И в конце нажми
                   i.paw.icon
                   | по кнопке отправить, для проверки того, что ты сделал
+
+      h2.ui.header.teal.dividing
+        if pastorMode
+          //- a(href="{{pathFor 'updateRiddle' _episodeId=episodeId _riddleId=_id}}")
+          i.write.icon.orange
+        else
+          i.question.icon
+        .content {{ucFirst question}}
+          .sub.header
+            i.book.icon
+            | {{books}} {{chapters}}
+            i.orange.fire.icon
+            | {{plurality intricacy "мудрост"}}
+
+      
 
       +riddleAnswer
           

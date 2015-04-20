@@ -58,7 +58,7 @@ template(name="commonInterface")
       +yield
 
   .ui.inverted.vertical.segment.footer
-    .ui.page.three.column.stackable.grid.very.relaxed
+    .ui.page.four.column.stackable.grid.very.relaxed
       .column
         h5.ui.inverted.header
           i.copyright.icon
@@ -73,3 +73,15 @@ template(name="commonInterface")
         h5.ui.inverted.header
           i.rocket.icon
           .content Поддержка только современных браузеров
+      .column
+        .ui.grid.middle.aligned.heart-block
+          .three.wide.column.heart-transition
+            .ui.shape
+              .sides
+                .active.side: i.empty.heart.icon.large
+                .side: i.heart.icon.red.large            
+          .thirteen.wide.column
+            h5.ui.inverted.header
+              .content Сделано в Борисове
+                .sub.header ул. Гончарная 26
+                  i.by.flag

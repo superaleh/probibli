@@ -24,3 +24,5 @@ sml0820:meteor-timecircles
 rzymek:moment-locale-ru
 stevezhu:lodash
 wizonesolutions:underscore-string
+aldeed:simple-schema
+fabienb4:autoform-semantic-ui

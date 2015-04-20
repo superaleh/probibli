@@ -21,7 +21,7 @@ template(name="episodesAll")
         .ui.piled.segment.episode-item
           h3
             if pastorMode
-              a(href="{{pathFor 'updateEpisode' _episodeId=_id}}").ui.icon.orange.button
+              a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.orange.button
                 i.write.icon
             | {{title}}
             if newEpisode

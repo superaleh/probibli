@@ -16,7 +16,7 @@ Template.riddleAnswer.events({
 
     e.preventDefault();
 
-    var nextRiddle = $(e.target).parents().find('.button.next-riddle-url').data('next');
+    var nextRiddle = $(e.currentTarget).data('next');
     var episodeId = this.episodeId;
 
     Meteor.setTimeout(function() {

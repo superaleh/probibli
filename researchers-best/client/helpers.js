@@ -6,7 +6,7 @@ Template.researchersBest.helpers({
         wisdom: -1
         ,createdAt: -1
       },
-      limit: 4
+      limit: 12
     });
   }
 });
