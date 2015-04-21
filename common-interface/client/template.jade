@@ -28,12 +28,12 @@ template(name="commonInterface")
                     a.ui.button.fluid.researcher-exit Выйти
 
             .ui.fluid.large.steps
-              if _id
+              unless isActiveRoute regex='research|new-episode'
                 a(href="{{pathFor 'research'}}").step
                   i.diamond.icon
                   .content
                     .title Исследовательская
-                if episodeId
+                unless isActiveRoute regex='episode'
                   a(href="{{pathFor 'episode' _episodeId=episodeId}}").step
                     i.block.layout.icon
                     .content
@@ -49,12 +49,12 @@ template(name="commonInterface")
                     i.block.layout.icon
                     .content
                       .title Эпизод
+                      .description {{episodeTitle}}
               else
                 .active.step
                   i.diamond.icon
                   .content
                     .title Исследовательская
-
       +yield
 
   .ui.inverted.vertical.segment.footer

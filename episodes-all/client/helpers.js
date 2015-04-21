@@ -3,32 +3,29 @@ Template.episodesAll.helpers({
     var episodes;
     return episodes = Episodes.find({}, {
       sort: {
-        creating: 1
+        createdAt: -1
       }
     });
   },
   count: function() {
-    if(!Meteor.user()) return 0;
+    if(!Meteor.user())
+      return 0;
 
-    var riddles = this.numberRiddles;
     var guessRiddlesResearcher = Meteor.user().guessRiddles;
-    
-    if (guessRiddlesResearcher.length > 0) {
-      /*
-      #фильтрую массив по id эпизода
-       */
-      guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: this._id });
-    }
+    check(guessRiddlesResearcher, Array);
 
-
-    var guess = guessRiddlesResearcher.length;
-    var percent = (guess / riddles * 100).toFixed(0);
-
-    return {
-      riddles: riddles,
-      guess: guess,
-      percent: percent
+    var count = {
+      riddles: (this.numberRiddles ? this.numberRiddles : 0)
+      ,guess: (guessRiddlesResearcher.length ? _.where(guessRiddlesResearcher, { episodeId: this._id }).length : 0)
+      ,percent: 0
     };
+
+    if (count.riddles === 0 || count.guess === 0)
+      return count;
+
+    count.percent = (count.guess / count.riddles * 100).toFixed(0);
+
+    return count;
   },
   newEpisode: function() {
     var creatingDate, now;

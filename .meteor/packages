@@ -25,4 +25,10 @@ rzymek:moment-locale-ru
 stevezhu:lodash
 wizonesolutions:underscore-string
 aldeed:simple-schema
+aldeed:collection2
+aldeed:autoform
 fabienb4:autoform-semantic-ui
+zimme:collection-timestampable
+alanning:roles
+ongoworks:security
+zimme:iron-router-active

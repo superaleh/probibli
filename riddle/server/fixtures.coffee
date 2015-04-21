@@ -226,6 +226,7 @@ if Riddles.find().count() == 0
   episodeId = Episodes.insert(
     title: 'История Самсона'
     numberRiddles: riddlesSamson.length
+    publish: true
     creating: now
     update: now)
 

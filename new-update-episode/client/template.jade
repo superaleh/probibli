@@ -1,5 +1,32 @@
 template(name="newEpisode")
-  h1 Создать эпизод
+  .ui.two.column.grid.centered
+    .column
+      h2.ui.header
+        i.add.icon
+        .content Создать эпизод
+      +autoForm(collection="Episodes" id="insertEpisodeForm" type="insert")
+        .ui.column.grid
+          .eleven.wide.column
+            +afFormGroup name="title"
+          .five.wide.column
+            +afQuickField name="numberRiddles" value=0 disabled=true
+        p
+        +afQuickField name="publish"
+        .field: button.ui.blue.submit.button.big(type='submit') Отправить
 
 template(name="editEpisode")
-  h1 Редактировать эпизод
+  .ui.two.column.grid.centered
+    .column
+      h2.ui.header
+        i.edit.icon
+        .content Редактировать эпизод
+          .sub.header {{title}}
+      +autoForm(collection="Episodes" doc=this id="updateEpisodeForm" type="update")
+        .ui.column.grid
+          .eleven.wide.column
+            +afFormGroup name="title"
+          .five.wide.column
+            +afQuickField name="numberRiddles" disabled=true
+        p
+        +afQuickField name="publish"
+        .field: button.ui.blue.submit.button.big(type='submit') Сохранить

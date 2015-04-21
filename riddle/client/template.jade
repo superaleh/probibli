@@ -45,8 +45,8 @@ template(name="riddle")
 
       h2.ui.header.teal.dividing
         if pastorMode
-          //- a(href="{{pathFor 'updateRiddle' _episodeId=episodeId _riddleId=_id}}")
-          i.write.icon.orange
+          a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}")
+            i.write.icon.orange
         else
           i.question.icon
         .content {{ucFirst question}}
