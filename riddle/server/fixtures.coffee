@@ -226,9 +226,9 @@ if Riddles.find().count() == 0
   episodeId = Episodes.insert(
     title: 'История Самсона'
     numberRiddles: riddlesSamson.length
+    createdAt: now
     publish: true
-    creating: now
-    update: now)
+    )
 
   _.each riddlesSamson, (value, key) ->
     Riddles.insert
@@ -242,3 +242,5 @@ if Riddles.find().count() == 0
       versesCount: value.FIELD7
       intricacy: value.FIELD8
       position: value.FIELD9
+      createdAt: now
+      publish: true

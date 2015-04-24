@@ -1,0 +1,1 @@
+Riddles.permit(['insert', 'update', 'remove']).ifHasPastor().apply();

@@ -370,8 +370,8 @@ if Riddles.find().count() is 20
   episodeId = Episodes.insert(
     title: 'Пасха'
     numberRiddles: riddlesPasha.length
-    creating: now
-    update: now
+    createdAt: now
+    publish: true
     )
 
   _.each riddlesPasha, (value, key) ->
@@ -386,3 +386,5 @@ if Riddles.find().count() is 20
       versesCount: value.FIELD7
       intricacy: value.FIELD8
       position: value.FIELD9
+      createdAt: now
+      publish: true

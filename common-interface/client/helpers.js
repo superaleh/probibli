@@ -6,19 +6,26 @@ Template.commonInterface.helpers({
     }
     researcher = Meteor.user();
     return researcher;
-  },
-  wisdomNumber: function() {
+  }
+  ,wisdomNumber: function() {
     var user;
     user = Meteor.user();
     if (user) {
       return user.wisdom;
     }
-  },
-  episodeTitle: function() {
+  }
+  ,episodeTitle: function() {
     var episode;
     episode = Episodes.findOne();
     if (episode) {
       return episode.title;
+    }
+  }
+  ,episodeId: function() {
+    var episode;
+    episode = Episodes.findOne();
+    if (episode) {
+      return episode._id;
     }
   }
 });

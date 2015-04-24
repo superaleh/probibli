@@ -1,11 +1,9 @@
-Template.commonInterface.onRendered(function() {
-  Meteor.setTimeout(function() {
-    var checkbox = this.$('.ui.checkbox.pastor');
+Template.pastorCheckbox.onRendered(function() {
 
-    checkbox.checkbox();
+  var checkbox = this.$('.ui.checkbox.pastor');
+  checkbox.addClass('toggle').checkbox();
 
-    if(Session.get('pastorMode'))
-      checkbox.checkbox('check');
+  if(Session.get('pastorMode'))
+    checkbox.checkbox('check');
 
-  }, 2000);
 });

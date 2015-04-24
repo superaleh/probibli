@@ -1,3 +1,21 @@
+Template.pastorCheckbox.events({
+
+  'change .checkbox.pastor' : function(e, template) {
+
+    var pastorChecked = $(e.target).parent().checkbox('is checked');
+    var userPastor = Meteor.user().pastor;
+
+    if (userPastor){
+      if(pastorChecked)
+        Session.set('pastorMode', true);
+      else
+        Session.set('pastorMode', false);
+    }
+
+  }
+
+})
+
 Template.commonInterface.events({
   'mouseenter .heart-block' : function(e, template) {
 
@@ -19,19 +37,6 @@ Template.commonInterface.events({
 
     e.preventDefault();
     Meteor.logout();
-
-  }
-  ,'change .checkbox.pastor' : function(e, template) {
-
-    var pastorChecked = $(e.target).parent().checkbox('is checked');
-    var userPastor = Meteor.user().pastor;
-
-    if (userPastor){
-      if(pastorChecked)
-        Session.set('pastorMode', true);
-      else
-        Session.set('pastorMode', false);
-    }
 
   }
 });

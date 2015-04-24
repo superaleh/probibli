@@ -1,5 +1,62 @@
+template(name="userPill")
+  span ({{index}}) {{name}}
+
 template(name="newRiddle")
-  h1 Создать загадку
+  .ui.two.column.grid.centered
+    .column
+      h2.ui.header
+        i.add.icon
+        .content Создать загадку
+          .sub.header Эпизод: {{this.title}}
+      
+      .ui.segment.form
+        .ui.input.big
+          +inputAutocomplete settings=settings name='auto-input' class="auto-input" placeholder="Умное поле"
+        p Книги: 
+          span.books
+        p Главы:
+          span.chapters
+        p Стихи:
+          span.verses
+
+        p Область поиска: 
+          span.scope-search
+        p Стихи с ответами: 
+          span.correct-verses
+
+      +autoForm(collection="Riddles" id="insertRiddleForm" type="insert")
+        .ui.grid.row
+          .ten.wide.column
+            +afQuickField name="question"
+          .six.wide.column
+            +afQuickField name="episodeId" value=this._id readonly=true
+            +afQuickField name="intricacy"
+            +afQuickField name="position"
+        .ui.grid.row
+          .ten.wide.column
+            +afQuickField name="books"
+            +afQuickField name="versesResponse"
+          .six.wide.column
+            +afQuickField name="chapters"
+            +afQuickField name="versesCount"
+        .ui.grid.row
+          .wide.column
+            +afQuickField name="response"
+            +afQuickField name="falseResponse"
+        .ui.two.column.grid.middle.aligned
+          .column
+            .field: button.ui.blue.submit.button.big(type='submit') Создать
+          .column.right.aligned
+            +afQuickField name="publish" defaultValue=true
 
 template(name="editRiddle")
-  h1 Редактировать загадку
+  .ui.two.column.grid.centered
+    .column
+      h2.ui.header
+        i.edit.icon
+        .content Редактировать загадку
+      +autoForm(collection="Riddles" doc=this id="updateRiddleForm" type="update")
+
+        +afQuickField name="publish"
+
+        .field: button.ui.blue.submit.button.big(type='submit') Сохранить

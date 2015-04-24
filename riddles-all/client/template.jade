@@ -2,11 +2,12 @@ template(name="riddlesAll")
   h2.ui.horizontal.header.divider
     i.block.layout.icon
     | {{title}}
+
   .ui.four.cards.stackable
     if pastorMode
       .card
         .content
-          h3.ui.icon.header.center.aligned
+          a(href="{{pathFor 'newRiddle' _episodeId=_id}}").ui.icon.header.center.aligned
             i.add.icon
             .content Добавить Загадку
               .sub.header Добавить новую загадку
@@ -28,12 +29,11 @@ template(name="riddlesAll")
         .content
           .ui.corner.label.position
             h5 {{position}}
-          .header
-            if pastorMode
-              a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.mini.orange.button
-                i.write.icon
-            | {{ucFirst question}}
+          a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
           .description
+            if pastorMode
+              a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button
+                i.edit.icon
             i.book.icon
             | {{books}} {{chapters}}
         if pastorMode

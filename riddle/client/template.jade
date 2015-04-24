@@ -44,13 +44,12 @@ template(name="riddle")
                   | по кнопке отправить, для проверки того, что ты сделал
 
       h2.ui.header.teal.dividing
-        if pastorMode
-          a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}")
-            i.write.icon.orange
-        else
-          i.question.icon
+        i.question.icon
         .content {{ucFirst question}}
           .sub.header
+            if pastorMode
+              a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button
+                i.edit.icon
             i.book.icon
             | {{books}} {{chapters}}
             i.orange.fire.icon

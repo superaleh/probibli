@@ -2,7 +2,6 @@ template(name="episodesAll")
   h2.ui.horizontal.header.divider
     i.block.layout.icon
     | Все Эпизоды
-
   .ui.three.column.grid.stackable.middle.aligned.centered
     if pastorMode
       .column
@@ -18,12 +17,8 @@ template(name="episodesAll")
                 | Добавить
     each episodes
       .column
-        .ui.piled.segment.episode-item
-          h3
-            if pastorMode
-              a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.orange.button
-                i.write.icon
-            | {{title}}
+        .ui.stacked.segment.episode-item
+          a.ui.header(href="{{pathFor 'episode' _episodeId=_id}}") {{title}}
             if newEpisode
               .ui.teal.label новый
           .ui.divider
@@ -44,14 +39,18 @@ template(name="episodesAll")
             .bar
               .progress
             .label Прогресс прохождения <b>{{count.percent}}%</b>
-          .ui.one.column.grid
-            .right.aligned.column
+          .ui.grid
+            .six.wide.column
               if pastorMode
-                a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.labeled.icon.center.aligned.blue.large.button
+                a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.basic.orange.large.button
+                  i.edit.icon
+            .ten.wide.column.right.floated.right.aligned
+              if pastorMode
+                a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.floated.labeled.icon.center.aligned.blue.large.button
                   i.chevron.right.icon
                   | Открыть
               else
-                a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.labeled.icon.center.aligned.blue.large.button
+                a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.floated.labeled.icon.center.aligned.blue.large.button
                   i.rocket.icon
                   | Вперед
 
