@@ -1,5 +1,12 @@
 Template.riddlesAll.helpers({
-  riddles: function() {
+  scopeSearch: function () {
+
+    if( !this.scopeSearch ) return;
+    var scopeSearchArray = EJSON.parse( this.scopeSearch );
+    return scopeSearchArray.join(', ');
+    
+  }
+  ,riddles: function() {
 
     var riddles = Riddles.find({}, {
       sort: {
@@ -30,7 +37,22 @@ Template.riddlesAll.helpers({
       guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
       var guessRiddleResearcherLastId = guessRiddlesResearcher[guessRiddlesResearcher.length - 1];
 
-      riddles = _.map(riddles, function(riddle, key) {
+      // если в эпизоде отгаданы все загадки то делаю их все доступными
+      if ( riddles.length === guessRiddlesResearcher.length ) {
+
+        riddles = _.map(riddles, function(riddle) {
+
+          riddle.availability = true;
+          riddle.next = false;
+          return riddle;
+          
+        });
+
+        return riddles;
+
+      }
+
+      riddles = _.map(riddles, function(riddle) {
         riddle.availability = false;
         /*
         #загадка доступна если она отгадана

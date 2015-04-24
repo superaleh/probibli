@@ -1,24 +1,28 @@
 Riddles = new Mongo.Collection('riddles');
 
 Riddles.attachSchema(new SimpleSchema({
-  question: {
-    type: String
-    ,label: "Вопрос"
-    ,autoform: {
-      type: "textarea"
-    }
-  }
-  ,episodeId: {
+  episodeId: {
     type: String
     ,label: "ID Эпизода"
+    ,optional: true
   }
-  ,books: {
+  ,smartInput: {
     type: String
-    ,label: "Книги"
+    ,label: "Умная строка"
+    ,optional: true
   }
-  ,chapters: {
-    type: Number
-    ,label: "Главы"
+  ,scopeSearch: {
+    type: String
+    ,label: "Область поиска"
+  }
+  ,correctVerses: {
+    type: String
+    ,label: "Стихи ответы"
+    ,optional: true
+  }
+  ,question: {
+    type: String
+    ,label: "Вопрос"
   }
   ,response: {
     type: String
@@ -27,14 +31,11 @@ Riddles.attachSchema(new SimpleSchema({
   ,falseResponse: {
     type: String
     ,label: "Ложные ответы"
-  }
-  ,versesResponse: {
-    type: String
-    ,label: "Стихи ответы"
+    ,optional: true
   }
   ,versesCount: {
     type: Number
-    ,label: "Число стихов для ответа"
+    ,label: "Обязательных стихов"
   }
   ,intricacy: {
     type: Number
@@ -44,13 +45,19 @@ Riddles.attachSchema(new SimpleSchema({
     type: Number
     ,label: "Позиция"
   }
+  ,createdAt: {
+    type: Date
+    ,label: "Дата создания"
+  }
+  ,updatedAt: {
+    type: Date
+    ,label: "Дата обновления"
+    ,optional: true
+  }
   ,publish: {
     type: Boolean
     ,label: "Опубликовать"
     ,optional: true
-    ,autoform: {
-      type: "boolean-checkbox"
-    }
   }
 }));
 

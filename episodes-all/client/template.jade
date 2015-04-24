@@ -35,9 +35,8 @@ template(name="episodesAll")
                     .value {{count.riddles}}
                     .label ЗАГАДОК
           .ui.divider
-          .ui.green.progress(data-value="{{count.guess}}" data-total="{{count.riddles}}")
+          .ui.indicating.progress(data-value="{{count.guess}}" data-total="{{count.riddles}}")
             .bar
-              .progress
             .label Прогресс прохождения <b>{{count.percent}}%</b>
           .ui.grid
             .six.wide.column

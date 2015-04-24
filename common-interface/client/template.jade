@@ -48,8 +48,9 @@ template(name="commonInterface")
                         if position
                           .ui.label {{position}}
                       if pastorMode
-                        a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button.edit-pastor
-                          i.edit.icon
+                        unless isActiveRoute regex='newRiddle'
+                          a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button.edit-pastor
+                            i.edit.icon
                 else
                   .active.step
                     i.block.layout.icon

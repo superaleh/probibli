@@ -1,19 +1,17 @@
 Template.searchArea.helpers({
   placesBibleText: function() {
-    /*
-    #формирование массива с главами, пока только сделал при одной книге (сделать когда несколько книг)
-     */
-    var books, chapters, placesBible, riddle;
-    riddle = Riddles.findOne();
-    books = riddle.books;
-    chapters = riddle.chapters;
-    placesBible = _.chain(chapters).words(',').map(function(chapter, index) {
+
+    var currentRiddle = Riddles.findOne();
+
+    if( !currentRiddle.scopeSearch ) return;
+    var scopeSearchArray = EJSON.parse( currentRiddle.scopeSearch );
+    placesBible = scopeSearchArray.map(function(place, index) {
       return {
-        id: index,
-        place: books + ' ' + lodash.trim(chapter),
-        active: index ? '' : 'active'
+        id: index
+        ,place: place
+        ,active: index ? '' : 'active'
       };
-    }).value();
+    });
     return placesBible;
   }
   ,selectedVersesCount: function() {

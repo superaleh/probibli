@@ -1,18 +1,36 @@
-AutoForm.addHooks('insertRiddleForm', {
+AutoForm.addHooks( 'insertRiddleForm', {
 
-  onSuccess: function(formType, result) {
+  onSuccess: function( formType, resultId ) {
+  
+    var insertRiddle = Riddles.findOne( { _id: resultId } );
     var episodeId = Router.current().params._episodeId;
-    Router.go('riddle', {_episodeId: episodeId, _riddleId: result});
+    
+    // инкрементирую число загадок в эпизоде, если загадка опубликована
+    if( insertRiddle && insertRiddle.publish ){
+
+      Episodes.update(
+        { _id: episodeId }
+        ,{ $inc: { numberRiddles: 1 } }
+      );
+
+    }
+
+    Meteor.setTimeout(function() {
+
+      Router.go( 'riddle', { _episodeId: episodeId, _riddleId: resultId } );
+  
+    }, 500)
+  
   }
   
 })
 
-AutoForm.addHooks('updateRiddleForm', {
+AutoForm.addHooks( 'updateRiddleForm', {
 
   onSuccess: function(formType, result) {
     var episodeId = Router.current().params._episodeId;
     var riddleId = Router.current().params._riddleId;
-    Router.go('riddle', {_episodeId: episodeId, _riddleId: riddleId});
+    Router.go( 'riddle', { _episodeId: episodeId, _riddleId: riddleId } );
   }
   
 })

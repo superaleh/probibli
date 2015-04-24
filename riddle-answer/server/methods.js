@@ -68,30 +68,31 @@ Meteor.methods({
       _id: riddleId
     });
 
+    // очищаю строку ответа
     var response = _.chain(curentRiddle.response).clean().value().toLowerCase();
-    var verses = curentRiddle.versesResponse
-      .replace(RegExp(' ', 'gi'), '')
-      .replace(/:/gi, '')
-      .replace(/;/gi, '').split(',');
-
-    verses = lodash.map(verses, lodash.parseInt);
+    var verses = [];
+    // требуются ли стихи для ответа?
+    if( curentRiddle.versesCount !== 0 && curentRiddle.versesResponse )
+      var verses = EJSON.parse( curentRiddle.versesResponse );
 
     //проверяю ответ
     var correctResponse = response === userResponse;
 
     //проверяю стихи
     var correctVerses = 0;
-    lodash.forEach(userVerses, function (userVerse) {
-      correctVerses += lodash.indexOf(verses, userVerse) !== -1 ? 1 : 0;
+    _.forEach(userVerses, function (userVerse) {
+      correctVerses += _.indexOf(verses, userVerse) !== -1 ? 1 : 0;
     });
 
-    if (correctVerses === curentRiddle.versesCount && userVerses.length === curentRiddle.versesCount)
+    if (
+          verses.length === 0 ||
+         (correctVerses === curentRiddle.versesCount && userVerses.length === curentRiddle.versesCount)
+        )
       correctVerses = true;
     else
       correctVerses = false;
 
-
-    if ( correctResponse && correctVerses) {
+    if ( correctResponse && correctVerses ) {
 
       var riddleWisdom = 0;
 

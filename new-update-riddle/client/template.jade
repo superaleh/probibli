@@ -8,46 +8,37 @@ template(name="newRiddle")
         i.add.icon
         .content Создать загадку
           .sub.header Эпизод: {{this.title}}
-      
-      .ui.segment.form
-        .ui.input.big
-          +inputAutocomplete settings=settings name='auto-input' class="auto-input" placeholder="Умное поле"
-        p Книги: 
-          span.books
-        p Главы:
-          span.chapters
-        p Стихи:
-          span.verses
-
-        p Область поиска: 
-          span.scope-search
-        p Стихи с ответами: 
-          span.correct-verses
 
       +autoForm(collection="Riddles" id="insertRiddleForm" type="insert")
-        .ui.grid.row
-          .ten.wide.column
-            +afQuickField name="question"
-          .six.wide.column
-            +afQuickField name="episodeId" value=this._id readonly=true
-            +afQuickField name="intricacy"
-            +afQuickField name="position"
-        .ui.grid.row
-          .ten.wide.column
-            +afQuickField name="books"
-            +afQuickField name="versesResponse"
-          .six.wide.column
-            +afQuickField name="chapters"
-            +afQuickField name="versesCount"
-        .ui.grid.row
-          .wide.column
-            +afQuickField name="response"
-            +afQuickField name="falseResponse"
-        .ui.two.column.grid.middle.aligned
+        +afQuickField name="episodeId" value=this._id type="hidden"
+        +afQuickField name="smartInput" type="hidden" class="smart-input-out"
+
+        .ui.segment
+          .field
+            .ui.big.input
+              +inputAutocomplete settings=settings name='smart-input' class="smart-input" placeholder="Умное поле"
+          .ui.message
+            .header Примеры:
+            ul.list
+              li !Быт. 2.3 4:3,5 !2 Пар. 15.
+              li !Лук. 2. !Мф. 3.
+        .two.fields
+          +afQuickField name="scopeSearch" class="scope-search"
+          +afQuickField name="correctVerses" class="correct-verses"
+        +afQuickField name="question" options="allowed" trimStrings=true type="textarea"
+        +afQuickField name="response" trimStrings=true
+        +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
+        .three.fields
+          +afQuickField name="intricacy" value=1
+          +afQuickField name="versesCount" class="verses-count" value=0
+          +afQuickField name="position" value=nextPosition
+        .ui.grid
           .column
-            .field: button.ui.blue.submit.button.big(type='submit') Создать
-          .column.right.aligned
-            +afQuickField name="publish" defaultValue=true
+            .ui.two.column.grid.middle.aligned
+              .column
+                .field: button.ui.blue.submit.button.big(type='submit') Создать
+              .column.right.aligned
+                +afQuickField name="publish" defaultValue=true type="boolean-checkbox"
 
 template(name="editRiddle")
   .ui.two.column.grid.centered

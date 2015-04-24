@@ -5,6 +5,20 @@ Episodes.attachSchema(new SimpleSchema({
     type: String
     ,label: "Название"
   }
+  ,numberRiddles: {
+    type: Number
+    ,label: "Количество загадок"
+    ,defaultValue: 0
+  }  
+  ,createdAt: {
+    type: Date
+    ,label: "Дата создания"
+  }
+  ,updatedAt: {
+    type: Date
+    ,label: "Дата обновления"
+    ,optional: true
+  }
   ,publish: {
     type: Boolean
     ,label: "Опубликовать"
@@ -12,11 +26,6 @@ Episodes.attachSchema(new SimpleSchema({
     ,autoform: {
       type: "boolean-checkbox"
     }
-  }
-  ,numberRiddles: {
-    type: Number
-    ,label: "Количество загадок"
-    ,defaultValue: 0
   }
 }));
 
