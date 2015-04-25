@@ -365,7 +365,7 @@ riddlesPasha = [
 ]
 
 
-if Riddles.find().count() is 20
+if Riddles.find().count() is 100
   now = (new Date).getTime()
   episodeId = Episodes.insert(
     title: 'Пасха'

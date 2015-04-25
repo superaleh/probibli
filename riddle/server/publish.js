@@ -1,6 +1,5 @@
 Meteor.publish('riddles', function(episodeId, riddleId) {
 
-  var pastor = Meteor.users.findOne({_id: this.userId}).pastor;
 
   if (riddleId == null) {
     riddleId = false;
@@ -17,9 +16,23 @@ Meteor.publish('riddles', function(episodeId, riddleId) {
         ,updatedAt: 1
       }
 
-  // если пастор, то добавляю поле публикация 
-  if ( pastor )
-    _.extend(fields, {publish: 1});
+  // если пастор, то добавляю закрытые поля
+  if (this.userId) {
+
+    var pastor = Meteor.users.findOne({_id: this.userId}).pastor;
+    if ( pastor ){
+      
+      _.extend(fields, {
+        smartInput: 1
+        ,response: 1
+        ,falseResponse: 1
+        ,correctVerses: 1
+        ,publish: 1
+      });
+    
+    }
+  
+  }
 
   if (riddleId) {
     return Riddles.find({

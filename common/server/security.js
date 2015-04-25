@@ -3,8 +3,14 @@ Security.defineMethod("ifHasPastor", {
     ,transform: null
     ,deny: function (type, arg, userId, doc) {
 
-      var pastor = Meteor.users.findOne( {_id: userId} ).pastor;
-      return !pastor;
-      
+      if (Meteor.user() !== null) {
+        
+        var pastor = Meteor.users.findOne( {_id: userId} ).pastor;
+        return !pastor;
+        
+      }
+
+      return false;
+
     }
 });

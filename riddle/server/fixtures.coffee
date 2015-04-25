@@ -221,7 +221,7 @@ riddlesSamson = [
   }
 ]
 
-if Riddles.find().count() == 0
+if Riddles.find().count() == 100
   now = (new Date).getTime()
   episodeId = Episodes.insert(
     title: 'История Самсона'

@@ -10,7 +10,7 @@ Template.registerHelper('varsion', function() {
  */
 Template.registerHelper('pastorMode', function() {
 
-  if ( Meteor.user() ){    
+  if ( Meteor.user() ){
     var pastorMode = Session.get('pastorMode');
     
     if (Meteor.user().pastor && pastorMode)

@@ -10,7 +10,7 @@ template(name="newEpisode")
             .ten.wide.column
               +afFormGroup name="title"
             .six.wide.column
-              +afQuickField name="numberRiddles" readonly=true
+              +afQuickField name="numberRiddles"
           .ui.two.column.grid.middle.aligned
             .column
               .field: button.ui.blue.submit.button.big(type='submit') Создать
@@ -29,7 +29,7 @@ template(name="editEpisode")
           .ten.wide.column
             +afFormGroup name="title"
           .six.wide.column
-            +afQuickField name="numberRiddles" readonly=true
+            +afQuickField name="numberRiddles"
         .ui.two.column.grid.middle.aligned
           .column
             .field: button.ui.blue.submit.button.big(type='submit') Сохранить

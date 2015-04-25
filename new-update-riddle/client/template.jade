@@ -2,17 +2,17 @@ template(name="userPill")
   span ({{index}}) {{name}}
 
 template(name="newRiddle")
-  .ui.two.column.grid.centered
-    .column
-      h2.ui.header
-        i.add.icon
-        .content Создать загадку
-          .sub.header Эпизод: {{this.title}}
+  h2.ui.header
+    i.add.icon
+    .content Создать загадку
+      .sub.header Эпизод: {{this.title}}
 
-      +autoForm(collection="Riddles" id="insertRiddleForm" type="insert")
-        +afQuickField name="episodeId" value=this._id type="hidden"
-        +afQuickField name="smartInput" type="hidden" class="smart-input-out"
+  +autoForm(collection="Riddles" id="insertRiddleForm" type="insert")
+    +afQuickField name="episodeId" value=this._id type="hidden"
+    +afQuickField name="smartInput" type="hidden" class="smart-input-out"
 
+    .ui.two.column.grid.stackable
+      .column
         .ui.segment
           .field
             .ui.big.input
@@ -25,13 +25,14 @@ template(name="newRiddle")
         .two.fields
           +afQuickField name="scopeSearch" class="scope-search"
           +afQuickField name="correctVerses" class="correct-verses"
-        +afQuickField name="question" options="allowed" trimStrings=true type="textarea"
-        +afQuickField name="response" trimStrings=true
-        +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
         .three.fields
           +afQuickField name="intricacy" value=1
           +afQuickField name="versesCount" class="verses-count" value=0
           +afQuickField name="position" value=nextPosition
+      .column
+        +afQuickField name="question" trimStrings=true type="textarea"
+        +afQuickField name="response" trimStrings=true
+        +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
         .ui.grid
           .column
             .ui.two.column.grid.middle.aligned
@@ -41,13 +42,39 @@ template(name="newRiddle")
                 +afQuickField name="publish" defaultValue=true type="boolean-checkbox"
 
 template(name="editRiddle")
-  .ui.two.column.grid.centered
-    .column
-      h2.ui.header
-        i.edit.icon
-        .content Редактировать загадку
-      +autoForm(collection="Riddles" doc=this id="updateRiddleForm" type="update")
+  h2.ui.header
+    i.edit.icon
+    .content Редактировать загадку
+  +autoForm(collection="Riddles" doc=this id="updateRiddleForm" type="update")
+    +afQuickField name="episodeId" type="hidden"
+    +afQuickField name="smartInput" type="hidden" class="smart-input-out"
 
-        +afQuickField name="publish"
-
-        .field: button.ui.blue.submit.button.big(type='submit') Сохранить
+    .ui.two.column.grid.stackable
+      .column
+        .ui.segment
+          .field
+            .ui.big.input
+              +inputAutocomplete settings=settings name='smart-input' class="smart-input" placeholder="Умное поле" value=smartInput
+          .ui.message
+            .header Примеры:
+            ul.list
+              li !Быт. 2.3 4:3,5 !2 Пар. 15.
+              li !Лук. 2. !Мф. 3.
+        .two.fields
+          +afQuickField name="scopeSearch" class="scope-search"
+          +afQuickField name="correctVerses" class="correct-verses"
+        .three.fields
+          +afQuickField name="intricacy"
+          +afQuickField name="versesCount" class="verses-count"
+          +afQuickField name="position"
+      .column
+        +afQuickField name="question" trimStrings=true type="textarea"
+        +afQuickField name="response" trimStrings=true
+        +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
+        .ui.grid
+          .column
+            .ui.two.column.grid.middle.aligned
+              .column
+                .field: button.ui.blue.submit.button.big(type='submit') Сохранить
+              .column.right.aligned
+                +afQuickField name="publish" type="boolean-checkbox"

@@ -39,11 +39,13 @@ template(name="episodesAll")
             .bar
             .label Прогресс прохождения <b>{{count.percent}}%</b>
           .ui.grid
-            .six.wide.column
+            .six.wide.column.middle.aligned
               if pastorMode
                 a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.basic.orange.large.button
                   i.edit.icon
-            .ten.wide.column.right.floated.right.aligned
+                unless publish
+                  i.hide.icon.red.large
+            .ten.wide.column.right.aligned
               if pastorMode
                 a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.floated.labeled.icon.center.aligned.blue.large.button
                   i.chevron.right.icon
