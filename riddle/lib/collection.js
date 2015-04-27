@@ -36,14 +36,17 @@ Riddles.attachSchema(new SimpleSchema({
   ,versesCount: {
     type: Number
     ,label: "Обязательных стихов"
+    ,min: 0
   }
   ,intricacy: {
     type: Number
     ,label: "Сложность"
+    ,min: 0
   }
   ,position: {
     type: Number
     ,label: "Позиция"
+    ,min: 1
   }
   ,createdAt: {
     type: Date
@@ -52,11 +55,6 @@ Riddles.attachSchema(new SimpleSchema({
   ,updatedAt: {
     type: Date
     ,label: "Дата обновления"
-    ,optional: true
-  }
-  ,publish: {
-    type: Boolean
-    ,label: "Опубликовать"
     ,optional: true
   }
 }));

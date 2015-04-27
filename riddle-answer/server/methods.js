@@ -38,8 +38,9 @@ Meteor.methods({
       ,options: false
     };
 
-    if (typeof curentRiddle.response === 'number') {
+    if ( /^\d+$/.test( curentRiddle.response ) ) {
       responseType.number = true;
+      return responseType;
     }
 
     if (typeof curentRiddle.response === 'string') {

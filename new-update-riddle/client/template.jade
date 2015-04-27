@@ -33,13 +33,7 @@ template(name="newRiddle")
         +afQuickField name="question" trimStrings=true type="textarea"
         +afQuickField name="response" trimStrings=true
         +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
-        .ui.grid
-          .column
-            .ui.two.column.grid.middle.aligned
-              .column
-                .field: button.ui.blue.submit.button.big(type='submit') Создать
-              .column.right.aligned
-                +afQuickField name="publish" defaultValue=true type="boolean-checkbox"
+        .field: button.ui.blue.submit.button.big(type='submit') Создать
 
 template(name="editRiddle")
   h2.ui.header
@@ -71,10 +65,4 @@ template(name="editRiddle")
         +afQuickField name="question" trimStrings=true type="textarea"
         +afQuickField name="response" trimStrings=true
         +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
-        .ui.grid
-          .column
-            .ui.two.column.grid.middle.aligned
-              .column
-                .field: button.ui.blue.submit.button.big(type='submit') Сохранить
-              .column.right.aligned
-                +afQuickField name="publish" type="boolean-checkbox"
+        .field: button.ui.blue.submit.button.big(type='submit') Сохранить

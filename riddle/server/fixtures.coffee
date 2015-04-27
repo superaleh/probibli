@@ -227,7 +227,6 @@ if Riddles.find().count() == 100
     title: 'История Самсона'
     numberRiddles: riddlesSamson.length
     createdAt: now
-    publish: true
     )
 
   _.each riddlesSamson, (value, key) ->
@@ -243,4 +242,3 @@ if Riddles.find().count() == 100
       intricacy: value.FIELD8
       position: value.FIELD9
       createdAt: now
-      publish: true

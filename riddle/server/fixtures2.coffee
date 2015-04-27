@@ -371,7 +371,6 @@ if Riddles.find().count() is 100
     title: 'Пасха'
     numberRiddles: riddlesPasha.length
     createdAt: now
-    publish: true
     )
 
   _.each riddlesPasha, (value, key) ->
@@ -387,4 +386,3 @@ if Riddles.find().count() is 100
       intricacy: value.FIELD8
       position: value.FIELD9
       createdAt: now
-      publish: true

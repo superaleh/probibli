@@ -20,7 +20,7 @@ Router.route('/episode-:_episodeId/riddle-:_riddleId/edit', {
     return [
       Meteor.subscribe('researcher')
       ,Meteor.subscribe('episodes', this.params._episodeId)
-      ,Meteor.subscribe('riddles', this.params._episodeId, this.params._riddleId)
+      ,Meteor.subscribe('riddles', this.params._episodeId)
     ];
   }
   ,data: function() {

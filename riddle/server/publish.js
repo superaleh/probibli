@@ -27,7 +27,6 @@ Meteor.publish('riddles', function(episodeId, riddleId) {
         ,response: 1
         ,falseResponse: 1
         ,correctVerses: 1
-        ,publish: 1
       });
     
     }

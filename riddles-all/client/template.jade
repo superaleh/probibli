@@ -41,9 +41,6 @@ template(name="riddlesAll")
             span.left.floated
               i.orange.fire.icon
               | {{plurality intricacy "мудрост"}}
-            span.right.floated
-              unless publish
-                i.hide.icon.red
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.chevron.right.icon
             | Открыть

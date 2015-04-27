@@ -6,16 +6,9 @@ template(name="newEpisode")
         .content Создать эпизод
       .ui.segment
         +autoForm(collection="Episodes" id="insertEpisodeForm" type="insert")
-          .ui.column.grid
-            .ten.wide.column
-              +afFormGroup name="title"
-            .six.wide.column
-              +afQuickField name="numberRiddles"
-          .ui.two.column.grid.middle.aligned
-            .column
-              .field: button.ui.blue.submit.button.big(type='submit') Создать
-            .column.right.aligned
-              +afQuickField name="publish" defaultValue=true
+          +afQuickField name="numberRiddles" value="0" type="hidden"
+          +afFormGroup name="title"
+          .field: button.ui.blue.submit.button.big(type='submit') Создать
 
 template(name="editEpisode")
   .ui.two.column.grid.centered
@@ -25,13 +18,6 @@ template(name="editEpisode")
         .content Редактировать эпизод
           .sub.header {{title}}
       +autoForm(collection="Episodes" doc=this id="updateEpisodeForm" type="update")
-        .ui.column.grid
-          .ten.wide.column
-            +afFormGroup name="title"
-          .six.wide.column
-            +afQuickField name="numberRiddles"
-        .ui.two.column.grid.middle.aligned
-          .column
-            .field: button.ui.blue.submit.button.big(type='submit') Сохранить
-          .column.right.aligned
-            +afQuickField name="publish"
+        +afFormGroup name="title"
+        +afQuickField name="numberRiddles" type="hidden"
+        .field: button.ui.blue.submit.button.big(type='submit') Сохранить

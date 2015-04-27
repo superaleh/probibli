@@ -42,9 +42,7 @@ template(name="episodesAll")
             .six.wide.column.middle.aligned
               if pastorMode
                 a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.basic.orange.large.button
-                  i.edit.icon
-                unless publish
-                  i.hide.icon.red.large
+                  i.edit.icon                
             .ten.wide.column.right.aligned
               if pastorMode
                 a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.floated.labeled.icon.center.aligned.blue.large.button
