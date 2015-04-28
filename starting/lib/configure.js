@@ -1,10 +1,5 @@
 T9n.setLanguage("ru");
 
-AccountsTemplates.configure({
-  lowercaseUsername: true
-  
-});
-
 AccountsTemplates.removeField('email');
 
 AccountsTemplates.removeField('password');
@@ -25,18 +20,6 @@ AccountsTemplates.addFields([
     ,minLength: 5
     ,trim: true
   }, {
-    _id: 'email'
-    ,type: 'email'
-    ,displayName: {
-      signUp: "Email для обратной связи"
-    }
-    ,placeholder: {
-      signUp: "Например: email@email.by"
-    }
-    ,required: true
-    ,lowercase: true
-    ,trim: true
-  }, {
     _id: 'password'
     ,type: 'password'
     ,displayName: {
@@ -53,7 +36,7 @@ AccountsTemplates.addFields([
     _id: 'city'
     ,type: 'text'
     ,displayName: {
-      signUp: "Город в котором проживаешь"
+      signUp: "Город в котором ты проживаешь"
     }
     ,placeholder: {
       signUp: "Например: Борисов"

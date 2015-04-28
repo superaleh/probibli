@@ -6,7 +6,7 @@ Meteor.methods({
       _id: riddleId
     });
 
-    var wordsResponse = lodash.words( curentRiddle.response, /[а-яА-Я]+/g );
+    var wordsResponse = lodash.words( curentRiddle.response, /[а-я\d]+/ig );
 
     return wordsResponse.length;
 
@@ -20,6 +20,9 @@ Meteor.methods({
       episodeId : episodeId
       ,position : position + 1
     });
+
+    if ( !nextRiddle )
+      return false; 
 
     return nextRiddle._id;
 
@@ -68,30 +71,40 @@ Meteor.methods({
     var curentRiddle = Riddles.findOne({
       _id: riddleId
     });
+    var correctResponse = false;
+    var correctVerses = false;
+
 
     // очищаю строку ответа
     var response = _.chain(curentRiddle.response).clean().value().toLowerCase();
+    //проверяю ответ
+    correctResponse = response === userResponse;
+
     var verses = [];
     // требуются ли стихи для ответа?
-    if( curentRiddle.versesCount !== 0 && curentRiddle.versesResponse )
-      var verses = EJSON.parse( curentRiddle.versesResponse );
+    if ( curentRiddle.versesCount === 0) {
 
-    //проверяю ответ
-    var correctResponse = response === userResponse;
-
-    //проверяю стихи
-    var correctVerses = 0;
-    _.forEach(userVerses, function (userVerse) {
-      correctVerses += _.indexOf(verses, userVerse) !== -1 ? 1 : 0;
-    });
-
-    if (
-          verses.length === 0 ||
-         (correctVerses === curentRiddle.versesCount && userVerses.length === curentRiddle.versesCount)
-        )
       correctVerses = true;
-    else
-      correctVerses = false;
+
+    } else {
+
+      var verses = EJSON.parse( curentRiddle.correctVerses );
+      
+      //проверяю совпадения стихов
+      var correctVerses = 0;
+      _.forEach(userVerses, function (userVerse) {
+        correctVerses += _.indexOf(verses, userVerse) !== -1 ? 1 : 0;
+      });
+
+      // если количство совпадений равно с количеством обязательных стихов то правильно
+      if ( correctVerses === curentRiddle.versesCount && userVerses.length === curentRiddle.versesCount )
+        correctVerses = true;
+      else
+        correctVerses = false;
+      
+    }
+
+
 
     if ( correctResponse && correctVerses ) {
 

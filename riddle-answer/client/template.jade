@@ -7,7 +7,7 @@ template(name="riddleAnswer")
         .ui.grid.stackable.divided
           .ten.wide.column
             h3.ui.header
-              .content Введи текст
+              .content Введи слова
                 .sub.header Если в ответе есть числа, то набирай их цифрами
           .six.wide.column
             .ui.padded.grid
@@ -101,14 +101,15 @@ template(name="riddleAnswer")
               .ui.basic.inverted.cancel.button
                 i.repeat.icon
                 span.text-popup Вернуться к загадке
-              if checkAnswer
-                a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
-                  i.play.icon
-                  span.text-popup Следующая загадка
-              else if equal checkAnswer 0
-                a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
-                  i.play.icon
-                  span.text-popup Следующая загадка
+              if nextRiddleId
+                if checkAnswer
+                  a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                    i.play.icon
+                    span.text-popup Следующая загадка
+                else if equal checkAnswer 0
+                  a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                    i.play.icon
+                    span.text-popup Следующая загадка
 
 template(name="buttonSubmit")
   button(type="submit").ui.fluid.animated.fade.huge.blue.submit.button

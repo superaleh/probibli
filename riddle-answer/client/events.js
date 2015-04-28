@@ -24,9 +24,9 @@ Template.riddleAnswer.events({
     }, 700);
 
   }
-  ,'keypress form.string input, focus form.string input, blur form.string input': function(e) {
+  ,'keyup form.string input, focus form.string input, blur form.string input': function(e) {
     var form = $(e.target).parents().find('form.string');
-    var words = lodash.words( form.form('get value', 'response-user'), /[а-яА-Я]+/g );
+    var words = lodash.words( form.form('get value', 'response-user'), /[а-я\d]+/ig );
     Session.set('countWordsResponse', words.length);
     
   }
