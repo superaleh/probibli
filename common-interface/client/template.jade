@@ -19,9 +19,10 @@ template(name="commonInterface")
                     h3
                       i.user.icon.circular
                       | {{researcher.username}}
+                      i.mail.icon
                   if researcher.pastor
                     +pastorCheckbox
-                    
+
                   td.collapsing
                     a.ui.button.fluid.researcher-exit Выйти
 
@@ -40,7 +41,7 @@ template(name="commonInterface")
                       if pastorMode
                         a(href="{{pathFor 'editEpisode' _episodeId=episodeId}}").ui.icon.basic.orange.button.edit-pastor
                           i.edit.icon
-                    
+
                   .active.step
                     i.help.icon
                     .content
@@ -85,17 +86,11 @@ template(name="commonInterface")
           i.rocket.icon
           .content Поддержка только современных браузеров
       .column
-        .ui.grid.middle.aligned.heart-block
-          .three.wide.column.heart-transition
-            .ui.shape
-              .sides
-                .active.side: i.empty.heart.icon.large
-                .side: i.heart.icon.red.large            
-          .thirteen.wide.column
-            h5.ui.inverted.header
-              .content Сделано в Борисове
-                .sub.header ул. Гончарная 26
-                  i.by.flag
+        h5.ui.inverted.header
+          i.heart.icon.red
+          .content Сделано в Борисове
+            .sub.header ул. Гончарная 26
+              i.by.flag
 
 template(name="pastorCheckbox")
   td.collapsing.center.aligned

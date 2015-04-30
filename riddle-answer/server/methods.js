@@ -12,7 +12,7 @@ Meteor.methods({
 
   }
   ,nextRiddleId: function(position, episodeId) {
-    
+
     check(episodeId, String);
     check(position, Number);
 
@@ -22,7 +22,7 @@ Meteor.methods({
     });
 
     if ( !nextRiddle )
-      return false; 
+      return false;
 
     return nextRiddle._id;
 
@@ -50,7 +50,6 @@ Meteor.methods({
       if (!curentRiddle.falseResponse) {
         responseType.string = true;
       } else {
-        responseType.options = true;
         responseType.options = _.chain(curentRiddle.falseResponse.split(',')).map(function(value) {
           return lodash.trim(value);
         }).value();
@@ -89,7 +88,7 @@ Meteor.methods({
     } else {
 
       var verses = EJSON.parse( curentRiddle.correctVerses );
-      
+
       //проверяю совпадения стихов
       var correctVerses = 0;
       _.forEach(userVerses, function (userVerse) {
@@ -101,7 +100,7 @@ Meteor.methods({
         correctVerses = true;
       else
         correctVerses = false;
-      
+
     }
 
 
@@ -131,7 +130,7 @@ Meteor.methods({
 
       return riddleWisdom;
     }
-    
+
     return false;
   }
 });

@@ -2,7 +2,7 @@
 #версия приложения
  */
 Template.registerHelper('varsion', function() {
-  return '0.4.1';
+  return '0.4.2';
 });
 
 /*
@@ -12,13 +12,13 @@ Template.registerHelper('pastorMode', function() {
 
   if ( Meteor.user() ){
     var pastorMode = Session.get('pastorMode');
-    
+
     if (Meteor.user().pastor && pastorMode)
       return true;
 
     return false;
   };
-  
+
   return false;
 
 });
