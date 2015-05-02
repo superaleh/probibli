@@ -1,7 +1,4 @@
 template(name="riddlesAll")
-  h2.ui.horizontal.header.divider
-    i.block.layout.icon
-    | {{title}}
 
   .ui.four.cards.stackable
     if pastorMode
@@ -47,7 +44,7 @@ template(name="riddlesAll")
         else if availability
           .extra.content
             span.right.floated
-              i.check.icon
+              i.check.green.icon
               | Отгадана
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.repeat.icon
@@ -59,7 +56,7 @@ template(name="riddlesAll")
                 i.orange.fire.icon
                 | {{plurality intricacy "мудрост"}}
               span.right.floated
-                i.unlock.icon
+                i.unlock.blue.icon
                 | Открыта
             a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.blue.bottom.attached.button
               i.play.icon

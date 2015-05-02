@@ -1,0 +1,20 @@
+template(name="support")
+  .ui.two.column.grid.centered
+    .column
+      h2.ui.header
+        i.life.ring.icon
+        | Поддержка
+      .ui.top.attached.secondary.segment
+        h2 Обращения по загадкам
+      each supports
+        .ui.attached.segment
+          h3 {{riddleQuestionSupport}};
+          p Открыто <b>{{createdAtSupport}}</b> создано исследователем <b>{{researcherNameSupport}}</b>
+
+template(name="messageSupport")
+  +autoForm(collection="Support" id="insertSupportForm" type="insert" class="inverted")
+    +afQuickField name="riddleId" value=riddleId type="hidden"
+    +afQuickField name="riddleQuestion" value=riddleQuestion type="hidden"
+    +afQuickField name="researcherName" value=researcherName type="hidden"
+    +afFormGroup name="message" type="textarea" label=false placeholder="Написать Юре Астраленко по загадке"
+    .field: button.ui.inverted.basic.small.blue.button(type='submit') Отправить Юре

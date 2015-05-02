@@ -19,54 +19,70 @@ template(name="commonInterface")
                     h3
                       i.user.icon.circular
                       | {{researcher.username}}
-                      i.mail.icon
+                      //- a(href="{{pathFor 'support' _researcherId=researcher._id}}").ui.button.icon.support
+                        i.life.ring.icon
+                        .floating.ui.blue.label.mini 2
                   if researcher.pastor
                     +pastorCheckbox
 
                   td.collapsing
-                    a.ui.button.fluid.researcher-exit Выйти
+                    button.ui.button.fluid.researcher-exit Выйти
 
             .ui.fluid.large.steps
-              unless isActiveRoute regex='research|new-episode'
-                a(href="{{pathFor 'research'}}").step
-                  i.diamond.icon
-                  .content
-                    .title Исследовательская
-                unless isActiveRoute regex='episode'
-                  a(href="{{pathFor 'episode' _episodeId=episodeId}}").step
-                    i.block.layout.icon
-                    .content
-                      .title Эпизод
-                      .description {{episodeTitle}}
-                      if pastorMode
-                        a(href="{{pathFor 'editEpisode' _episodeId=episodeId}}").ui.icon.basic.orange.button.edit-pastor
-                          i.edit.icon
-
-                  .active.step
-                    i.help.icon
-                    .content
-                      .title Загадка
-                        if position
-                          .ui.label {{position}}
-                      if pastorMode
-                        unless isActiveRoute regex='newRiddle|editRiddle'
-                          a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button.edit-pastor
-                            i.edit.icon
-                else
-                  .active.step
-                    i.block.layout.icon
-                    .content
-                      .title Эпизод
-                      .description {{episodeTitle}}
-                      if pastorMode
-                        unless isActiveRoute regex='editEpisode|newEpisode'
-                          a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.basic.orange.button.edit-pastor
-                            i.edit.icon
-              else
+              if isActiveRoute regex='research'
                 .active.step
-                  i.diamond.icon
+                  i.lab.icon
                   .content
                     .title Исследовательская
+              
+              if isActiveRoute regex='episode'
+                a(href="{{pathFor 'research'}}").step
+                  i.lab.icon
+                  .content
+                    .title Исследовательская
+                .active.step
+                  i.block.layout.icon
+                  .content
+                    .title Эпизод
+                    .description {{episodeTitle}}
+                    if pastorMode
+                      unless isActiveRoute regex='editEpisode|newEpisode'
+                        a(href="{{pathFor 'editEpisode' _episodeId=_id}}").ui.icon.basic.orange.button.edit-pastor
+                          i.edit.icon
+              
+              if isActiveRoute regex='riddle'
+                a(href="{{pathFor 'research'}}").step
+                  i.lab.icon
+                  .content
+                    .title Исследовательская
+                a(href="{{pathFor 'episode' _episodeId=episodeId}}").step
+                  i.block.layout.icon
+                  .content
+                    .title Эпизод
+                    .description {{episodeTitle}}
+                    if pastorMode
+                      a(href="{{pathFor 'editEpisode' _episodeId=episodeId}}").ui.icon.basic.orange.button.edit-pastor
+                        i.edit.icon
+                .active.step
+                  i.help.icon
+                  .content
+                    .title Загадка
+                      if position
+                        .ui.label {{position}}
+                    if pastorMode
+                      unless isActiveRoute regex='newRiddle|editRiddle'
+                        a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button.edit-pastor
+                          i.edit.icon
+              
+              if isActiveRoute regex='support'
+                a(href="{{pathFor 'research'}}").step
+                  i.lab.icon
+                  .content
+                    .title Исследовательская
+                .active.step
+                  i.life.ring.icon
+                  .content
+                    .title Поддержка
       +yield
 
   .ui.inverted.vertical.segment.footer

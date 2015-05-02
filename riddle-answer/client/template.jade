@@ -21,7 +21,7 @@ template(name="riddleAnswer")
                     .value {{countWordsResponseRiddle}}
                     .label всего
       .ui.segment
-        form.ui.form.string
+        form.ui.form.string.check-answer
           .field
             .ui.left.icon.input.large
               input(type='text', name='response-user', placeholder="Ответ вводить сюда")
@@ -34,7 +34,7 @@ template(name="riddleAnswer")
       .ui.secondary.segment
         h3 Введи число
       .ui.segment
-        form.ui.form.number
+        form.ui.form.number.check-answer
           .field
             .ui.left.icon.input.large
               input(type='text', name='response-user', placeholder="Ответ вводить сюда")
@@ -46,7 +46,7 @@ template(name="riddleAnswer")
       .ui.secondary.segment
         h3 Выбери один вариант
       .ui.segment
-        form.ui.form.options
+        form.ui.form.options.check-answer
           input(type="hidden", name='response-user')
           p
             .ui.fluid.large.vertical.buttons

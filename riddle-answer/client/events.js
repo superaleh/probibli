@@ -28,7 +28,7 @@ Template.riddleAnswer.events({
     var form = $(e.target).parents().find('form.string');
     var words = lodash.words( form.form('get value', 'response-user'), /[а-я\d]+/ig );
     Session.set('countWordsResponse', words.length);
-    
+
   }
   ,'click .options .toggle.button': function(e, template) {
 
@@ -42,15 +42,15 @@ Template.riddleAnswer.events({
     formOptions.find('input[name=response-user]').val(response);
 
   }
-  ,'submit form.ui.form': function(e, template) {
+  ,'submit form.ui.form.check-answer': function(e, template) {
 
     e.preventDefault();
-    
+
     var idRiddle = this._id;
     var timeCircle = $(e.target).parents().find('.time-circle').TimeCircles();
     var formButton = $(e.target).find('.submit.button');
 
-    var pastorMode = false;    
+    var pastorMode = false;
     if (Meteor.user().pastor && Session.get('pastorMode'))
       pastorMode = true;
 

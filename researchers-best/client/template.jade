@@ -3,14 +3,26 @@ template(name="researchersBest")
     i.thumbs.up.icon
     | Лучшие Исследователи
 
-  .ui.doubling.four.column.grid.middle.aligned.centered
+  .ui.four.column.grid.stackable.middle.aligned.centered
     each researchersBest
       .column
-        .ui.card
+        .ui.card.fluid
           .content
             .header
               i.trophy.icon
               | {{username}}
+            .meta
+              if status.online
+                .ui.green.empty.circular.label
+                |  ONLINE
+              else
+                | Был(а) {{lastLoginDate}}
+            .description
+              .city Город: <b>{{profile.city}}</b>
+              .register Дата регистрации: <b>{{registerDate}}</b>
           .extra.content
+            span.right.floated
+              i.check.green.icon
+              | {{guessRiddlesCount}} отгадано
             i.orange.fire.icon
             | {{plurality wisdom "мудрост"}}

@@ -20,7 +20,7 @@ isWholeField = (rule) ->
 getRegExp = (rule) ->
   unless isWholeField(rule)
     # Expressions for the range from the last word break to the current cursor position
-    new RegExp('(^|\\b|\\s)' + rule.token + '([\\wа-я.]*)$')
+    new RegExp('(^|\\b|\\s)' + rule.token + '([\\wа-яА-Я.]*)$')
   else
     # Whole-field behavior - word characters or spaces
     new RegExp('(^)(.*)$')
@@ -82,7 +82,7 @@ class @AutoComplete
     @ruleDep = new Deps.Dependency
     @filterDep = new Deps.Dependency
     @loadingDep = new Deps.Dependency
-    
+
     # autosubscribe to the record set published by the server based on the filter
     # This will tear down server subscriptions when they are no longer being used.
     @sub = null

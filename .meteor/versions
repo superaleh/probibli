@@ -53,6 +53,8 @@ meteortoys:toykit@0.3.4
 minifiers@1.1.5
 minimongo@1.0.8
 mizzao:autocomplete@0.5.1
+mizzao:timesync@0.3.1
+mizzao:user-status@0.6.4
 mobile-status-bar@1.0.3
 momentjs:moment@2.10.2
 mongo@1.1.0
@@ -60,7 +62,6 @@ mquandalle:jade@0.4.1
 mrt:modernizr-meteor@2.6.2
 msavin:jetsetter@1.0.11
 msavin:mongol@1.0.22
-multiply:iron-router-progress@1.0.1
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 ongoworks:security@1.1.0
