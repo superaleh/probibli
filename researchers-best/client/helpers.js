@@ -16,7 +16,7 @@ Template.researchersBest.helpers({
   ,registerDate: function () {
     var createdAt = this.createdAt;
     if ( createdAt )
-      return moment( createdAt ).format( 'L' );
+      return moment( createdAt ).fromNow();
   }
   ,lastLoginDate: function () {
     if ( this.status.lastLogin ) {

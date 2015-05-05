@@ -11,18 +11,20 @@ template(name="researchersBest")
             .header
               i.trophy.icon
               | {{username}}
-            .meta
               if status.online
-                .ui.green.empty.circular.label
-                |  ONLINE
+                .ui.green.empty.circular.label(data-content="сейчас исследует", data-variation="inverted")
               else
-                | Был(а) {{lastLoginDate}}
+                .ui.red.empty.circular.label(data-content="был(а) {{lastLoginDate}}", data-variation="inverted")
             .description
-              .city Город: <b>{{profile.city}}</b>
-              .register Дата регистрации: <b>{{registerDate}}</b>
+              p.city
+                i.marker.icon(data-content="город", data-variation="inverted")
+                | {{profile.city}}
+              p.register
+                i.add.user.icon(data-content="дата регистрации", data-variation="inverted")
+                | {{registerDate}}
           .extra.content
             span.right.floated
-              i.check.green.icon
-              | {{guessRiddlesCount}} отгадано
-            i.orange.fire.icon
-            | {{plurality wisdom "мудрост"}}
+              i.check.green.icon(data-content="отгадано загадок", data-variation="inverted")
+              | {{guessRiddlesCount}}
+            i.orange.fire.icon(data-content="мудрость", data-variation="inverted")
+            | {{wisdom}}
