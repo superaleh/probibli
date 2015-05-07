@@ -4,6 +4,7 @@ Router.route('/episode-:_episodeId/riddle-:_riddleId', {
   ,waitOn: function() {
     return [
       Meteor.subscribe('researcher')
+      ,Meteor.subscribe('supportsNotViewed')
       ,Meteor.subscribe('riddles', this.params._episodeId, this.params._riddleId)
       ,Meteor.subscribe('episodes', this.params._episodeId)
     ];

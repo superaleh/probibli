@@ -19,9 +19,10 @@ template(name="commonInterface")
                     h3
                       i.user.icon.circular
                       | {{researcher.username}}
-                      //- a(href="{{pathFor 'support' _researcherId=researcher._id}}").ui.button.icon.support
+                      a(href="{{pathFor 'support'}}").ui.button.icon.support
                         i.life.ring.icon
-                        .floating.ui.blue.label.mini 2
+                        if supportsNotViewed
+                          .floating.ui.blue.label.mini {{supportsNotViewed}}
                   if researcher.pastor
                     +pastorCheckbox
 

@@ -1,8 +1,9 @@
-Router.route('/support-:_researcherId', {
+Router.route('/support', {
   name: 'support'
   ,layoutTemplate: 'commonInterface'
   ,waitOn: function() {
     Meteor.subscribe('researcher');
-    Meteor.subscribe('support', this.params._researcherId);
+    Meteor.subscribe('supports');
+    Meteor.subscribe('messages');
   }
 });

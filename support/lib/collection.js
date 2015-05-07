@@ -1,6 +1,6 @@
-Support = new Mongo.Collection('support');
+Supports = new Mongo.Collection('supports');
 
-Support.attachSchema(new SimpleSchema({
+Supports.attachSchema(new SimpleSchema({
   riddleId: {
     type: String
     ,label: "ID Загадки"
@@ -8,6 +8,14 @@ Support.attachSchema(new SimpleSchema({
   ,riddleQuestion: {
     type: String
     ,label: "Вопрос"
+  }
+  ,riddleIntricacy: {
+    type: Number
+    ,label: "Сложность"
+  }
+  ,solved: {
+    type: Boolean
+    ,label: "Решен"
   }
   ,createdBy: {
     type: String
@@ -17,18 +25,59 @@ Support.attachSchema(new SimpleSchema({
     type: String
     ,label: "Никнейм Исследователя"
   }
-  ,message: {
+  ,researcherCity: {
     type: String
-    ,label: "Сообщение"
+    ,label: "Город Исследователя"
   }
   ,createdAt: {
     type: Date
     ,label: "Дата создания"
   }
+  ,body: {
+    type: String
+    ,label: "Сообщение"
+  }
+  ,messageCount: {
+    type: Number
+    ,label: "Количество сообщений"
+  }
+  ,viewed: {
+    type: Boolean
+    ,label: "Просмотрено"
+  }
 }));
 
-//Автоматичекое добавление время создания
-Support.attachBehaviour('timestampable', {
+Supports.attachBehaviour('timestampable', {
+  updatedBy: false
+  ,updatedAt: false
+});
+
+Messages = new Mongo.Collection('messages');
+
+Messages.attachSchema(new SimpleSchema({
+  body: {
+    type: String
+    ,label: "Текст"
+  }
+  ,createdAt: {
+    type: Date
+    ,label: "Дата создания"
+  }
+  ,viewed: {
+    type: Boolean
+    ,label: "Просмотрено"
+  }
+  ,createdBy: {
+    type: String
+    ,label: "ID создавшего"
+  }
+  ,supportId: {
+    type: String
+    ,label: "ID обращения"
+  }
+}));
+
+Messages.attachBehaviour('timestampable', {
   updatedBy: false
   ,updatedAt: false
 });

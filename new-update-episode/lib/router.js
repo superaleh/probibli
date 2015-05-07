@@ -4,6 +4,7 @@ Router.route('/new-episode', {
   ,waitOn: function() {
     return [
       Meteor.subscribe('researcher')
+      ,Meteor.subscribe('supportsNotViewed')
       ];
   }
 });
@@ -14,6 +15,7 @@ Router.route('/episode-:_episodeId/edit', {
   ,waitOn: function() {
     return [
       Meteor.subscribe('researcher')
+      ,Meteor.subscribe('supportsNotViewed')
       ,Meteor.subscribe('episodes', this.params._episodeId)
       ];
   }

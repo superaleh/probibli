@@ -1,20 +1,47 @@
 template(name="support")
-  .ui.two.column.grid.centered
-    .column
+  .ui.grid.centered
+    .ten.wide.column
       h2.ui.header
         i.life.ring.icon
         | Поддержка
-      .ui.top.attached.secondary.segment
-        h2 Обращения по загадкам
-      each supports
-        .ui.attached.segment
-          h3 {{riddleQuestionSupport}};
-          p Открыто <b>{{createdAtSupport}}</b> создано исследователем <b>{{researcherNameSupport}}</b>
+      
+      table.ui.table
+        thead
+          tr
+            th Статус
+            th Вопрос загадки
+            th Исследователь
+            th Дата
+            th Сообщений
+            th Просмотрен
+        tbody
+          each supports
+            tr
+              td
+                if solved
+                  | Решен
+                else
+                  | Открыт
+              td {{riddleQuestion}} {{riddleIntricacy}}
+              td {{researcherName}} {{researcherCity}}
+              td {{createdAt}}
+              td {{messageCount}}
+              td 
+                if viewed
+                  | Да
+                else
+                  | Нет
 
 template(name="messageSupport")
-  +autoForm(collection="Support" id="insertSupportForm" type="insert" class="inverted")
-    +afQuickField name="riddleId" value=riddleId type="hidden"
-    +afQuickField name="riddleQuestion" value=riddleQuestion type="hidden"
+  +autoForm(collection="Supports" id="insertSupportsForm" type="insert" class="inverted")
+    +afQuickField name="riddleId" value=_id type="hidden"
+    +afQuickField name="riddleQuestion" value=question type="hidden"
+    +afQuickField name="riddleIntricacy" value=intricacy type="hidden"
+    +afQuickField name="solved" value="false" type="hidden"
     +afQuickField name="researcherName" value=researcherName type="hidden"
-    +afFormGroup name="message" type="textarea" label=false placeholder="Написать Юре Астраленко по загадке"
+    +afQuickField name="researcherCity" value=researcherCity type="hidden"
+    +afQuickField name="messageCount" value=1 type="hidden"
+    +afQuickField name="viewed" value="false" type="hidden"
+  
+    +afFormGroup name="body" type="textarea" label=false placeholder="Написать Юре Астраленко по загадке"
     .field: button.ui.inverted.basic.small.blue.button(type='submit') Отправить Юре

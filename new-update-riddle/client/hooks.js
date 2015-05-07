@@ -16,7 +16,6 @@ AutoForm.addHooks( 'updateRiddleForm', {
   onSuccess: function(formType, result) {
 
     var episodeId = Router.current().params._episodeId;
-    var riddleId = Router.current().params._riddleId;
     Router.go( 'episode', { _episodeId: episodeId } );
 
   }

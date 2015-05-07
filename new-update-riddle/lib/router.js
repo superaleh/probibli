@@ -4,6 +4,7 @@ Router.route('/episode-:_episodeId/new-riddle', {
   ,waitOn: function() {
     return [
       Meteor.subscribe('researcher')
+      ,Meteor.subscribe('supportsNotViewed')
       ,Meteor.subscribe('episodes', this.params._episodeId)
       ,Meteor.subscribe('riddles', this.params._episodeId)
     ];
@@ -19,6 +20,7 @@ Router.route('/episode-:_episodeId/riddle-:_riddleId/edit', {
   ,waitOn: function() {
     return [
       Meteor.subscribe('researcher')
+      ,Meteor.subscribe('supportsNotViewed')
       ,Meteor.subscribe('episodes', this.params._episodeId)
       ,Meteor.subscribe('riddles', this.params._episodeId)
     ];

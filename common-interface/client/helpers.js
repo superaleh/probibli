@@ -28,4 +28,7 @@ Template.commonInterface.helpers({
       return episode._id;
     }
   }
+  ,supportsNotViewed: function () {
+    return Supports.find( { viewed: false } ).count();
+  }
 });

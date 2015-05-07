@@ -27,7 +27,7 @@ Riddles.before.insert(function (userId, doc) {
     if ( riddle !== false )
       Riddles.update( {_id: riddle._id}, {$set: {position: index + 1}} );
 
-  })
+  });
 
 });
 
@@ -56,16 +56,16 @@ Riddles.before.update(function (userId, doc, fieldNames, modifier, options) {
         Riddles.update( {_id: riddle._id}, {$set: {position: position}} );
       })
     } else {
-      
+
       // если новая позиция больше старой, беру стек между старой позицией и новой и декрементирую их позицию
-      var decArray = riddles.slice( oldPosition, newPosition );      
+      var decArray = riddles.slice( oldPosition, newPosition );
       decArray.forEach(function (riddle) {
         var position = riddle.position - 1;
         Riddles.update( {_id: riddle._id}, {$set: {position: position}} );
       })
-      
+
     }
 
   }
-  
+
 });

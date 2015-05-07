@@ -1,15 +1,47 @@
-Meteor.publish('support', function(researcherId) {
+Meteor.publish('supports', function() {
 
-  check(researcherId, String);
+  if ( this.userId ) {
 
-  var researcher = Meteor.users.findOne( { _id: researcherId } );
+    var researcher = Meteor.users.findOne( { _id: this.userId } );
 
-  if ( !researcher ) return false;
+    if ( researcher.pastor ) {
+      return Supports.find( {}, { createdAt: -1 } );
+    } else {
+      return Supports.find( { createdBy: this.userId }, { createdAt: -1 } );
+    }
 
-  if ( researcher.pastor ) {
-    return Support.find( {}, { createdAt: -1 } );
-  } else {
-    return Support.find( { createdBy: researcherId }, { createdAt: -1 } );
+  }
+
+});
+
+Meteor.publish('supportsNotViewed', function() {
+
+  if ( this.userId ) {
+
+    var researcher = Meteor.users.findOne( { _id: this.userId } );
+
+    if ( researcher.pastor ) {
+      return Supports.find( { viewed: false } );
+    } else {
+      return Supports.find( { createdBy: this.userId, viewed: false } );
+    }
+
+  }
+
+});
+
+Meteor.publish('messages', function() {
+
+  if ( this.userId ) {
+
+    var researcher = Meteor.users.findOne( { _id: this.userId } );
+
+    if ( researcher.pastor ) {
+      return Messages.find( {}, { createdAt: -1 } );
+    } else {
+      return Messages.find( { createdBy: this.userId }, { createdAt: -1 } );
+    }
+
   }
 
 });

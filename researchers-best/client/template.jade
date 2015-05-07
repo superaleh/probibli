@@ -14,13 +14,13 @@ template(name="researchersBest")
               if status.online
                 .ui.green.empty.circular.label(data-content="сейчас исследует", data-variation="inverted")
               else
-                .ui.red.empty.circular.label(data-content="был(а) {{lastLoginDate}}", data-variation="inverted")
+                .ui.red.empty.circular.label(data-content="исследовал(а) {{lastLoginDate}}", data-variation="inverted")
             .description
               p.city
                 i.marker.icon(data-content="город", data-variation="inverted")
                 | {{profile.city}}
               p.register
-                i.add.user.icon(data-content="дата регистрации", data-variation="inverted")
+                i.add.user.icon(data-content="зарегистрировался(-ась)", data-variation="inverted")
                 | {{registerDate}}
           .extra.content
             span.right.floated
