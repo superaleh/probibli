@@ -29,6 +29,12 @@ Template.commonInterface.helpers({
     }
   }
   ,supportsNotViewed: function () {
-    return Supports.find( { viewed: false } ).count();
+    var supports = Supports.find( {
+      $and: [
+        { seen: { $ne: Meteor.userId() } }
+        ,{ seen: { $ne: "true" } }
+      ]
+    } );
+    return supports.count();
   }
 });

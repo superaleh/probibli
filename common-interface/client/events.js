@@ -2,7 +2,7 @@ Template.pastorCheckbox.events({
 
   'change .checkbox.pastor' : function(e, template) {
 
-    var pastorChecked = $(e.target).parent().checkbox('is checked');
+    var pastorChecked = $(e.currentTarget).checkbox('is checked');
     var userPastor = Meteor.user().pastor;
 
     if (userPastor){
@@ -31,7 +31,7 @@ Template.commonInterface.events({
 
     shape.shape({duration: 600});
     shape.shape('flip down');
-    
+
   }
   ,'click .researcher-exit' : function(e, template) {
 

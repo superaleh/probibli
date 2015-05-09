@@ -45,8 +45,8 @@ Supports.attachSchema(new SimpleSchema({
     type: Number
     ,label: "Количество сообщений"
   }
-  ,viewed: {
-    type: Boolean
+  ,seen: {
+    type: String
     ,label: "Просмотрено"
   }
 }));
@@ -66,10 +66,6 @@ Messages.attachSchema(new SimpleSchema({
   ,createdAt: {
     type: Date
     ,label: "Дата создания"
-  }
-  ,viewed: {
-    type: Boolean
-    ,label: "Просмотрено"
   }
   ,createdBy: {
     type: String

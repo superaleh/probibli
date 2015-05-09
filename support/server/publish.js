@@ -29,9 +29,9 @@ Meteor.publish('supportsNotViewed', function() {
     var researcher = Meteor.users.findOne( { _id: this.userId } );
 
     if ( researcher.pastor ) {
-      return Supports.find( { viewed: false } );
+      return Supports.find( { seen: { $ne: researcher._id, $ne: "true" } } );
     } else {
-      return Supports.find( { createdBy: this.userId, viewed: false } );
+      return Supports.find( { createdBy: this.userId, seen: { $ne: researcher._id, $ne: "true" } } );
     }
 
   }

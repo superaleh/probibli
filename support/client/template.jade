@@ -6,7 +6,7 @@ template(name="support")
         .content Поддержка
       each supports
         .ui.segment.attached
-          .ui.grid
+          .ui.grid.middle.aligned
             .one.wide.column
               if solved
                 i.check.circle.green.outline.icon.large
@@ -29,7 +29,7 @@ template(name="support")
                             i.edit.icon
                             | ред.
             .two.wide.column
-              a(href="{{pathFor 'supportMessages' _supportId=_id}}").ui.statistic.mini.right.floated
+              a(href="{{pathFor 'supportMessages' _supportId=_id}}", class="{{#if notSeen}}blue{{/if}}").ui.statistic.mini.right.floated
                 .value
                   i.comments.icon
                   | {{messageCount}}
@@ -42,6 +42,9 @@ template(name="supportMessages")
           i.question.icon
           .content {{ucFirst riddle.question}}
             .sub.header
+              .ui.checkbox.toggle.solved
+                input(type='checkbox', name='solved')
+                label решен
               i.book.icon
               | {{riddle.scopeSearch}}
               i.orange.fire.icon
@@ -87,7 +90,7 @@ template(name="supportMessages")
               
   .ui.grid.centered.messages.stackable
     .row
-      .eight.wide.column(class="{{#if currentResearcher}}right aligned{{/if}}")
+      .eight.wide.column(class="{{#if currentResearcher}}right aligned {{/if}}")
         p
           if currentResearcher
             span  {{fromNow createdAt}} 
@@ -106,7 +109,7 @@ template(name="supportMessages")
         .ui.pointing.label.huge(class="{{#if currentResearcher}}green{{else}}teal{{/if}}") {{body}}
     each messages
       .row
-        .eight.wide.column(class="{{#if currentResearcher}}right aligned{{/if}}")
+        .eight.wide.column(class="{{#if currentResearcher}}right aligned {{/if}}")
           p
             if currentResearcher
               span  {{fromNow createdAt}} 
@@ -128,7 +131,6 @@ template(name="supportMessages")
     .eight.wide.column
       +autoForm(collection="Messages" id="insertMessagesForm" type="insert")
         +afQuickField name="supportId" value=_id type="hidden"
-        +afQuickField name="viewed" value="false" type="hidden"
       
         +afFormGroup name="body" type="textarea" label=false placeholder="Сообщение"
         .field: button.ui.blue.button(type='submit') Отправить
@@ -140,10 +142,10 @@ template(name="newMessageSupport")
     +afQuickField name="riddleQuestion" value=question type="hidden"
     +afQuickField name="riddleIntricacy" value=intricacy type="hidden"
     +afQuickField name="solved" value="false" type="hidden"
-    +afQuickField name="researcherName" value=researcherName type="hidden"
-    +afQuickField name="researcherCity" value=researcherCity type="hidden"
+    +afQuickField name="researcherName" value=researcher.username type="hidden"
+    +afQuickField name="researcherCity" value=researcher.profile.city type="hidden"
     +afQuickField name="messageCount" value=1 type="hidden"
-    +afQuickField name="viewed" value="false" type="hidden"
+    +afQuickField name="seen" value=researcher._id type="hidden"
   
     +afFormGroup name="body" type="textarea" label=false placeholder="Написать Юре Астраленко по загадке"
     .field: button.ui.inverted.basic.small.blue.button(type='submit') Отправить Юре

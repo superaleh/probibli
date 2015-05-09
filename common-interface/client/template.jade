@@ -75,7 +75,7 @@ template(name="commonInterface")
                         a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button.edit-pastor
                           i.edit.icon
               
-              if isActiveRoute regex='support'
+              if isActiveRoute regex='^support$'
                 a(href="{{pathFor 'research'}}").step
                   i.lab.icon
                   .content
@@ -84,25 +84,39 @@ template(name="commonInterface")
                   i.life.ring.icon
                   .content
                     .title Поддержка
+              
+              if isActiveRoute regex='supportMessages'
+                a(href="{{pathFor 'research'}}").step
+                  i.lab.icon
+                  .content
+                    .title Исследовательская
+                a(href="{{pathFor 'support'}}").step
+                  i.life.ring.icon
+                  .content
+                    .title Поддержка
+                .active.step
+                  i.life.ring.icon
+                  .content
+                    .title Обращение
       +yield
 
   .ui.inverted.vertical.segment.footer
-    .ui.page.four.column.stackable.grid.very.relaxed
-      .column
+    .ui.page.stackable.grid
+      .four.wide.column
         h5.ui.inverted.header
           i.copyright.icon
           .content ПРОБИБЛИ 2015
             .ui.orange.label.mini {{varsion}}
             .sub.header версия для внутреннего тестирования
-      .column
+      .four.wide.column
         h5.ui.inverted.header
           i.mobile.icon
           .content Адаптировано под мобильные устройства
-      .column
+      .four.wide.column
         h5.ui.inverted.header
           i.rocket.icon
           .content Поддержка только современных браузеров
-      .column
+      .four.wide.column
         h5.ui.inverted.header
           i.heart.icon.red
           .content Сделано в Борисове
@@ -111,6 +125,6 @@ template(name="commonInterface")
 
 template(name="pastorCheckbox")
   td.collapsing.center.aligned
-    .ui.checkbox.pastor
+    .ui.checkbox.toggle.pastor
       input(type='checkbox', name='pastor')
       label режим пастора

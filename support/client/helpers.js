@@ -1,6 +1,11 @@
 Template.support.helpers({
   supports: function () {
-    return Supports.find();
+    return Supports.find({}, { sort: { createdAt: -1 } });
+  }
+  ,notSeen: function () {
+    if ( Meteor.userId() !== this.seen && this.seen !== "true" )
+      return true;
+    return false;
   }
 });
 
@@ -44,12 +49,8 @@ Template.supportMessages.helpers({
 });
 
 Template.newMessageSupport.helpers({
-  researcherName: function () {
-    researcher = Meteor.users.findOne( { _id: Meteor.userId()} )
-    return researcher.username;
-  }
-  ,researcherCity: function () {
-    researcher = Meteor.users.findOne( { _id: Meteor.userId()} )
-    return researcher.profile.city;
+  researcher: function () {
+    researcher = Meteor.users.findOne( { _id: Meteor.userId() } )
+    return researcher;
   }
 });

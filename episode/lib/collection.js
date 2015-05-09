@@ -10,7 +10,7 @@ Episodes.attachSchema(new SimpleSchema({
     ,label: "Количество загадок"
     ,min: 0
     ,optional: true
-  }  
+  }
   ,createdAt: {
     type: Date
     ,label: "Дата создания"
