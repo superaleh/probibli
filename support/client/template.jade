@@ -1,39 +1,141 @@
 template(name="support")
-  .ui.grid.centered
-    .ten.wide.column
+  .ui.grid.centered.stackable
+    .twelve.wide.column
       h2.ui.header
         i.life.ring.icon
-        | Поддержка
-      
-      table.ui.table
-        thead
-          tr
-            th Статус
-            th Вопрос загадки
-            th Исследователь
-            th Дата
-            th Сообщений
-            th Просмотрен
-        tbody
-          each supports
-            tr
-              td
-                if solved
-                  | Решен
-                else
-                  | Открыт
-              td {{riddleQuestion}} {{riddleIntricacy}}
-              td {{researcherName}} {{researcherCity}}
-              td {{createdAt}}
-              td {{messageCount}}
-              td 
-                if viewed
-                  | Да
-                else
-                  | Нет
+        .content Поддержка
+      each supports
+        .ui.segment.attached
+          .ui.grid
+            .one.wide.column
+              if solved
+                i.check.circle.green.outline.icon.large
+              else
+                i.warning.circle.red.icon.large
+            .thirteen.wide.column
+              .ui.items
+                .item
+                  .content
+                    a(href="{{pathFor 'supportMessages' _supportId=_id}}").header {{riddleQuestion}}
+                    .description Создал(-а) <b>{{researcherName}}</b> из {{researcherCity}}(-а) {{fromNow createdAt}}
+                    .extra
+                      a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=riddleId}}", target="_blank")
+                        .ui.label
+                          i.external.share.icon
+                          | к загадке
+                      if pastorMode
+                        a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=riddleId}}")
+                          .ui.label
+                            i.edit.icon
+                            | ред.
+            .two.wide.column
+              a(href="{{pathFor 'supportMessages' _supportId=_id}}").ui.statistic.mini.right.floated
+                .value
+                  i.comments.icon
+                  | {{messageCount}}
 
-template(name="messageSupport")
+template(name="supportMessages")
+  .ui.grid.centered.stackable
+    .ten.wide.column
+      .ui.segment
+        h2.ui.header.teal.dividing
+          i.question.icon
+          .content {{ucFirst riddle.question}}
+            .sub.header
+              i.book.icon
+              | {{riddle.scopeSearch}}
+              i.orange.fire.icon
+              | {{plurality riddle.intricacy "мудрост"}}
+              a(href="{{pathFor 'riddle' _episodeId=riddle.episodeId _riddleId=riddle._id}}", target="_blank")
+                .ui.label
+                  i.external.share.icon
+                  | к загадке
+              if pastorMode
+                a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=riddle.episodeId _riddleId=riddle._id}}")
+                  .ui.label
+                    i.edit.icon
+                    | ред.
+        .ui.two.column.grid.centered.stackable.middle.aligned
+          .column.center.aligned.mobile.only
+            p
+              i.circular.user.icon
+              | {{companion.username}}
+              i.marker.icon
+              | {{companion.profile.city}}
+          .column.center.aligned.mobile.only
+            p
+              i.add.user.icon
+              | {{fromNow companion.createdAt}}
+              i.orange.fire.icon
+              | {{companion.wisdom}}
+              i.green.check.icon
+              | {{companion.guessRiddles.length}}
+          .column.right.aligned.tablet.computer.only
+            p
+              i.circular.user.icon
+              | {{companion.username}}
+              i.marker.icon
+              | {{companion.profile.city}}
+          .column.left.aligned.tablet.computer.only
+            p
+              i.add.user.icon
+              | {{fromNow companion.createdAt}}
+              i.orange.fire.icon
+              | {{companion.wisdom}}
+              i.green.check.icon
+              | {{companion.guessRiddles.length}}
+              
+  .ui.grid.centered.messages.stackable
+    .row
+      .eight.wide.column(class="{{#if currentResearcher}}right aligned{{/if}}")
+        p
+          if currentResearcher
+            span  {{fromNow createdAt}} 
+            b  Я 
+            if companion.status.online
+              .ui.green.empty.circular.label 
+            else
+              .ui.red.empty.circular.label 
+          else
+            if companion.status.online
+              .ui.green.empty.circular.label 
+            else
+              .ui.red.empty.circular.label 
+            b  {{companion.username}} 
+            span  {{fromNow createdAt}} 
+        .ui.pointing.label.huge(class="{{#if currentResearcher}}green{{else}}teal{{/if}}") {{body}}
+    each messages
+      .row
+        .eight.wide.column(class="{{#if currentResearcher}}right aligned{{/if}}")
+          p
+            if currentResearcher
+              span  {{fromNow createdAt}} 
+              b  Я 
+              if companion.status.online
+                .ui.green.empty.circular.label 
+              else
+                .ui.red.empty.circular.label 
+            else
+              if companion.status.online
+                .ui.green.empty.circular.label 
+              else
+                .ui.red.empty.circular.label 
+              b  {{companion.username}} 
+              span  {{fromNow createdAt}} 
+          .ui.pointing.label.huge(class="{{#if currentResearcher}}green{{else}}teal{{/if}}") {{body}}
+
+  .ui.grid.centered.stackable
+    .eight.wide.column
+      +autoForm(collection="Messages" id="insertMessagesForm" type="insert")
+        +afQuickField name="supportId" value=_id type="hidden"
+        +afQuickField name="viewed" value="false" type="hidden"
+      
+        +afFormGroup name="body" type="textarea" label=false placeholder="Сообщение"
+        .field: button.ui.blue.button(type='submit') Отправить
+
+template(name="newMessageSupport")
   +autoForm(collection="Supports" id="insertSupportsForm" type="insert" class="inverted")
+    +afQuickField name="episodeId" value=episodeId type="hidden"
     +afQuickField name="riddleId" value=_id type="hidden"
     +afQuickField name="riddleQuestion" value=question type="hidden"
     +afQuickField name="riddleIntricacy" value=intricacy type="hidden"

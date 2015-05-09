@@ -21,22 +21,21 @@ Meteor.publish('riddles', function(episodeId, riddleId) {
 
     var pastor = Meteor.users.findOne({_id: this.userId}).pastor;
     if ( pastor ){
-      
+
       _.extend(fields, {
         smartInput: 1
         ,response: 1
         ,falseResponse: 1
         ,correctVerses: 1
       });
-    
+
     }
-  
+
   }
 
   if (riddleId) {
     return Riddles.find({
       _id: riddleId,
-      episodeId: episodeId
     }, {
       fields: fields
     });

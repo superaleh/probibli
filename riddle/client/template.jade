@@ -6,13 +6,15 @@ template(name="riddle")
         i.question.icon
         .content {{ucFirst question}}
           .sub.header
-            if pastorMode
-              a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button
-                i.edit.icon
             i.book.icon
             | {{scopeSearch}}
             i.orange.fire.icon
             | {{plurality intricacy "мудрост"}}
+            if pastorMode
+              a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}")
+                .ui.label
+                  i.edit.icon
+                  | ред.
 
       +riddleAnswer
           

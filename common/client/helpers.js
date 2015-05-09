@@ -23,6 +23,15 @@ Template.registerHelper('pastorMode', function() {
 
 });
 
+/*
+# Относительное время
+ */
+Template.registerHelper('fromNow', function( data ) {
+  if ( data )
+    return moment( data ).fromNow();
+  return false;
+});
+
 
 /*
 #Первая буква в предложении большая

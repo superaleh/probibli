@@ -1,7 +1,11 @@
 Supports = new Mongo.Collection('supports');
 
 Supports.attachSchema(new SimpleSchema({
-  riddleId: {
+  episodeId: {
+    type: String
+    ,label: "ID Эпизода"
+  }
+  ,riddleId: {
     type: String
     ,label: "ID Загадки"
   }

@@ -14,17 +14,17 @@ template(name="researchersBest")
               if status.online
                 .ui.green.empty.circular.label(data-content="сейчас исследует", data-variation="inverted")
               else
-                .ui.red.empty.circular.label(data-content="исследовал(а) {{lastLoginDate}}", data-variation="inverted")
+                .ui.red.empty.circular.label(data-content="исследовал(а) {{fromNow status.lastLogin.date}}", data-variation="inverted")
             .description
               p.city
                 i.marker.icon(data-content="город", data-variation="inverted")
                 | {{profile.city}}
               p.register
                 i.add.user.icon(data-content="зарегистрировался(-ась)", data-variation="inverted")
-                | {{registerDate}}
+                | {{fromNow createdAt}}
           .extra.content
             span.right.floated
               i.check.green.icon(data-content="отгадано загадок", data-variation="inverted")
-              | {{guessRiddlesCount}}
+              | {{guessRiddles.length}}
             i.orange.fire.icon(data-content="мудрость", data-variation="inverted")
             | {{wisdom}}

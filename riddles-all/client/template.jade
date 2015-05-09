@@ -28,11 +28,13 @@ template(name="riddlesAll")
             h5 {{position}}
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
           .description
-            if pastorMode
-              a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button
-                i.edit.icon
             i.book.icon
             | {{scopeSearch}}
+            if pastorMode
+              a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}")
+                .ui.label
+                  i.edit.icon
+                  | ред.
         if pastorMode
           .extra.content
             span.left.floated

@@ -9,6 +9,8 @@ Meteor.publish('researcher', function() {
         ,'guessRiddles': 1
         ,'guides': 1
         ,'pastor': 1
+        ,'status': 1
+        ,'createdAt': 1
       }
     });
   } else {
