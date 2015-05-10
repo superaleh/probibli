@@ -37,7 +37,7 @@ Template.episodesAll.helpers({
     /*
     #если прошло меньше 14 дней от создания эпизода, то он новый
      */
-    if (moment(now).diff(creatingDate, 'days') < 14) {
+    if (moment(now).diff(creatingDate, 'days') < 10) {
       return true;
     }
     return false;

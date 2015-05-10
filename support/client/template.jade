@@ -16,7 +16,7 @@ template(name="support")
               .ui.items
                 .item
                   .content
-                    a(href="{{pathFor 'supportMessages' _supportId=_id}}").header {{riddleQuestion}}
+                    a(href="{{pathFor 'supportMessages' _supportId=_id}}").header {{ucFirst riddleQuestion}}
                     .description Создал(-а) <b>{{researcherName}}</b> из {{researcherCity}}(-а) {{fromNow createdAt}}
                     .extra
                       a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=riddleId}}", target="_blank")
