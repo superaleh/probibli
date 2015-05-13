@@ -28,16 +28,12 @@ Template.episodesAll.helpers({
     return count;
   },
   newEpisode: function() {
-    var creatingDate, now;
-    now = (new Date).getTime();
-    creatingDate = Episodes.findOne({
-      _id: this._id
-    }).creating;
+    var now = (new Date).getTime();
 
     /*
-    #если прошло меньше 14 дней от создания эпизода, то он новый
+    #если прошло меньше количества дней от создания эпизода, то он новый
      */
-    if (moment(now).diff(creatingDate, 'days') < 10) {
+    if (moment(now).diff(this.createdAt, 'days') < 10) {
       return true;
     }
     return false;
