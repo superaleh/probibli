@@ -24,6 +24,11 @@ Riddles.attachSchema(new SimpleSchema({
     type: String
     ,label: "Вопрос"
   }
+  ,help: {
+    type: String
+    ,label: "Справка"
+    ,optional: true
+  }
   ,response: {
     type: String
     ,label: "Ответ"

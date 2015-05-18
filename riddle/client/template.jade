@@ -15,6 +15,12 @@ template(name="riddle")
                 .ui.label
                   i.edit.icon
                   | ред.
+      if help
+        .ui.icon.message.info
+          i.info.icon
+          .content
+            .header Справка
+            p {{help}}
 
       +riddleAnswer
           

@@ -13,6 +13,7 @@ template(name="newRiddle")
 
     .ui.two.column.grid.stackable
       .column
+        +afQuickField name="question" trimStrings=true type="textarea"
         .ui.segment
           .field
             .ui.big.input
@@ -22,18 +23,18 @@ template(name="newRiddle")
             ul.list
               li !Быт. 2.3 4:3,5 !2 Пар. 15.
               li !Лук. 2. !Мф. 3.
-        .two.fields
-          +afQuickField name="scopeSearch" class="scope-search"
-          +afQuickField name="correctVerses" class="correct-verses"
+        +afQuickField name="response" trimStrings=true
+        .field: button.ui.blue.submit.button.big(type='submit') Создать
+      .column
+        +afQuickField name="help" trimStrings=true type="textarea"
         .three.fields
           +afQuickField name="intricacy" value=1
           +afQuickField name="versesCount" class="verses-count" value=0
           +afQuickField name="position" value=nextPosition
-      .column
-        +afQuickField name="question" trimStrings=true type="textarea"
-        +afQuickField name="response" trimStrings=true
+        .two.fields
+          +afQuickField name="scopeSearch" class="scope-search"
+          +afQuickField name="correctVerses" class="correct-verses"
         +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
-        .field: button.ui.blue.submit.button.big(type='submit') Создать
 
 template(name="editRiddle")
   h2.ui.header
@@ -45,6 +46,7 @@ template(name="editRiddle")
 
     .ui.two.column.grid.stackable
       .column
+        +afQuickField name="question" trimStrings=true type="textarea"
         .ui.segment
           .field
             .ui.big.input
@@ -54,6 +56,10 @@ template(name="editRiddle")
             ul.list
               li !Быт. 2.3 4:3,5 !2 Пар. 15.
               li !Лук. 2. !Мф. 3.
+        +afQuickField name="response" trimStrings=true
+        .field: button.ui.blue.submit.button.big(type='submit') Сохранить
+      .column
+        +afQuickField name="help" trimStrings=true type="textarea"
         .two.fields
           +afQuickField name="scopeSearch" class="scope-search"
           +afQuickField name="correctVerses" class="correct-verses"
@@ -61,8 +67,4 @@ template(name="editRiddle")
           +afQuickField name="intricacy"
           +afQuickField name="versesCount" class="verses-count"
           +afQuickField name="position"
-      .column
-        +afQuickField name="question" trimStrings=true type="textarea"
-        +afQuickField name="response" trimStrings=true
         +afQuickField name="falseResponse" placeholder="Через запятую" trimStrings=true type="textarea"
-        .field: button.ui.blue.submit.button.big(type='submit') Сохранить

@@ -9,6 +9,7 @@ Meteor.publish('riddles', function(episodeId, riddleId) {
         episodeId: 1
         ,scopeSearch: 1
         ,question: 1
+        ,help: 1
         ,intricacy: 1
         ,position: 1
         ,versesCount: 1
