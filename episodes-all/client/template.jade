@@ -21,6 +21,12 @@ template(name="episodesAll")
           a.ui.header(href="{{pathFor 'episode' _episodeId=_id}}") {{title}}
             if newEpisode
               .ui.teal.label новый
+          if description
+            p {{description}}
+          if period
+            p
+              i.time.icon
+              |{{period}}
           .ui.divider
           .ui.one.column.grid
             .column
@@ -52,4 +58,3 @@ template(name="episodesAll")
                 a(href="{{pathFor 'episode' _episodeId=_id}}").ui.right.floated.labeled.icon.center.aligned.blue.large.button
                   i.rocket.icon
                   | Вперед
-

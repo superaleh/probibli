@@ -2,5 +2,11 @@ template(name="episode")
   h2.ui.horizontal.header.divider
     i.block.layout.icon
     | {{title}}
+  if description
+    p {{description}}
+  if period
+    p
+      i.time.icon
+      |{{period}}
 
   +riddlesAll

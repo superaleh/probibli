@@ -5,11 +5,20 @@ Episodes.attachSchema(new SimpleSchema({
     type: String
     ,label: "Название"
   }
+  ,description: {
+    type: String
+    ,label: "Описание"
+    ,optional: true
+  }
+  ,period: {
+    type: String
+    ,label: "Период"
+    ,optional: true
+  }
   ,numberRiddles: {
     type: Number
     ,label: "Количество загадок"
     ,min: 0
-    ,optional: true
   }
   ,createdAt: {
     type: Date
