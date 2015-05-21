@@ -4,35 +4,36 @@ template(name="support")
       h2.ui.header
         i.life.ring.icon
         .content Поддержка
-      each supports
-        .ui.segment.attached
-          .ui.grid.middle.aligned
-            .one.wide.column
-              if solved
-                i.check.circle.green.outline.icon.large
-              else
-                i.warning.circle.red.icon.large
-            .thirteen.wide.column
-              .ui.items
-                .item
-                  .content
-                    a(href="{{pathFor 'supportMessages' _supportId=_id}}").header {{ucFirst riddleQuestion}}
-                    .description Создал(-а) <b>{{researcherName}}</b> из {{researcherCity}}(-а) {{fromNow createdAt}}
-                    .extra
-                      a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=riddleId}}", target="_blank")
-                        .ui.label
-                          i.external.share.icon
-                          | к загадке
-                      if pastorMode
-                        a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=riddleId}}")
+      table.ui.table.segment.padded.unstackable
+        tbody
+          each supports
+            tr
+              td
+                if solved
+                  i.check.circle.green.outline.icon.large
+                else
+                  i.warning.circle.red.icon.large
+              td
+                .ui.items
+                  .item
+                    .content
+                      a(href="{{pathFor 'supportMessages' _supportId=_id}}").header {{ucFirst riddleQuestion}}
+                      .description Создал(-а) <b>{{researcherName}}</b> из {{researcherCity}}(-а) {{fromNow createdAt}}
+                      .extra
+                        a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=riddleId}}", target="_blank")
                           .ui.label
-                            i.edit.icon
-                            | ред.
-            .two.wide.column
-              a(href="{{pathFor 'supportMessages' _supportId=_id}}", class="{{#if notSeen}}blue{{/if}}").ui.statistic.mini.right.floated
-                .value
-                  i.comments.icon
-                  | {{messageCount}}
+                            i.external.share.icon
+                            | к загадке
+                        if pastorMode
+                          a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=riddleId}}")
+                            .ui.label
+                              i.edit.icon
+                              | ред.
+              td
+                a(href="{{pathFor 'supportMessages' _supportId=_id}}", class="{{#if notSeen}}blue{{/if}}").ui.statistic.mini.right.floated
+                  .value
+                    i.comments.icon
+                    | {{messageCount}}
 
 template(name="supportMessages")
   .ui.grid.centered.stackable
@@ -42,22 +43,26 @@ template(name="supportMessages")
           i.question.icon
           .content {{ucFirst riddle.question}}
             .sub.header
-              .ui.checkbox.toggle.solved
-                input(type='checkbox', name='solved')
-                label решен
               i.book.icon
               | {{riddle.scopeSearch}}
               i.orange.fire.icon
               | {{plurality riddle.intricacy "мудрост"}}
-              a(href="{{pathFor 'riddle' _episodeId=riddle.episodeId _riddleId=riddle._id}}", target="_blank")
-                .ui.label
-                  i.external.share.icon
-                  | к загадке
               if pastorMode
                 a.edit-riddle(href="{{pathFor 'editRiddle' _episodeId=riddle.episodeId _riddleId=riddle._id}}")
                   .ui.label
                     i.edit.icon
                     | ред.
+
+        .ui.one.column.grid
+          .column.center.aligned
+            .ui.checkbox.toggle.solved
+              input(type='checkbox', name='solved')
+              label решен
+            a(href="{{pathFor 'riddle' _episodeId=riddle.episodeId _riddleId=riddle._id}}", target="_blank")
+              .ui.label
+                i.external.share.icon
+                | к загадке
+              
         .ui.two.column.grid.centered.stackable.middle.aligned
           .column.center.aligned.mobile.only
             p
