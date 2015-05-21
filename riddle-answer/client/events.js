@@ -54,7 +54,7 @@ Template.riddleAnswer.events({
     if (Meteor.user().pastor && Session.get('pastorMode'))
       pastorMode = true;
 
-    //включаею на кнопке загрузку
+    //включаю на кнопке загрузку
     formButton.addClass('loading');
 
     var response = $(e.target).find('input[name=response-user]').val();
@@ -83,12 +83,12 @@ Template.riddleAnswer.events({
             ,closable : false
             ,transition : 'vertical flip'
             ,onShow : function(){
-              //останавливаем счетчик
+              //останавливаю счетчик
               timeCircle.stop();
 
             }
             ,onHidden : function(){
-              //запускаем счетчик
+              //запускаю счетчик
               timeCircle.start();
             }
           })

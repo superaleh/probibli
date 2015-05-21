@@ -1,118 +1,128 @@
 template(name="riddleAnswer")
-
-  .ui.segments.riddle-answer
-
-    if responseType.string
-      .ui.secondary.segment
-        .ui.grid.stackable.divided
+  .riddle-answer
+    .ui.segments
+      
+      .ui.segment
+        .ui.grid.stackable
           .seven.wide.column
-            h3.ui.header
-              .content Введи слова
-                .sub.header Если в ответе есть числа, то набирай их цифрами
+            h3 Выбери стихи
           .nine.wide.column
             .ui.padded.grid
               .two.column.row
                 .center.aligned.column.green
                   .ui.mini.statistic.inverted
-                    .value {{countWordsResponseUser}}
-                    .label введено
+                    .value {{selectedVersesCount}}
+                    .label выбрано
                 .center.aligned.column.teal
                   .ui.mini.statistic.inverted
-                    .value {{countWordsResponseRiddle}}
+                    .value {{versesCount}}
                     .label всего
-      .ui.segment
-        form.ui.form.string.check-answer
-          .field
-            .ui.left.icon.input.large
-              input(type='text', name='response-user', placeholder="Ответ вводить сюда", autocomplete="off")
-              i.write.icon
-              .ui.corner.label
-                i.asterisk.icon
-          +buttonSubmit
 
-    if responseType.number
-      .ui.secondary.segment
-        h3 Введи число
-      .ui.segment
-        form.ui.form.number.check-answer
-          .field
-            .ui.left.icon.input.large
-              input(type='text', name='response-user', placeholder="Ответ вводить сюда", autocomplete="off")
-              i.write.icon
-              .ui.corner.label
-                i.asterisk.icon
-          +buttonSubmit
-    if responseType.options
-      .ui.secondary.segment
-        h3 Выбери один вариант
-      .ui.segment
-        form.ui.form.options.check-answer
-          input(type="hidden", name='response-user')
+      if responseType.string
+        .ui.segment
+          .ui.grid.stackable
+            .seven.wide.column
+              h3.ui.header
+                .content Введи слова
+                  .sub.header Если в ответе есть числа, то набирай их цифрами
+            .nine.wide.column
+              .ui.padded.grid
+                .two.column.row
+                  .center.aligned.column.green
+                    .ui.mini.statistic.inverted
+                      .value {{countWordsResponseUser}}
+                      .label введено
+                  .center.aligned.column.teal
+                    .ui.mini.statistic.inverted
+                      .value {{countWordsResponseRiddle}}
+                      .label всего
           p
-            .ui.fluid.large.vertical.buttons
-              each responseType.options
-                .ui.toggle.button {{this}}
-          .ui.error.message
-          +buttonSubmit
+          form.ui.form.string.check-answer
+            .field
+              .ui.left.icon.input.large
+                input(type='text', name='response-user', placeholder="Ответ вводить сюда", autocomplete="off")
+                i.write.icon
+            +buttonSubmit
+
+      if responseType.number
+        .ui.segment
+          h3 Введи число
+          form.ui.form.number.check-answer
+            .field
+              .ui.left.icon.input.large
+                input(type='text', name='response-user', placeholder="Ответ вводить сюда", autocomplete="off")
+                i.write.icon
+            +buttonSubmit
+      if responseType.options
+        .ui.segment
+          h3 Выбери один вариант
+          form.ui.form.options.check-answer
+            input(type="hidden", name='response-user')
+            p
+              .ui.fluid.large.vertical.buttons
+                each responseType.options
+                  .ui.toggle.button {{this}}
+            .ui.error.message
+            +buttonSubmit
 
 
-    .ui.basic.modal
-      .header
-        h1.ui.inverted.header
-          if notequal checkAnswer false
-            | Правильно! Поздравляем!
-          else
-            | Не правильно!
-      .content
-        .image
-          if notequal checkAnswer false
-            i.inverted.green.check.icon
-          else
-            i.inverted.red.close.icon
-        .description
-          .ui.two.column.stackable.grid
-            .column
-              if checkAnswer
-                h2.ui.inverted.header
-                  i.orange.fire.icon
-                  .content Ты заработал:<br>+{{plurality checkAnswer "мудрост"}}
-                    .sub.header
-                      i.play.icon
-                      | Открыта следующая загадка
-              else if equal checkAnswer 0
-                h2.ui.inverted.header
-                  i.repeat.icon
-                  .content Ты заработал:<br>{{plurality checkAnswer "мудрост"}}
-              else
-                h2.ui.inverted.header
-                  i.repeat.icon
-                  .content Прочти еще раз!
-              +newMessageSupport
-            .column
-              h2.ui.inverted.header Время отгадывания:
-              .time-circle
-      .actions
-        .ui.one.column.grid
+  .ui.basic.modal
+    .header
+      h1.ui.inverted.header
+        if notequal checkAnswer false
+          | Правильно! Поздравляем!
+        else
+          | Не правильно!
+    .content
+      .image
+        if notequal checkAnswer false
+          i.inverted.green.check.icon
+        else
+          i.inverted.red.close.icon
+      .description
+        .ui.two.column.stackable.grid
           .column
-            .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
-              .ui.green.basic.inverted.button.curren-episode-url
-                i.block.layout.icon
-                span.text-popup Обзор эпизода
-              .ui.basic.inverted.cancel.button
+            if checkAnswer
+              h2.ui.inverted.header
+                i.orange.fire.icon
+                .content Ты заработал:<br>+{{plurality checkAnswer "мудрост"}}
+                  .sub.header
+                    i.play.icon
+                    | Открыта следующая загадка
+            else if equal checkAnswer 0
+              h2.ui.inverted.header
                 i.repeat.icon
-                span.text-popup Вернуться к загадке
-              if nextRiddleId
-                if checkAnswer
-                  a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
-                    i.play.icon
-                    span.text-popup Следующая загадка
-                else if equal checkAnswer 0
-                  a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
-                    i.play.icon
-                    span.text-popup Следующая загадка
+                .content Ты заработал:<br>{{plurality checkAnswer "мудрост"}}
+            else
+              h2.ui.inverted.header
+                i.repeat.icon
+                .content Прочти еще раз!
+            +newMessageSupport
+          .column
+            h2.ui.inverted.header Время отгадывания:
+            .time-circle
+    .actions
+      .ui.one.column.grid
+        .column
+          .fluid.ui.inverted.buttons.big(class="{{#if notequal checkAnswer false}} 3 {{else}} 2 {{/if}}")
+            .ui.green.basic.inverted.button.curren-episode-url
+              i.block.layout.icon
+              span.text-popup Обзор эпизода
+            .ui.basic.inverted.cancel.button
+              i.repeat.icon
+              span.text-popup Вернуться к загадке
+            if nextRiddleId
+              if checkAnswer
+                a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                  i.play.icon
+                  span.text-popup Следующая загадка
+              else if equal checkAnswer 0
+                a.ui.blue.basic.inverted.button.next-riddle-url(data-next="{{nextRiddleId}}")
+                  i.play.icon
+                  span.text-popup Следующая загадка
 
 template(name="buttonSubmit")
-  button(type="submit").ui.fluid.animated.fade.huge.blue.submit.button
+  button(type="submit", class="{{#unless disabledButton}} disabled {{/unless}}").ui.fluid.animated.fade.huge.blue.submit.button
     .visible.content Отправить
     .hidden.content
       i.send.icon

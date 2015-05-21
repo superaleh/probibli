@@ -4,6 +4,7 @@ Template.searchArea.helpers({
     var currentRiddle = Riddles.findOne();
 
     if( !currentRiddle.scopeSearch ) return;
+    
     var scopeSearchArray = EJSON.parse( currentRiddle.scopeSearch );
     placesBible = scopeSearchArray.map(function(place, index) {
       return {
@@ -13,9 +14,5 @@ Template.searchArea.helpers({
       };
     });
     return placesBible;
-  }
-  ,selectedVersesCount: function() {
-    var enableVersesUser = Session.get('enableVerses');
-    return enableVersesUser.length;
   }
 });

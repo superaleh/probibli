@@ -14,4 +14,21 @@ Template.riddleAnswer.helpers({
   ,countWordsResponseRiddle: function() {
     return ReactiveMethod.call('countWordsResponseRiddle', this._id);
   }
+  ,selectedVersesCount: function() {
+    var enableVersesUser = Session.get('enableVerses');
+    return enableVersesUser.length;
+  }
 });
+
+
+Template.buttonSubmit.helpers({
+  disabledButton: function () {
+    var enableVersesUserCount = Session.get('enableVerses');
+    var countWordsResponse = Session.get('countWordsResponse');
+
+    if ( enableVersesUserCount.length === this.versesCount && countWordsResponse > 0)
+      return true;
+
+    return false;
+  }
+})
