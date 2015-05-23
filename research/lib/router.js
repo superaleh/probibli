@@ -7,6 +7,7 @@ Router.route('/research', {
       ,Meteor.subscribe('supportsNotViewed')
       ,Meteor.subscribe('researchersBest')
       ,Meteor.subscribe('episodes')
+      ,Meteor.subscribe('statistics')
     ];
   }
 });

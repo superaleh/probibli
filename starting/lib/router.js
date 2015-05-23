@@ -9,6 +9,9 @@ Router.route('/', {
     }
   }
   ,waitOn: function() {
-    return [Meteor.subscribe('researchersBest')];
+    return [
+      Meteor.subscribe('researchersBest')
+      ,Meteor.subscribe('statistics')
+    ];
   }
 });

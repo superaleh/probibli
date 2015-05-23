@@ -1,0 +1,30 @@
+template(name="statistics")
+  h2.ui.horizontal.header.divider
+    i.bar.chart.icon
+    | Статистика
+
+  .ui.center.aligned.four.column.grid.stackable
+    .column
+      .ui.statistic
+        .value
+          i.user.icon
+          | {{getPublishedCount 'researchers'}}
+        .label Всех исследователей
+    .column
+      .ui.statistic
+        .value
+          i.block.layout.icon
+          | {{getPublishedCount 'episodes'}}
+        .label Всего эпизодов
+    .column
+      .ui.statistic
+        .value 
+          i.help.icon
+          | {{getPublishedCount 'riddles'}}
+        .label Всего загадок
+    .column
+      .ui.statistic
+        .value 
+          i.check.icon
+          | {{getPublishedCount 'guessRiddles'}}
+        .label Отгадано загадок

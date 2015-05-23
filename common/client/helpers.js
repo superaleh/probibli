@@ -2,7 +2,7 @@
 #версия приложения
  */
 Template.registerHelper('varsion', function() {
-  return '0.5.7';
+  return '0.5.8';
 });
 
 /*
