@@ -13,8 +13,8 @@ Meteor.methods({
   }
   ,nextRiddleId: function(position, episodeId) {
 
-    check(episodeId, String);
     check(position, Number);
+    check(episodeId, String);
 
     var nextRiddle = Riddles.findOne({
       episodeId : episodeId

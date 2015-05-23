@@ -14,28 +14,18 @@ template(name="riddlesAll")
 
     each riddles
       .card
-        unless availability
-          unless next
-            unless pastorMode
-              .ui.active.dimmer
-                .content
-                  .center
-                    h3.ui.inverted.icon.header
-                      i.lock.icon
-                      | Закрыта
-        .content
-          .ui.corner.label.position
-            h5 {{position}}
-          a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
-          .description
-            i.book.icon
-            | {{scopeSearch}}
-            if pastorMode
+        if pastorMode
+          .content
+            .ui.corner.label.position
+              h5 {{position}}
+            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
+            .description
+              i.book.icon
+              | {{scopeSearch}}
               a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}")
                 .ui.label
                   i.edit.icon
                   | ред.
-        if pastorMode
           .extra.content
             span.left.floated
               i.orange.fire.icon
@@ -43,7 +33,14 @@ template(name="riddlesAll")
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.chevron.right.icon
             | Открыть
-        else if availability
+        else if guess
+          .content
+            .ui.corner.label.position
+              h5 {{position}}
+            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
+            .description
+              i.book.icon
+              | {{scopeSearch}}
           .extra.content
             span.right.floated
               i.check.green.icon
@@ -51,26 +48,45 @@ template(name="riddlesAll")
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.repeat.icon
             | Отгадать снова
+        else if open
+          .content
+            .ui.corner.label.position
+              h5 {{position}}
+            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
+            .description
+              i.book.icon
+              | {{scopeSearch}}
+          .extra.content
+            span.left.floated
+              i.orange.fire.icon
+              | {{plurality intricacy "мудрост"}}
+            span.right.floated
+              i.unlock.blue.icon
+              | Открыта
+          a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.blue.bottom.attached.button
+            i.play.icon
+            | Отгадать
         else
-          if next
-            .extra.content
-              span.left.floated
-                i.orange.fire.icon
-                | {{plurality intricacy "мудрост"}}
-              span.right.floated
-                i.unlock.blue.icon
-                | Открыта
-            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.blue.bottom.attached.button
-              i.play.icon
-              | Отгадать
-          else
-            .extra.content
-              span.left.floated
-                i.orange.fire.icon
-                | {{plurality intricacy "мудрост"}}
-              span.right.floated
-                i.lock.icon
-                | Закрыта
-            .ui.blue.bottom.attached.button
-              i.play.icon
-              | Отгадать
+          .ui.active.dimmer
+            .content
+              .center
+                h3.ui.inverted.icon.header
+                  i.lock.icon
+                  | Закрыта
+          .content
+            .ui.corner.label.position
+              h5 {{position}}
+            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
+            .description
+              i.book.icon
+              | {{scopeSearch}}
+          .extra.content
+            span.left.floated
+              i.orange.fire.icon
+              | {{plurality intricacy "мудрост"}}
+            span.right.floated
+              i.lock.icon
+              | Закрыта
+          .ui.blue.bottom.attached.button
+            i.play.icon
+            | Отгадать

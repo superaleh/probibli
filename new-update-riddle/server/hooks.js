@@ -6,7 +6,6 @@ Riddles.before.insert(function (userId, doc) {
     ,{ $inc: { numberRiddles: 1 } }
   );
 
-  // получаю все загадки эпизода
   var riddles = Riddles.find({
     episodeId: doc.episodeId
   }, {
@@ -33,7 +32,6 @@ Riddles.before.insert(function (userId, doc) {
 
 Riddles.before.update(function (userId, doc, fieldNames, modifier, options) {
 
-  // получаю все опубликованные загадки эпизода
   var riddles = Riddles.find({
     episodeId: modifier.$set.episodeId
   }, {

@@ -4,7 +4,7 @@ Template.riddlesAll.helpers({
     if( !this.scopeSearch ) return;
     var scopeSearchArray = EJSON.parse( this.scopeSearch );
     return scopeSearchArray.join(', ');
-    
+
   }
   ,riddles: function() {
 
@@ -12,67 +12,45 @@ Template.riddlesAll.helpers({
       sort: {
         position: 1
       }
-    }).fetch();
-
-    if( riddles.length === 0 ) return;
-
-    if(!Meteor.user()) return riddles;
-    
-    var guessRiddlesResearcher = Meteor.user().guessRiddles;
-    var episodeId = this._id;
-    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: episodeId });
-
-    /*
-    #если нет не одной отгаданной загадки то доступна только первая загадка
-     */
-    if (guessRiddlesResearcher.length === 0) {
-      /*
-      #следующая загадка
-       */
-      riddles[0].next = true;
-    } else {
-      /*
-      #иначе если есть хоть одна отгаданная загадка, то делаю ее доступной и следующую после нее
-       */
-      guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
-      var guessRiddleResearcherLastId = guessRiddlesResearcher[guessRiddlesResearcher.length - 1];
-
-      // если в эпизоде отгаданы все загадки то делаю их все доступными
-      if ( riddles.length === guessRiddlesResearcher.length ) {
-
-        riddles = _.map(riddles, function(riddle) {
-
-          riddle.availability = true;
-          riddle.next = false;
-          return riddle;
-          
-        });
-
-        return riddles;
-
-      }
-
-      riddles = _.map(riddles, function(riddle) {
-        riddle.availability = false;
-        /*
-        #загадка доступна если она отгадана
-         */
-        if (_.indexOf(guessRiddlesResearcher, riddle._id) !== -1){
-          
-          riddle.availability = true;
-          /*
-          #следующая загадка
-           */
-          if (riddle._id === guessRiddleResearcherLastId)            
-            riddles[riddle.position].next = true;
-
-        }
-
-        return riddle;
-      });
-
-    }
+    });
 
     return riddles;
+  }
+  ,guess: function () {
+    var guessRiddlesResearcher = Meteor.user().guessRiddles;
+    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: this.episodeId });
+    guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
+
+    if (_.indexOf(guessRiddlesResearcher, this._id) !== -1)
+      return true;
+
+    return false;
+  }
+  ,open: function () {
+    var guessRiddlesResearcher = Meteor.user().guessRiddles;
+    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: this.episodeId });
+    guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
+
+    // если в эпизоде нет не одной загадки делаю 1 загадку открытой
+    if ( guessRiddlesResearcher.length === 0 && this.position === 1 )
+      return true;
+
+    // создаю коллекцию id, position
+    guessRiddlesResearcher = _.map(guessRiddlesResearcher, function( value ){
+      var riddlePosition = Riddles.findOne({_id:value}).position;
+      return {id: value, position: riddlePosition};
+    });
+    // определяю максимальную позицию отгаданной загадки в коллекции
+    var maxGuessRiddle = _.max(guessRiddlesResearcher, function(guessRiddle){ return guessRiddle.position; });
+
+    // если максимальная позиция отгаданной загадки + 1 равна позиции текущей то она открыта
+    if ( maxGuessRiddle.position + 1 === this.position )
+      return true;
+
+    // если максимальная позиция отгаданной загадки больше позиции текущей то она открыта
+    if ( maxGuessRiddle.position > this.position )
+      return true;
+    // в остальных случаях загадка закрыта
+    return false;
   }
 });

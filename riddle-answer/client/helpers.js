@@ -16,6 +16,8 @@ Template.riddleAnswer.helpers({
   }
   ,selectedVersesCount: function() {
     var enableVersesUser = Session.get('enableVerses');
+    if ( !enableVersesUser )
+      return false;
     return enableVersesUser.length;
   }
 });
@@ -24,9 +26,8 @@ Template.riddleAnswer.helpers({
 Template.buttonSubmit.helpers({
   disabledButton: function () {
     var enableVersesUserCount = Session.get('enableVerses');
-    var countWordsResponse = Session.get('countWordsResponse');
 
-    if ( enableVersesUserCount.length === this.versesCount && countWordsResponse > 0)
+    if ( enableVersesUserCount.length === this.versesCount)
       return true;
 
     return false;
