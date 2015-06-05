@@ -11,11 +11,11 @@ template(name="commonInterface")
                     a(href="{{pathFor 'research'}}").logo
                       img(src="logo-small.png", alt="ПРОБИБЛИ")
                       .ui.label.mini.floating.tag.orange {{varsion}}
-                  td.collapsing.center.aligned
-                    h3
-                      i.orange.fire.icon
-                      | {{plurality wisdomNumber "мудрост"}}
-                  td.collapsing.center.aligned
+                  td.collapsing
+                    h3.ui.center.aligned.header.orange
+                      i.fire.icon
+                      .content {{plurality wisdomNumber "мудрост"}}
+                  td.collapsing
                     h3
                       i.user.icon.circular
                       | {{researcher.username}}
@@ -23,11 +23,20 @@ template(name="commonInterface")
                         i.life.ring.icon
                         if supportsNotViewed
                           .floating.ui.blue.label.mini {{supportsNotViewed}}
+                  td.collapsing
+                    unless sins
+                      h3.ui.header.purple
+                        i.tint.icon
+                        .content святой
+                    else
+                      h3.ui.header.red.inverted.block.sins
+                        i.tint.icon
+                        .content {{plurality sins "грех"}}
                   if researcher.pastor
                     +pastorCheckbox
 
-                  td.collapsing
-                    button.ui.button.fluid.researcher-exit Выйти
+                  td.collapsing.center.aligned
+                    button.ui.button.researcher-exit Выйти
 
             .ui.fluid.large.steps
               if isActiveRoute regex='research'
@@ -124,7 +133,7 @@ template(name="commonInterface")
               i.by.flag
 
 template(name="pastorCheckbox")
-  td.collapsing.center.aligned
+  td.collapsing
     .ui.checkbox.toggle.pastor
       input(type='checkbox', name='pastor')
       label режим пастора

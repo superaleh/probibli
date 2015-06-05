@@ -5,6 +5,7 @@ Router.route('/episode-:_episodeId', {
     return [
       Meteor.subscribe('researcher')
       ,Meteor.subscribe('supportsNotViewed')
+      ,Meteor.subscribe('guessRiddles')
       ,Meteor.subscribe('episodes', this.params._episodeId)
       ,Meteor.subscribe('riddles', this.params._episodeId)
     ];

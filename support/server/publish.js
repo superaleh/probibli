@@ -56,7 +56,6 @@ Meteor.publish('researcherSupport', function( ressearcherId ) {
       fields: {
         'username': 1
         ,'wisdom': 1
-        ,'guessRiddles': 1
         ,'pastor': 1
         ,'profile': 1
         ,'createdAt': 1
@@ -70,7 +69,6 @@ Meteor.publish('researcherSupport', function( ressearcherId ) {
       fields: {
         'username': 1
         ,'wisdom': 1
-        ,'guessRiddles': 1
         ,'pastor': 1
         ,'profile': 1
         ,'createdAt': 1

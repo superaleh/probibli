@@ -13,6 +13,17 @@ Template.commonInterface.helpers({
     if (user) {
       return user.wisdom;
     }
+    return false;
+  }
+  ,sins: function() {
+    var user;
+    user = Meteor.user();
+    if (user && user.sins) {
+      Tinycon.setBubble(user.sins);
+      return user.sins;
+    }
+    Tinycon.reset;
+    return false;
   }
   ,episodeTitle: function() {
     var episode;

@@ -11,12 +11,14 @@ Template.episodesAll.helpers({
     if(!Meteor.user())
       return 0;
 
-    var guessRiddlesResearcher = Meteor.user().guessRiddles;
-    check(guessRiddlesResearcher, Array);
+    var guessRiddlesResearcher = GuessRiddles.find({
+      researcherId: Meteor.userId()
+      ,episodeId: this._id
+    });
 
     var count = {
       riddles: (this.numberRiddles ? this.numberRiddles : 0)
-      ,guess: (guessRiddlesResearcher.length ? _.where(guessRiddlesResearcher, { episodeId: this._id }).length : 0)
+      ,guess: guessRiddlesResearcher.count()
       ,percent: 0
     };
 

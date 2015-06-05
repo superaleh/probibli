@@ -7,7 +7,7 @@ Meteor.publish('researcher', function() {
         'username': 1
         ,'wisdom': 1
         ,'guessRiddles': 1
-        ,'guides': 1
+        ,'sins': 1
         ,'pastor': 1
         ,'status': 1
         ,'createdAt': 1

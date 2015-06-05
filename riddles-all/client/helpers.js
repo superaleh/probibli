@@ -17,8 +17,11 @@ Template.riddlesAll.helpers({
     return riddles;
   }
   ,guess: function () {
-    var guessRiddlesResearcher = Meteor.user().guessRiddles;
-    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: this.episodeId });
+    if(!Meteor.user()) return;
+
+    var guessRiddlesResearcher = GuessRiddles.find({
+      episodeId: this.episodeId
+    }).fetch();
     guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
 
     if (_.indexOf(guessRiddlesResearcher, this._id) !== -1)
@@ -27,8 +30,11 @@ Template.riddlesAll.helpers({
     return false;
   }
   ,open: function () {
-    var guessRiddlesResearcher = Meteor.user().guessRiddles;
-    guessRiddlesResearcher = _.where(guessRiddlesResearcher, { episodeId: this.episodeId });
+    if(!Meteor.user()) return;
+
+    var guessRiddlesResearcher = GuessRiddles.find({
+      episodeId: this.episodeId
+    }).fetch();
     guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
 
     // если в эпизоде нет не одной загадки делаю 1 загадку открытой

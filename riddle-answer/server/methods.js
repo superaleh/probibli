@@ -70,6 +70,7 @@ Meteor.methods({
     var curentRiddle = Riddles.findOne({
       _id: riddleId
     });
+    var currentResearcherId = Meteor.userId()
     var correctResponse = false;
     var correctVerses = false;
 
@@ -104,27 +105,37 @@ Meteor.methods({
     }
 
 
-
+    // если ответ и стихи правильные то начисляю мудрость
     if ( correctResponse && correctVerses ) {
 
       var riddleWisdom = 0;
 
+      // в режиме пастора мудрость не начисляю
       if (pastorMode)
         return riddleWisdom;
 
-      var guessRiddlesResearcher = Meteor.user().guessRiddles;
-      var currentGuessRiddlesResearcher = _.where(guessRiddlesResearcher, { riddleId: curentRiddle._id });
+      var guessRiddleResearcher = GuessRiddles.find(
+        {
+          researcherId: currentResearcherId
+          ,riddleId: riddleId
+        }
+      );
 
-      if (currentGuessRiddlesResearcher.length === 0) {
+      // если загадка ни разу не отгадывалась то начисляю мудрость и добавляю ее в отгаданные
+      if (guessRiddleResearcher.count() === 0) {
 
         riddleWisdom = curentRiddle.intricacy;
 
         Meteor.users.update(
-           { _id: Meteor.userId() }
-           ,{ $push: { guessRiddles: {episodeId: curentRiddle.episodeId, riddleId: curentRiddle._id} }
-              ,$inc: { wisdom:  riddleWisdom }
-            }
+           { _id: currentResearcherId }
+           ,{ $inc: { wisdom:  riddleWisdom, guessRiddles: 1 } }
         );
+
+        GuessRiddles.insert({
+          episodeId: curentRiddle.episodeId
+          ,riddleId: curentRiddle._id
+          ,sins: 0
+        })
 
       };
 
