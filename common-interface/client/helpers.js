@@ -1,23 +1,19 @@
 Template.commonInterface.helpers({
   researcher: function() {
-    var researcher;
-    if (!Meteor.user()) {
-      return;
-    }
-    researcher = Meteor.user();
+    if (!Meteor.user()) return;
+
+    var researcher = Meteor.user();
     return researcher;
   }
   ,wisdomNumber: function() {
-    var user;
-    user = Meteor.user();
+    var user = Meteor.user();
     if (user) {
       return user.wisdom;
     }
     return false;
   }
   ,sins: function() {
-    var user;
-    user = Meteor.user();
+    var user = Meteor.user();
     if (user && user.sins) {
       Tinycon.setBubble(user.sins);
       return user.sins;
@@ -26,17 +22,21 @@ Template.commonInterface.helpers({
     return false;
   }
   ,episodeTitle: function() {
-    var episode;
-    episode = Episodes.findOne();
+    var episode = Episodes.findOne();
     if (episode) {
       return episode.title;
     }
   }
   ,episodeId: function() {
-    var episode;
-    episode = Episodes.findOne();
+    var episode = Episodes.findOne();
     if (episode) {
       return episode._id;
+    }
+  }
+  ,episodeRiddlesCount: function() {
+    var episode = Episodes.findOne();
+    if (episode) {
+      return episode.numberRiddles;
     }
   }
   ,supportsNotViewed: function () {

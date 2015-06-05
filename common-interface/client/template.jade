@@ -78,7 +78,7 @@ template(name="commonInterface")
                   .content
                     .title Загадка
                       if position
-                        .ui.label {{position}}
+                        .ui.label {{position}} из {{episodeRiddlesCount}}
                     if pastorMode
                       unless isActiveRoute regex='newRiddle|editRiddle'
                         a(href="{{pathFor 'editRiddle' _episodeId=episodeId _riddleId=_id}}").ui.icon.orange.basic.button.edit-pastor
