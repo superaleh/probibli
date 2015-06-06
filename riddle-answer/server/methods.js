@@ -114,7 +114,7 @@ Meteor.methods({
       if (pastorMode)
         return riddleWisdom;
 
-      var guessRiddleResearcher = GuessRiddles.find(
+      var guessRiddleResearcher = GuessRiddles.findOne(
         {
           researcherId: currentResearcherId
           ,riddleId: riddleId
@@ -122,7 +122,7 @@ Meteor.methods({
       );
 
       // если загадка ни разу не отгадывалась то начисляю мудрость и добавляю ее в отгаданные
-      if (guessRiddleResearcher.count() === 0) {
+      if ( !guessRiddleResearcher ) {
 
         riddleWisdom = curentRiddle.intricacy;
 
@@ -136,6 +136,23 @@ Meteor.methods({
           ,riddleId: curentRiddle._id
           ,sins: 0
         })
+
+      };
+
+      // если загадка отгадана и помечена за грех то добовляю мудрость и отнимаю грех
+      if ( !!guessRiddleResearcher && guessRiddleResearcher.sins === 1 ) {
+
+        riddleWisdom = curentRiddle.intricacy;
+
+        Meteor.users.update(
+           { _id: currentResearcherId }
+           ,{ $inc: { wisdom:  riddleWisdom, guessRiddles: 1, sins: -1 } }
+        );
+
+        GuessRiddles.update(
+          { _id: guessRiddleResearcher._id }
+          ,{ $inc: { sins: -1 }, $set: { researcherId: currentResearcherId } }
+        )
 
       };
 

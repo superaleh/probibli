@@ -33,6 +33,24 @@ template(name="riddlesAll")
           a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.green.bottom.attached.button
             i.chevron.right.icon
             | Открыть
+        else if sins
+          .content
+            .ui.corner.label.position
+              h5 {{position}}
+            a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").header {{ucFirst question}}
+            .description
+              i.book.icon
+              | {{scopeSearch}}
+          .extra.content
+            span.left.floated
+              i.orange.fire.icon
+              | {{plurality intricacy "мудрост"}}
+            span.right.floated
+              i.tint.red.icon
+              | -1 грех
+          a(href="{{pathFor 'riddle' _episodeId=episodeId _riddleId=_id}}").ui.blue.bottom.attached.button
+            i.play.icon
+            | Отгадать
         else if guess
           .content
             .ui.corner.label.position

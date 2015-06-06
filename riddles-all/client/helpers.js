@@ -29,6 +29,20 @@ Template.riddlesAll.helpers({
 
     return false;
   }
+  ,sins: function () {
+    if(!Meteor.user()) return;
+
+    var guessRiddlesResearcher = GuessRiddles.find({
+      episodeId: this.episodeId
+      ,sins: 1
+    }).fetch();
+    guessRiddlesResearcher = _.pluck(guessRiddlesResearcher, 'riddleId');
+
+    if (_.indexOf(guessRiddlesResearcher, this._id) !== -1)
+      return true;
+
+    return false;
+  }
   ,open: function () {
     if(!Meteor.user()) return;
 

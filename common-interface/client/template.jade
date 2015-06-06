@@ -27,11 +27,11 @@ template(name="commonInterface")
                     unless sins
                       h3.ui.header.purple
                         i.tint.icon
-                        .content святой
+                        .content святой(-ая)
                     else
                       h3.ui.header.red.inverted.block.sins
                         i.tint.icon
-                        .content {{plurality sins "грех"}}
+                        .content {{sins}} грех(-а)
                   if researcher.pastor
                     +pastorCheckbox
 
