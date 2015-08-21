@@ -18,7 +18,6 @@ mrt:modernizr-meteor
 fastclick
 coffeescript
 useraccounts:semantic-ui
-semantic:ui-css
 sml0820:meteor-timecircles
 rzymek:moment-locale-ru
 stevezhu:lodash
@@ -37,3 +36,4 @@ mizzao:user-status
 anti:gagarin
 tmeasday:publish-counts
 andruschka:tinycon
+semantic:ui-css

@@ -2,7 +2,7 @@ template(name="episodesAll")
   h2.ui.horizontal.header.divider
     i.block.layout.icon
     | Все Эпизоды
-  .ui.three.column.grid.stackable.middle.aligned.centered
+  .ui.three.column.grid.stackable
     if pastorMode
       .column
         .ui.segment
@@ -30,20 +30,19 @@ template(name="episodesAll")
           .ui.divider
           .ui.one.column.grid
             .column
-              .ui.two.column.grid.stackable
+              .ui.equal.width.grid.stackable
                 .center.aligned.column
                   .ui.mini.statistic
                     .value {{count.guess}}
-                    .label ОТГАДАНО              
+                    .label ОТГАДАНО
                 .ui.vertical.divider из
                 .center.aligned.column
                   .ui.mini.statistic
                     .value {{count.riddles}}
                     .label ЗАГАДОК
           .ui.divider
-          .ui.indicating.progress(data-value="{{count.guess}}" data-total="{{count.riddles}}")
+          .ui.indicating.top.attached.progress(data-value="{{count.guess}}" data-total="{{count.riddles}}")
             .bar
-            .label Прогресс прохождения <b>{{count.percent}}%</b>
           .ui.grid
             .six.wide.column.middle.aligned
               if pastorMode

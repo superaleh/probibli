@@ -1,5 +1,5 @@
 template(name="commonInterface")
-  .ui.one.column.page.grid
+  .ui.one.column.grid.container
     .column
       if currentUser
         .ui.one.column.grid.vertically.padded
@@ -109,8 +109,8 @@ template(name="commonInterface")
                     .title Обращение
       +yield
 
-  .ui.inverted.vertical.segment.footer
-    .ui.page.stackable.grid
+  .ui.black.inverted.segment
+    .ui.container.stackable.grid
       .four.wide.column
         h5.ui.inverted.header
           i.copyright.icon
