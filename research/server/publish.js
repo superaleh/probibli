@@ -11,6 +11,7 @@ Meteor.publish('researcher', function() {
         ,'pastor': 1
         ,'status': 1
         ,'createdAt': 1
+        ,'activeDate': 1
       }
     });
   } else {

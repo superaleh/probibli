@@ -17,6 +17,10 @@ GuessRiddles.attachSchema(new SimpleSchema({
     type: Date
     ,label: "Дата отгадывания"
   }
+  ,updatedAt: {
+    type: Date
+    ,label: "Дата обновления"
+  }
   ,sins: {
     type: Number
     ,label: "Количество грехов"
@@ -26,6 +30,5 @@ GuessRiddles.attachSchema(new SimpleSchema({
 //Автоматичекое добавление время создания и время обновления
 GuessRiddles.attachBehaviour('timestampable', {
   createdBy: 'researcherId'
-  ,updatedAt: false
   ,updatedBy: false
 });

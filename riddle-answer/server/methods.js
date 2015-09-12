@@ -74,7 +74,6 @@ Meteor.methods({
     var correctResponse = false;
     var correctVerses = false;
 
-
     // очищаю строку ответа
     var response = _.chain(curentRiddle.response).clean().value().toLowerCase();
     //проверяю ответ
@@ -155,6 +154,13 @@ Meteor.methods({
         )
 
       };
+
+      //устанавливаю дату активности
+      var now = new Date();
+      Meteor.users.update(
+         { _id: currentResearcherId }
+         ,{ $set: { activeDate: now } }
+      );
 
       return riddleWisdom;
     }

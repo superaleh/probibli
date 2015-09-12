@@ -6,11 +6,10 @@ Template.riddleAnswer.onDestroyed(function() {
 Template.riddleAnswer.onCreated(function() {
   Session.set('checkAnswer', false);
   Session.set('countWordsResponse', 0);
-  Session.set('checkAnswer', false);
 })
 
-Template.riddleAnswer.onRendered(function() {  
-  
+Template.riddleAnswer.onRendered(function() {
+
   Meteor.setTimeout(function() {
 
 
