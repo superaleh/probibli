@@ -145,7 +145,7 @@ Meteor.methods({
 
         Meteor.users.update(
            { _id: currentResearcherId }
-           ,{ $inc: { wisdom:  riddleWisdom, guessRiddles: 1, sins: -1 } }
+           ,{ $inc: { wisdom:  riddleWisdom, sins: -1 } }
         );
 
         GuessRiddles.update(
