@@ -2,7 +2,7 @@
 #версия приложения
  */
 Template.registerHelper('varsion', function() {
-  return '0.6.3';
+  return '0.6.8';
 });
 
 /*
@@ -47,7 +47,7 @@ Template.registerHelper('ucFirst', function(str) {
 
 
 /*
-#Окончание в числительных
+#Окончание в числительных, в слове "мудрость"
  */
 Template.registerHelper('plurality', function(n, thing) {
   if (n === 1) {
@@ -55,6 +55,17 @@ Template.registerHelper('plurality', function(n, thing) {
   } else {
     return n + ' ' + thing + 'и';
   }
+});
+
+/*
+#Окончание в грехах  */
+Template.registerHelper('sinEnding', function(n) {
+  function declOfNum(number, titles) {  
+    var cases = [2, 0, 1, 1, 1, 2];  
+    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+  }
+
+    return n + declOfNum(n, [' грех', ' греха', ' грехов']);
 });
 
 /*

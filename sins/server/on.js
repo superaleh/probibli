@@ -17,8 +17,6 @@ Accounts.onLogin( function(user) {
     hours = Math.floor(hours);
     var sins = Math.floor( hours / 72 );
 
-    console.log(hours,sins);
-
     if ( sins >= 1 ) {
 
       // устанавливаю дату актвности, чтобы не начислять грехи повторно

@@ -9,8 +9,8 @@ template(name="researchersBest")
         .ui.card.fluid
           .content
             .header
-              i.trophy.icon
-              | {{username}}
+              i.trophy.icon(class="{{range}}", data-content="награда", data-variation="inverted")
+              | {{username}} 
               if status.online
                 .ui.green.empty.circular.label(data-content="сейчас исследует", data-variation="inverted")
               else

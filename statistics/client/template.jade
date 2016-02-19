@@ -28,3 +28,9 @@ template(name="statistics")
           i.check.icon
           | {{getPublishedCount 'guessRiddles'}}
         .label Отгадано загадок
+    .column 
+      .ui.statistic
+        .value 
+          i.wait.icon
+          | {{getPublishedCount 'researchersOnline'}}
+        .label Сейчас исследуют

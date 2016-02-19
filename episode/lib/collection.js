@@ -15,6 +15,16 @@ Episodes.attachSchema(new SimpleSchema({
     ,label: "Период"
     ,optional: true
   }
+  ,image: {
+    type: String
+    ,label: "Картинка"
+    ,optional: true
+  }
+  ,epoch: {
+    type: String
+    ,label: "Эпоха" // придумать названия 7ми эпох на латинице, может 3 первые буквы
+    ,optional: true
+  }
   ,numberRiddles: {
     type: Number
     ,label: "Количество загадок"

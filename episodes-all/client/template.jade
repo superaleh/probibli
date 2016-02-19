@@ -17,16 +17,23 @@ template(name="episodesAll")
                 | Добавить
     each episodes
       .column
-        .ui.stacked.segment.episode-item
+        .ui.piled.segment.episode-item
           a.ui.header(href="{{pathFor 'episode' _episodeId=_id}}") {{title}}
             if newEpisode
               .ui.teal.label новый
           if description
             p {{description}}
+          if image
+            p
+              img(src="{{image}}", width="100%")
           if period
             p
               i.time.icon
               |{{period}}
+          if epoch
+            p
+              i.world.icon
+              |{{epoch}}
           .ui.divider
           .ui.one.column.grid
             .column

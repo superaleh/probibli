@@ -24,7 +24,7 @@ AccountsTemplates.addFields([
     ,type: 'password'
     ,displayName: {
       signIn: "Пароль"
-      ,signUp: "Придумай себе пароль"
+      ,signUp: "Придумай себе пароль (обязательно сохрани в надежном месте)!"
     }
     ,placeholder: {
       signIn: "Пароль"
@@ -39,7 +39,7 @@ AccountsTemplates.addFields([
       signUp: "Город в котором ты проживаешь"
     }
     ,placeholder: {
-      signUp: "Например: Борисов"
+      signUp: "Например: Борисов :)"
     }
     ,required: true
     ,trim: true

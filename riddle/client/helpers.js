@@ -5,5 +5,11 @@ Template.riddle.helpers({
     var scopeSearchArray = EJSON.parse( this.scopeSearch );
     return scopeSearchArray.join(', ');
     
-  }
+ }
+	,help: function () {
+
+		return this.help.replace(/([^>])\n/g, '$1<br>');
+		
+	}
 })
+

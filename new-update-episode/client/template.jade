@@ -10,6 +10,8 @@ template(name="newEpisode")
           +afFormGroup name="title" trimStrings=true
           +afFormGroup name="description" trimStrings=true type="textarea"
           +afFormGroup name="period" trimStrings=true
+          +afFormGroup name="image" trimStrings=true
+          +afFormGroup name="epoch" trimStrings=true
           .field: button.ui.blue.submit.button.big(type='submit') Создать
 
 template(name="editEpisode")
@@ -24,4 +26,6 @@ template(name="editEpisode")
         +afFormGroup name="title"
         +afFormGroup name="description" trimStrings=true type="textarea"
         +afFormGroup name="period" trimStrings=true
+        +afFormGroup name="image" trimStrings=true
+        +afFormGroup name="epoch" trimStrings=true
         .field: button.ui.blue.submit.button.big(type='submit') Сохранить

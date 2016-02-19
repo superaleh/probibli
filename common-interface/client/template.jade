@@ -31,7 +31,7 @@ template(name="commonInterface")
                     else
                       h3.ui.header.red.inverted.block.sins
                         i.tint.icon
-                        .content {{sins}} грех(-а)
+                        .content {{sinEnding sins}}
                   if researcher.pastor
                     +pastorCheckbox
 
@@ -114,7 +114,7 @@ template(name="commonInterface")
       .four.wide.column
         h5.ui.inverted.header
           i.copyright.icon
-          .content ПРОБИБЛИ 2015
+          .content ПРОБИБЛИ 2016
             .ui.orange.label.mini {{varsion}}
             .sub.header версия для внутреннего тестирования
       .four.wide.column
@@ -129,7 +129,7 @@ template(name="commonInterface")
         h5.ui.inverted.header
           i.heart.icon.red
           .content Сделано в Борисове
-            .sub.header ул. Гончарная 26
+            .sub.header
               i.by.flag
 
 template(name="pastorCheckbox")
